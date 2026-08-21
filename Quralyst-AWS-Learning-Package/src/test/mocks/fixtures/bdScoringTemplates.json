@@ -1,0 +1,1431 @@
+[
+  {
+    "id": "tpl1",
+    "slug": "sell-side-mandate-readiness-v1",
+    "name": "Sell-side Mandate Readiness",
+    "description": "For investment banks. Scores founder-owned companies by their likelihood of needing a sell-side M&A advisor. High founder-dependence is a positive signal: it means no succession plan exists and the owner needs outside help to exit.",
+    "targetUserType": "ibanking",
+    "scoringDirection": "seller",
+    "isDefault": true,
+    "isActive": true,
+    "config": {
+      "version": "1.0",
+      "max_base_score": 100,
+      "max_total_score": 120,
+      "max_bonus_score": 20,
+      "tier_thresholds": [
+        {
+          "key": "tier1",
+          "label": "Tier 1: Outreach now",
+          "color": "green",
+          "min_score": 75
+        },
+        {
+          "key": "tier2",
+          "label": "Tier 2: Nurture",
+          "color": "amber",
+          "min_score": 50
+        },
+        {
+          "key": "tier3",
+          "label": "Tier 3: Monitor",
+          "color": "gray",
+          "min_score": 30
+        },
+        {
+          "key": "tier4",
+          "label": "Tier 4: Archive",
+          "color": "light-gray",
+          "min_score": 0
+        }
+      ],
+      "modules": [
+        {
+          "id": "m1",
+          "name": "Owner exit horizon proxy",
+          "description": "Estimates how close the founder is to a natural exit consideration window based on business age.",
+          "max_score": 35,
+          "criteria": [
+            {
+              "id": "founding_year_range",
+              "label": "Founding year range",
+              "type": "single_select",
+              "data_source": "database",
+              "help_text": "Source from database records or company website.",
+              "options": [
+                {
+                  "value": "pre1980",
+                  "label": "Before 1980 (business 45+ yrs old)",
+                  "score": 18,
+                  "note": "Founder likely 72+. High probability but watch for estate complexity or informal succession already in place."
+                },
+                {
+                  "value": "y1980",
+                  "label": "1980 to 1988 (business 37-45 yrs old)",
+                  "score": 33,
+                  "note": "Founder likely mid-to-late 60s. Strongest scoring band."
+                },
+                {
+                  "value": "y1989",
+                  "label": "1989 to 1997 (business 28-36 yrs old)",
+                  "score": 35,
+                  "note": "Founder likely 58-65. Prime window: old enough to consider exit, young enough to execute cleanly."
+                },
+                {
+                  "value": "y1998",
+                  "label": "1998 to 2005 (business 20-27 yrs old)",
+                  "score": 23,
+                  "note": "Founder likely 48-58. Possible, especially the 2001-2005 cohort. Strong signals elsewhere required for Tier 1."
+                },
+                {
+                  "value": "y2006",
+                  "label": "2006 to 2012 (business 13-19 yrs old)",
+                  "score": 10,
+                  "note": "Founder likely 43-50. Too early in most cases. Re-score in 3-5 years."
+                },
+                {
+                  "value": "y2013",
+                  "label": "2013 or later (under 12 yrs old)",
+                  "score": 2,
+                  "note": "Long-term watch list only."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m2",
+          "name": "Business size and mandate viability",
+          "description": "Assesses whether the business is large enough to generate a viable sell-side advisory mandate.",
+          "max_score": 25,
+          "criteria": [
+            {
+              "id": "revenue_range",
+              "label": "Revenue estimate",
+              "type": "single_select",
+              "data_source": "database",
+              "help_text": "Modelled estimate for private companies. Treat as order-of-magnitude only.",
+              "options": [
+                {
+                  "value": "r0",
+                  "label": "Below $1M",
+                  "score": 0
+                },
+                {
+                  "value": "r1",
+                  "label": "$1M to $2M",
+                  "score": 2
+                },
+                {
+                  "value": "r2",
+                  "label": "$2M to $3M",
+                  "score": 7
+                },
+                {
+                  "value": "r3",
+                  "label": "$3M to $5M",
+                  "score": 12
+                },
+                {
+                  "value": "r5",
+                  "label": "$5M to $10M",
+                  "score": 16
+                },
+                {
+                  "value": "r10",
+                  "label": "$10M to $20M",
+                  "score": 18
+                },
+                {
+                  "value": "r20",
+                  "label": "Above $20M",
+                  "score": 11
+                }
+              ]
+            },
+            {
+              "id": "employee_count",
+              "label": "Employee count estimate",
+              "type": "integer",
+              "data_source": "database",
+              "help_text": "Source from database. Cross-check with LinkedIn where possible.",
+              "scoring_bands": [
+                {
+                  "min": null,
+                  "max": 4,
+                  "score": 0
+                },
+                {
+                  "min": 5,
+                  "max": 15,
+                  "score": 5
+                },
+                {
+                  "min": 16,
+                  "max": 35,
+                  "score": 7
+                },
+                {
+                  "min": 36,
+                  "max": 50,
+                  "score": 4
+                },
+                {
+                  "min": 51,
+                  "max": null,
+                  "score": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m3",
+          "name": "Owner-operator profile",
+          "description": "Assesses how personally dependent the business is on the founder. For IB: high founder-dependence is a positive signal because it means no internal succession option exists.",
+          "max_score": 10,
+          "criteria": [
+            {
+              "id": "management_layer",
+              "label": "Visible management layer",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check LinkedIn company page and website team or about section.",
+              "options": [
+                {
+                  "value": "none",
+                  "label": "None: founder appears to be the only key person",
+                  "score": 6
+                },
+                {
+                  "value": "some",
+                  "label": "Some: 1-2 managers present but founder still dominates",
+                  "score": 3
+                },
+                {
+                  "value": "clear",
+                  "label": "Clear: GM, COO, or VP-level management visible",
+                  "score": 0
+                }
+              ]
+            },
+            {
+              "id": "revenue_per_employee",
+              "label": "Revenue per employee",
+              "type": "computed",
+              "help_text": "Auto-calculated. High values indicate the founder is personally driving revenue, not a management team.",
+              "computation": {
+                "type": "ratio",
+                "numerator_field": "revenue_range",
+                "numerator_midpoints": {
+                  "r1": 1500000,
+                  "r2": 2500000,
+                  "r3": 4000000,
+                  "r5": 7500000,
+                  "r10": 15000000,
+                  "r20": 25000000
+                },
+                "denominator_field": "employee_count"
+              },
+              "scoring_bands": [
+                {
+                  "min": 200000,
+                  "max": null,
+                  "score": 4
+                },
+                {
+                  "min": 125000,
+                  "max": 199999,
+                  "score": 2
+                },
+                {
+                  "min": null,
+                  "max": 124999,
+                  "score": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m4",
+          "name": "Business profile and market position",
+          "description": "Assesses the quality and buyer attractiveness of the business.",
+          "max_score": 15,
+          "criteria": [
+            {
+              "id": "primary_customer_segment",
+              "label": "Primary customer segment",
+              "type": "single_select",
+              "data_source": "database",
+              "help_text": "Select the segment accounting for more than 50% of revenue.",
+              "options": [
+                {
+                  "value": "industrial_govt",
+                  "label": "Industrial or government (primary)",
+                  "score": 10
+                },
+                {
+                  "value": "commercial_b2b",
+                  "label": "Commercial B2B (primary, over 60%)",
+                  "score": 9
+                },
+                {
+                  "value": "mixed",
+                  "label": "Mixed: 40-60% commercial B2B",
+                  "score": 6
+                },
+                {
+                  "value": "consumer_some_b2b",
+                  "label": "Consumer primary, some B2B",
+                  "score": 3
+                },
+                {
+                  "value": "consumer_only",
+                  "label": "Consumer only",
+                  "score": 1
+                }
+              ]
+            },
+            {
+              "id": "business_footprint",
+              "label": "Business footprint",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check the company website for number of locations.",
+              "options": [
+                {
+                  "value": "s1",
+                  "label": "Single focus, single location",
+                  "score": 5
+                },
+                {
+                  "value": "sm",
+                  "label": "Single focus, 2 to 3 locations",
+                  "score": 3
+                },
+                {
+                  "value": "ml",
+                  "label": "Multi-focus or 4+ locations",
+                  "score": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m5",
+          "name": "Behavioral harvest signals",
+          "description": "Observable signals indicating whether the owner is in build mode or harvest mode.",
+          "max_score": 15,
+          "criteria": [
+            {
+              "id": "job_postings",
+              "label": "Active job postings",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check Indeed, LinkedIn, and the company careers page.",
+              "options": [
+                {
+                  "value": "none",
+                  "label": "None in the last 6 months",
+                  "score": 6
+                },
+                {
+                  "value": "few",
+                  "label": "1-2 postings (operational level)",
+                  "score": 3
+                },
+                {
+                  "value": "many",
+                  "label": "Multiple active postings",
+                  "score": 0
+                }
+              ]
+            },
+            {
+              "id": "website_quality",
+              "label": "Website investment and recency",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check copyright year and whether content has been updated recently.",
+              "options": [
+                {
+                  "value": "old",
+                  "label": "Outdated or minimal (copyright 3+ years ago)",
+                  "score": 5
+                },
+                {
+                  "value": "ok",
+                  "label": "Functional but not recently updated",
+                  "score": 2
+                },
+                {
+                  "value": "modern",
+                  "label": "Modern with active content",
+                  "score": 0
+                }
+              ]
+            },
+            {
+              "id": "social_activity",
+              "label": "Social media activity",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check the most active platform for the business type.",
+              "options": [
+                {
+                  "value": "inactive",
+                  "label": "No accounts or 12+ months inactive",
+                  "score": 4
+                },
+                {
+                  "value": "occasional",
+                  "label": "Occasional posts (quarterly or less)",
+                  "score": 2
+                },
+                {
+                  "value": "active",
+                  "label": "Regular active presence",
+                  "score": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "bonus_rules": [
+        {
+          "id": "convergence_age_behavior",
+          "label": "Prime founding window plus no active hiring",
+          "description": "Business is in the prime exit horizon and showing no capacity investment.",
+          "type": "auto",
+          "score": 8,
+          "conditions": [
+            {
+              "field": "founding_year_range",
+              "operator": "in",
+              "values": ["y1980", "y1989"]
+            },
+            {
+              "field": "job_postings",
+              "operator": "eq",
+              "value": "none"
+            }
+          ]
+        },
+        {
+          "id": "convergence_size_market",
+          "label": "Quality mandate convergence",
+          "description": "Right size, right market, and right age window for an attractive advisory mandate.",
+          "type": "auto",
+          "score": 6,
+          "conditions": [
+            {
+              "field": "revenue_range",
+              "operator": "in",
+              "values": ["r5", "r10"]
+            },
+            {
+              "field": "primary_customer_segment",
+              "operator": "in",
+              "values": ["industrial_govt", "commercial_b2b"]
+            },
+            {
+              "field": "founding_year_range",
+              "operator": "in",
+              "values": ["pre1980", "y1980", "y1989", "y1998"]
+            }
+          ]
+        },
+        {
+          "id": "bonus_industry_association",
+          "label": "Member of a relevant industry association",
+          "type": "manual",
+          "score": 2
+        },
+        {
+          "id": "bonus_local_network",
+          "label": "Owner personally visible in a local business network",
+          "type": "manual",
+          "score": 2
+        },
+        {
+          "id": "bonus_no_third_party_capital",
+          "label": "No visible third-party capital or institutional backing",
+          "type": "manual",
+          "score": 2
+        }
+      ],
+      "disqualifiers": [
+        {
+          "id": "dq_second_gen",
+          "label": "Known second-generation owner already running the business"
+        },
+        {
+          "id": "dq_below_minimum",
+          "label": "Revenue confirmed below minimum mandate threshold"
+        },
+        {
+          "id": "dq_active_process",
+          "label": "Active LOI or confirmed process with another advisor"
+        },
+        {
+          "id": "dq_rapid_growth",
+          "label": "Headcount grew 30% or more in the last 18 months"
+        },
+        {
+          "id": "dq_too_early",
+          "label": "Company founded post-2015 with no anomalous exit signals"
+        }
+      ]
+    },
+    "createdAt": "2026-07-01T00:00:00.000Z",
+    "updatedAt": "2026-07-01T00:00:00.000Z",
+    "isSystem": true
+  },
+  {
+    "id": "tpl2",
+    "slug": "acquisition-target-readiness-v1",
+    "name": "Acquisition Target Readiness",
+    "description": "For private equity firms. Scores founder-owned companies by their attractiveness as direct acquisition targets. Unlike the IB template, some management depth is a positive signal here: the business needs to be able to operate after the founder exits.",
+    "targetUserType": "pe",
+    "scoringDirection": "seller",
+    "isDefault": true,
+    "isActive": true,
+    "config": {
+      "version": "1.0",
+      "max_base_score": 100,
+      "max_total_score": 120,
+      "max_bonus_score": 20,
+      "tier_thresholds": [
+        {
+          "key": "tier1",
+          "label": "Tier 1: Approach now",
+          "color": "green",
+          "min_score": 75
+        },
+        {
+          "key": "tier2",
+          "label": "Tier 2: Track closely",
+          "color": "amber",
+          "min_score": 50
+        },
+        {
+          "key": "tier3",
+          "label": "Tier 3: Monitor",
+          "color": "gray",
+          "min_score": 30
+        },
+        {
+          "key": "tier4",
+          "label": "Tier 4: Archive",
+          "color": "light-gray",
+          "min_score": 0
+        }
+      ],
+      "modules": [
+        {
+          "id": "m1",
+          "name": "Owner exit horizon proxy",
+          "description": "Estimates how close the founder is to a natural exit consideration window based on business age.",
+          "max_score": 35,
+          "criteria": [
+            {
+              "id": "founding_year_range",
+              "label": "Founding year range",
+              "type": "single_select",
+              "data_source": "database",
+              "help_text": "Source from database records or company website.",
+              "options": [
+                {
+                  "value": "pre1980",
+                  "label": "Before 1980 (business 45+ yrs old)",
+                  "score": 18,
+                  "note": "Founder likely 72+. High receptivity to a PE approach but verify successor risk and estate position."
+                },
+                {
+                  "value": "y1980",
+                  "label": "1980 to 1988 (business 37-45 yrs old)",
+                  "score": 33,
+                  "note": "Founder likely mid-to-late 60s. Strongest scoring band for PE outreach."
+                },
+                {
+                  "value": "y1989",
+                  "label": "1989 to 1997 (business 28-36 yrs old)",
+                  "score": 35,
+                  "note": "Founder likely 58-65. Prime window: open to a liquidity conversation."
+                },
+                {
+                  "value": "y1998",
+                  "label": "1998 to 2005 (business 20-27 yrs old)",
+                  "score": 23,
+                  "note": "Founder likely 48-58. Possible for partial or growth capital structures."
+                },
+                {
+                  "value": "y2006",
+                  "label": "2006 to 2012 (business 13-19 yrs old)",
+                  "score": 10,
+                  "note": "Founder likely 43-50. Too early for most outright acquisitions."
+                },
+                {
+                  "value": "y2013",
+                  "label": "2013 or later (under 12 yrs old)",
+                  "score": 2,
+                  "note": "Long-term pipeline only."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m2",
+          "name": "Deal size and acquisition fit",
+          "description": "Assesses whether the business is in the right size range for a PE acquisition mandate.",
+          "max_score": 25,
+          "criteria": [
+            {
+              "id": "revenue_range",
+              "label": "Revenue estimate",
+              "type": "single_select",
+              "data_source": "database",
+              "help_text": "Modelled estimate for private companies. Treat as order-of-magnitude only.",
+              "options": [
+                {
+                  "value": "r0",
+                  "label": "Below $1M",
+                  "score": 0
+                },
+                {
+                  "value": "r1",
+                  "label": "$1M to $2M",
+                  "score": 2
+                },
+                {
+                  "value": "r2",
+                  "label": "$2M to $3M",
+                  "score": 7
+                },
+                {
+                  "value": "r3",
+                  "label": "$3M to $5M",
+                  "score": 12
+                },
+                {
+                  "value": "r5",
+                  "label": "$5M to $10M",
+                  "score": 16
+                },
+                {
+                  "value": "r10",
+                  "label": "$10M to $20M",
+                  "score": 18
+                },
+                {
+                  "value": "r20",
+                  "label": "Above $20M",
+                  "score": 11
+                }
+              ]
+            },
+            {
+              "id": "employee_count",
+              "label": "Employee count estimate",
+              "type": "integer",
+              "data_source": "database",
+              "help_text": "Source from database. Cross-check with LinkedIn where possible.",
+              "scoring_bands": [
+                {
+                  "min": null,
+                  "max": 4,
+                  "score": 0
+                },
+                {
+                  "min": 5,
+                  "max": 15,
+                  "score": 5
+                },
+                {
+                  "min": 16,
+                  "max": 35,
+                  "score": 7
+                },
+                {
+                  "min": 36,
+                  "max": 50,
+                  "score": 4
+                },
+                {
+                  "min": 51,
+                  "max": null,
+                  "score": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m3",
+          "name": "Operational readiness for acquisition",
+          "description": "Assesses whether the business can operate after the founder's departure. For PE: some management depth is a positive signal because the business must survive the transition.",
+          "max_score": 10,
+          "criteria": [
+            {
+              "id": "management_layer",
+              "label": "Visible management layer",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check LinkedIn company page and website team or about section.",
+              "options": [
+                {
+                  "value": "none",
+                  "label": "None: founder is the only key person (high key-person risk)",
+                  "score": 2
+                },
+                {
+                  "value": "some",
+                  "label": "Some: 1-2 managers present, business partially institutionalised",
+                  "score": 6
+                },
+                {
+                  "value": "clear",
+                  "label": "Clear: GM, COO, or VP-level management visible",
+                  "score": 8
+                }
+              ]
+            },
+            {
+              "id": "revenue_per_employee",
+              "label": "Revenue per employee",
+              "type": "computed",
+              "help_text": "Auto-calculated. High values indicate operational efficiency and pricing power.",
+              "computation": {
+                "type": "ratio",
+                "numerator_field": "revenue_range",
+                "numerator_midpoints": {
+                  "r1": 1500000,
+                  "r2": 2500000,
+                  "r3": 4000000,
+                  "r5": 7500000,
+                  "r10": 15000000,
+                  "r20": 25000000
+                },
+                "denominator_field": "employee_count"
+              },
+              "scoring_bands": [
+                {
+                  "min": 200000,
+                  "max": null,
+                  "score": 2
+                },
+                {
+                  "min": 125000,
+                  "max": 199999,
+                  "score": 1
+                },
+                {
+                  "min": null,
+                  "max": 124999,
+                  "score": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m4",
+          "name": "Business quality and revenue profile",
+          "description": "Assesses the defensibility and revenue quality of the business from a PE buyer perspective.",
+          "max_score": 15,
+          "criteria": [
+            {
+              "id": "primary_customer_segment",
+              "label": "Primary customer segment",
+              "type": "single_select",
+              "data_source": "database",
+              "help_text": "Select the segment accounting for more than 50% of revenue.",
+              "options": [
+                {
+                  "value": "industrial_govt",
+                  "label": "Industrial or government (primary)",
+                  "score": 8
+                },
+                {
+                  "value": "commercial_b2b",
+                  "label": "Commercial B2B (primary, over 60%)",
+                  "score": 8
+                },
+                {
+                  "value": "mixed",
+                  "label": "Mixed: 40-60% commercial B2B",
+                  "score": 5
+                },
+                {
+                  "value": "consumer_some_b2b",
+                  "label": "Consumer primary, some B2B",
+                  "score": 3
+                },
+                {
+                  "value": "consumer_only",
+                  "label": "Consumer only",
+                  "score": 1
+                }
+              ]
+            },
+            {
+              "id": "revenue_type",
+              "label": "Revenue type",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check the company website for service descriptions, maintenance contracts, or subscription offerings.",
+              "options": [
+                {
+                  "value": "recurring_dominant",
+                  "label": "Majority recurring: maintenance contracts, retainers, or subscriptions",
+                  "score": 7
+                },
+                {
+                  "value": "mixed",
+                  "label": "Mix of recurring and project-based revenue",
+                  "score": 4
+                },
+                {
+                  "value": "project_only",
+                  "label": "Primarily project-based or transactional",
+                  "score": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m5",
+          "name": "Behavioral signals",
+          "description": "Observable signals indicating whether the owner is receptive to an approach.",
+          "max_score": 15,
+          "criteria": [
+            {
+              "id": "job_postings",
+              "label": "Active job postings",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check Indeed, LinkedIn, and the company careers page.",
+              "options": [
+                {
+                  "value": "none",
+                  "label": "None in the last 6 months",
+                  "score": 6
+                },
+                {
+                  "value": "few",
+                  "label": "1-2 postings (operational level)",
+                  "score": 3
+                },
+                {
+                  "value": "many",
+                  "label": "Multiple active postings",
+                  "score": 0
+                }
+              ]
+            },
+            {
+              "id": "website_quality",
+              "label": "Website investment and recency",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check copyright year and whether content has been updated recently.",
+              "options": [
+                {
+                  "value": "old",
+                  "label": "Outdated or minimal (copyright 3+ years ago)",
+                  "score": 5
+                },
+                {
+                  "value": "ok",
+                  "label": "Functional but not recently updated",
+                  "score": 2
+                },
+                {
+                  "value": "modern",
+                  "label": "Modern with active content",
+                  "score": 0
+                }
+              ]
+            },
+            {
+              "id": "social_activity",
+              "label": "Social media activity",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Check the most active platform for the business type.",
+              "options": [
+                {
+                  "value": "inactive",
+                  "label": "No accounts or 12+ months inactive",
+                  "score": 4
+                },
+                {
+                  "value": "occasional",
+                  "label": "Occasional posts (quarterly or less)",
+                  "score": 2
+                },
+                {
+                  "value": "active",
+                  "label": "Regular active presence",
+                  "score": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "bonus_rules": [
+        {
+          "id": "convergence_age_behavior",
+          "label": "Prime founding window plus no active hiring",
+          "description": "Business is in the prime exit horizon and showing no capacity expansion behavior.",
+          "type": "auto",
+          "score": 8,
+          "conditions": [
+            {
+              "field": "founding_year_range",
+              "operator": "in",
+              "values": ["y1980", "y1989"]
+            },
+            {
+              "field": "job_postings",
+              "operator": "eq",
+              "value": "none"
+            }
+          ]
+        },
+        {
+          "id": "convergence_quality_size",
+          "label": "Quality acquisition convergence",
+          "description": "Right deal size, strong customer segment, and recurring revenue profile.",
+          "type": "auto",
+          "score": 6,
+          "conditions": [
+            {
+              "field": "revenue_range",
+              "operator": "in",
+              "values": ["r5", "r10"]
+            },
+            {
+              "field": "primary_customer_segment",
+              "operator": "in",
+              "values": ["industrial_govt", "commercial_b2b"]
+            },
+            {
+              "field": "revenue_type",
+              "operator": "in",
+              "values": ["recurring_dominant", "mixed"]
+            }
+          ]
+        },
+        {
+          "id": "bonus_industry_association",
+          "label": "Member of a relevant industry association",
+          "type": "manual",
+          "score": 2
+        },
+        {
+          "id": "bonus_no_pe_backing",
+          "label": "No prior PE recapitalisation or institutional backing",
+          "type": "manual",
+          "score": 2
+        },
+        {
+          "id": "bonus_geographic_fit",
+          "label": "Located in a target geography for this fund",
+          "type": "manual",
+          "score": 2
+        }
+      ],
+      "disqualifiers": [
+        {
+          "id": "dq_second_gen",
+          "label": "Known second-generation owner already running the business"
+        },
+        {
+          "id": "dq_below_minimum",
+          "label": "Revenue confirmed below minimum acquisition threshold"
+        },
+        {
+          "id": "dq_active_process",
+          "label": "Active sale process or LOI with another buyer confirmed"
+        },
+        {
+          "id": "dq_rapid_growth",
+          "label": "Headcount grew 30% or more in the last 18 months"
+        },
+        {
+          "id": "dq_existing_pe",
+          "label": "Business already has a PE sponsor or institutional investor"
+        }
+      ]
+    },
+    "createdAt": "2026-07-01T00:00:00.000Z",
+    "updatedAt": "2026-07-01T00:00:00.000Z",
+    "isSystem": true
+  },
+  {
+    "id": "tpl3",
+    "slug": "strategic-buyer-propensity-v1",
+    "name": "Strategic Buyer Propensity",
+    "description": "Scores a corporate or strategic acquirer on how likely they are to want to acquire a specific target. Used by investment banks building buyer lists for a sell-side process.",
+    "targetUserType": "ibanking",
+    "scoringDirection": "buyer",
+    "isDefault": false,
+    "isActive": true,
+    "config": {
+      "version": "1.0",
+      "max_base_score": 100,
+      "max_total_score": 120,
+      "max_bonus_score": 20,
+      "scored_entity_label": "Potential buyer (strategic acquirer)",
+      "tier_thresholds": [
+        {
+          "key": "tier1",
+          "label": "Priority A: Lead approach",
+          "color": "green",
+          "min_score": 75
+        },
+        {
+          "key": "tier2",
+          "label": "Priority B: Include in process",
+          "color": "amber",
+          "min_score": 50
+        },
+        {
+          "key": "tier3",
+          "label": "Priority C: Broad list",
+          "color": "gray",
+          "min_score": 30
+        },
+        {
+          "key": "tier4",
+          "label": "Priority D: Low likelihood",
+          "color": "light-gray",
+          "min_score": 0
+        }
+      ],
+      "modules": [
+        {
+          "id": "m1",
+          "name": "Strategic rationale",
+          "description": "Why would this buyer want to acquire this specific target? The strongest buyer has a clear, demonstrable reason.",
+          "max_score": 35,
+          "criteria": [
+            {
+              "id": "primary_acquisition_rationale",
+              "label": "Primary acquisition rationale",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Select the most compelling reason this buyer would pursue the target. This is the most important criterion in the framework.",
+              "options": [
+                {
+                  "value": "clear_gap_fill",
+                  "label": "Clear gap fill: target addresses a known product, capability, or customer gap the buyer cannot easily build organically",
+                  "score": 20,
+                  "note": "The strongest rationale. Look for gaps in the buyer's product range, geographic coverage, or technical capability that the target directly fills."
+                },
+                {
+                  "value": "geographic_expansion",
+                  "label": "Geographic expansion: target gives the buyer access to a market or region it does not currently serve",
+                  "score": 16,
+                  "note": "Strong rationale when the buyer has publicly stated geographic growth ambitions."
+                },
+                {
+                  "value": "competitor_consolidation",
+                  "label": "Competitor consolidation: target is a direct competitor and acquisition would increase market share or remove a threat",
+                  "score": 14,
+                  "note": "Common in consolidating sectors. Note that this can attract regulatory scrutiny."
+                },
+                {
+                  "value": "adjacency_synergy",
+                  "label": "Adjacency play: target is in an adjacent market with cross-sell or bundling potential",
+                  "score": 8,
+                  "note": "Weaker rationale unless the buyer has made similar adjacency moves before."
+                },
+                {
+                  "value": "no_clear_rationale",
+                  "label": "No clear rationale: acquisition would be opportunistic or purely financial",
+                  "score": 2,
+                  "note": "Corporate buyers without a clear strategic rationale rarely complete transactions."
+                }
+              ]
+            },
+            {
+              "id": "sector_and_business_overlap",
+              "label": "Sector and business overlap",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "How closely does the buyer's core business relate to the target's sector?",
+              "options": [
+                {
+                  "value": "same_sector_direct",
+                  "label": "Same sector: buyer operates the same type of business as the target",
+                  "score": 15
+                },
+                {
+                  "value": "same_sector_adjacent",
+                  "label": "Same sector, adjacent segment: same broad sector but different sub-market or customer type",
+                  "score": 11
+                },
+                {
+                  "value": "related_sector",
+                  "label": "Related sector: complementary business with identifiable synergy potential",
+                  "score": 7
+                },
+                {
+                  "value": "different_sector",
+                  "label": "Different sector: minimal business overlap",
+                  "score": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m2",
+          "name": "Relative scale and absorptive capacity",
+          "description": "Can the buyer absorb a target of this size without it being a transformative or bet-the-company transaction? Larger buyers relative to the target have more bandwidth and lower execution risk.",
+          "max_score": 20,
+          "criteria": [
+            {
+              "id": "buyer_size_relative_to_target",
+              "label": "Buyer revenue relative to target revenue",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Estimate the buyer's revenue and compare it to the target's. Use database records, press coverage, or website cues for private buyers.",
+              "options": [
+                {
+                  "value": "ten_x_or_more",
+                  "label": "10x or larger: buyer is at least 10 times the size of the target",
+                  "score": 12,
+                  "note": "Ideal size ratio. The acquisition is a manageable bolt-on and integration risk is low relative to the buyer's total business."
+                },
+                {
+                  "value": "three_to_ten_x",
+                  "label": "3x to 10x: buyer is 3 to 10 times the size of the target",
+                  "score": 9,
+                  "note": "Good ratio. Acquisition is meaningful but not transformative."
+                },
+                {
+                  "value": "one_to_three_x",
+                  "label": "1x to 3x: buyer is roughly 1 to 3 times the size of the target",
+                  "score": 5,
+                  "note": "Caution: acquisition is material relative to buyer size. Higher integration risk and financing complexity."
+                },
+                {
+                  "value": "similar_or_smaller",
+                  "label": "Similar or smaller: buyer is roughly the same size as or smaller than the target",
+                  "score": 2,
+                  "note": "Transformative or reverse-merger territory. Unlikely unless the buyer has a specific thesis and external financing."
+                }
+              ]
+            },
+            {
+              "id": "integration_track_record",
+              "label": "Prior acquisition integration track record",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Has the buyer successfully integrated acquisitions before? Check for post-acquisition press releases, retention of acquired management teams, and public commentary on integration outcomes.",
+              "options": [
+                {
+                  "value": "proven_integrator",
+                  "label": "Proven integrator: has successfully completed and integrated multiple acquisitions",
+                  "score": 8
+                },
+                {
+                  "value": "limited_experience",
+                  "label": "Limited experience: has made 1-2 acquisitions with no clear evidence of integration problems or success",
+                  "score": 4
+                },
+                {
+                  "value": "first_time",
+                  "label": "No prior acquisitions: this would be the buyer's first transaction",
+                  "score": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m3",
+          "name": "Proven acquisition behaviour",
+          "description": "Companies that have made acquisitions recently are far more likely to make another one. The process, board approval mechanisms, and advisor relationships are already in place.",
+          "max_score": 20,
+          "criteria": [
+            {
+              "id": "acquisition_frequency",
+              "label": "Acquisitions completed in the last 3 years",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Search press releases, company announcements, and M&A databases. Count only completed transactions, not rumoured or failed ones.",
+              "options": [
+                {
+                  "value": "three_plus",
+                  "label": "3 or more: serial acquirer with an active M&A programme",
+                  "score": 12
+                },
+                {
+                  "value": "one_two",
+                  "label": "1 to 2: has demonstrated willingness and ability to acquire",
+                  "score": 8
+                },
+                {
+                  "value": "none_but_history",
+                  "label": "None recently but has prior M&A history: paused but experienced",
+                  "score": 5
+                },
+                {
+                  "value": "no_history",
+                  "label": "No M&A history at all: first-time acquirer",
+                  "score": 2
+                }
+              ]
+            },
+            {
+              "id": "ma_infrastructure",
+              "label": "M&A infrastructure",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Does the buyer have a dedicated corporate development function? Check LinkedIn for corp dev titles, the company website for a business development or strategy team, and press coverage for named M&A leads.",
+              "options": [
+                {
+                  "value": "dedicated_corp_dev",
+                  "label": "Dedicated corporate development team: full-time M&A professionals in place",
+                  "score": 8,
+                  "note": "The strongest infrastructure signal. A corp dev team actively sources deals and manages pipeline."
+                },
+                {
+                  "value": "ad_hoc_executives",
+                  "label": "Ad hoc through executives: M&A handled by CEO or CFO without a dedicated team",
+                  "score": 4,
+                  "note": "Common in smaller strategics. Deals happen but less frequently and with longer timelines."
+                },
+                {
+                  "value": "no_visible_infrastructure",
+                  "label": "No visible M&A infrastructure: no evidence of internal deal-making capacity",
+                  "score": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m4",
+          "name": "Financial momentum",
+          "description": "Growing companies acquire; declining companies cut. Financial health determines both appetite and ability to complete a transaction.",
+          "max_score": 15,
+          "criteria": [
+            {
+              "id": "revenue_growth_trajectory",
+              "label": "Revenue growth trajectory",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Assess the buyer's revenue growth trend from public filings, press releases, or database estimates. Growing buyers have stronger acquisition appetite and easier access to financing.",
+              "options": [
+                {
+                  "value": "high_growth",
+                  "label": "High growth: revenue growing 10% or more per year",
+                  "score": 10
+                },
+                {
+                  "value": "moderate_growth",
+                  "label": "Moderate growth: revenue growing 3 to 10% per year",
+                  "score": 7
+                },
+                {
+                  "value": "flat",
+                  "label": "Flat: revenue roughly stable year on year",
+                  "score": 4
+                },
+                {
+                  "value": "declining",
+                  "label": "Declining: revenue is shrinking",
+                  "score": 1
+                }
+              ]
+            },
+            {
+              "id": "organisational_stability",
+              "label": "Organisational stability",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Companies undergoing major restructuring or C-suite turnover have significantly reduced bandwidth and appetite for acquisitions.",
+              "options": [
+                {
+                  "value": "stable",
+                  "label": "Stable: no major restructuring, leadership change, or cost-cutting programme in the last 12 months",
+                  "score": 5
+                },
+                {
+                  "value": "minor_changes",
+                  "label": "Minor changes: some management change but core business is stable",
+                  "score": 3
+                },
+                {
+                  "value": "major_disruption",
+                  "label": "Major disruption: active restructuring, layoffs, or C-suite turnover underway",
+                  "score": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m5",
+          "name": "Access and relationship",
+          "description": "A warm relationship reduces the time and friction of getting a conversation started. This is an outreach variable, not a propensity variable, so it carries lower weight than strategic fit.",
+          "max_score": 10,
+          "criteria": [
+            {
+              "id": "prior_relationship",
+              "label": "Prior relationship with the advisor or the target owner",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Assess the quality of existing relationships between the advisor, the target owner, and this potential buyer.",
+              "options": [
+                {
+                  "value": "strong_relationship",
+                  "label": "Strong: advisor has transacted with this buyer before, or buyer has a direct relationship with the target owner",
+                  "score": 6
+                },
+                {
+                  "value": "known_no_deal",
+                  "label": "Known: advisor has met this buyer but not completed a transaction with them",
+                  "score": 3
+                },
+                {
+                  "value": "no_prior_contact",
+                  "label": "No prior contact: cold approach required",
+                  "score": 1
+                }
+              ]
+            },
+            {
+              "id": "decision_maker_accessibility",
+              "label": "Decision maker identified and accessible",
+              "type": "single_select",
+              "data_source": "research",
+              "help_text": "Has the relevant decision maker (CEO, corp dev lead, or division head) been identified and is there a realistic path to contact?",
+              "options": [
+                {
+                  "value": "identified_accessible",
+                  "label": "Identified and accessible: decision maker is known and a warm or direct introduction is possible",
+                  "score": 4
+                },
+                {
+                  "value": "identified_cold",
+                  "label": "Identified but cold: decision maker is known but no warm introduction exists",
+                  "score": 2
+                },
+                {
+                  "value": "not_identified",
+                  "label": "Not identified: the right contact inside this organisation is unknown",
+                  "score": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "bonus_rules": [
+        {
+          "id": "convergence_rationale_sector_acquirer",
+          "label": "Clear rationale, same sector, and proven acquirer",
+          "description": "The three most important signals all point in the same direction.",
+          "type": "auto",
+          "score": 8,
+          "conditions": [
+            {
+              "field": "primary_acquisition_rationale",
+              "operator": "in",
+              "values": ["clear_gap_fill", "geographic_expansion", "competitor_consolidation"]
+            },
+            {
+              "field": "sector_and_business_overlap",
+              "operator": "in",
+              "values": ["same_sector_direct", "same_sector_adjacent"]
+            },
+            {
+              "field": "acquisition_frequency",
+              "operator": "in",
+              "values": ["three_plus", "one_two"]
+            }
+          ]
+        },
+        {
+          "id": "convergence_scale_infrastructure_growth",
+          "label": "Right relative scale, M&A infrastructure in place, and growing",
+          "description": "The buyer has the size, the capability, and the financial momentum to execute.",
+          "type": "auto",
+          "score": 6,
+          "conditions": [
+            {
+              "field": "buyer_size_relative_to_target",
+              "operator": "in",
+              "values": ["ten_x_or_more", "three_to_ten_x"]
+            },
+            {
+              "field": "ma_infrastructure",
+              "operator": "eq",
+              "value": "dedicated_corp_dev"
+            },
+            {
+              "field": "revenue_growth_trajectory",
+              "operator": "in",
+              "values": ["high_growth", "moderate_growth"]
+            }
+          ]
+        },
+        {
+          "id": "bonus_public_ma_intent",
+          "label": "Buyer has publicly stated M&A intent in the target sector (earnings call, press release, investor day)",
+          "type": "manual",
+          "score": 2
+        },
+        {
+          "id": "bonus_prior_approach",
+          "label": "Buyer has previously approached this target or a directly comparable asset",
+          "type": "manual",
+          "score": 2
+        },
+        {
+          "id": "bonus_sector_consolidation",
+          "label": "The sector is actively consolidating with multiple recent transactions by peer buyers",
+          "type": "manual",
+          "score": 2
+        }
+      ],
+      "disqualifiers": [
+        {
+          "id": "dq_financial_distress",
+          "label": "Buyer is under financial distress, in a formal restructuring process, or has suspended M&A activity"
+        },
+        {
+          "id": "dq_recent_major_acquisition",
+          "label": "Buyer completed a major acquisition in the last 12 months and is still integrating (bandwidth constrained)"
+        },
+        {
+          "id": "dq_regulatory_conflict",
+          "label": "Acquisition would likely face regulatory or antitrust challenge given buyer's existing market position"
+        },
+        {
+          "id": "dq_stated_no_ma",
+          "label": "Buyer has publicly stated it is not pursuing acquisitions or is exiting this sector"
+        },
+        {
+          "id": "dq_previously_passed",
+          "label": "Buyer has previously reviewed and passed on this specific target without material change in circumstances"
+        }
+      ]
+    },
+    "createdAt": "2026-07-01T00:00:00.000Z",
+    "updatedAt": "2026-07-01T00:00:00.000Z",
+    "isSystem": true
+  }
+]

@@ -1,0 +1,133 @@
+/* ============================================
+   TYPOGRAPHY
+   Font Families, Sizes, and Text Styles
+   ============================================ */
+
+:root {
+  /* Font Family */
+  --font-primary: 'Roboto', sans-serif;
+
+  /* Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-md: 18px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 40px;
+  --font-size-4xl: 48px;
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.2;
+  --line-height-relaxed: 1.4;
+  --line-height-loose: 1.5;
+  --line-height-extra: 1.6;
+}
+
+/* Base Body Typography */
+body {
+  font-family: var(--font-primary);
+  background: var(--color-bg-white, #ffffff);
+  color: var(--color-text-primary, #333333);
+  font-size: var(--font-size-base);
+}
+
+/* Headings */
+h1 {
+  font-size: var(--font-size-4xl);
+}
+h2 {
+  font-size: var(--font-size-3xl);
+}
+h3 {
+  font-size: var(--font-size-2xl);
+}
+h4 {
+  font-size: var(--font-size-xl);
+}
+h5 {
+  font-size: var(--font-size-lg);
+}
+h6 {
+  font-size: var(--font-size-md);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-primary);
+  color: var(--color-text-white, #ffffff);
+  margin: 0 0 20px 0;
+}
+
+h5,
+h6 {
+  font-family: var(--font-primary);
+  color: var(--color-text-white, #ffffff);
+  margin: 0 0 20px 0;
+}
+
+/* Base Text Elements */
+p,
+label,
+a,
+span,
+div,
+button {
+  font-size: var(--font-size-base);
+  font-family: var(--font-primary);
+}
+
+input,
+option,
+textarea {
+  font-size: var(--font-size-sm);
+}
+
+/* Links */
+a {
+  color: var(--color-link, #282561);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Error Text */
+.error {
+  color: var(--color-danger, #dc3545);
+  font-size: var(--font-size-sm);
+  margin-top: 4px;
+  display: block;
+}
+
+/* ===== PAGE HEADER ===== */
+/* Shared title/subtitle used by Scorecard, My Preferences, and similar pages.
+   Overrides the global h1–h4 white color so titles match Knowledge Bank / Previous Results. */
+.page-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--color-text-primary, var(--brand-navy, #282561));
+}
+
+.page-subtitle {
+  margin: 0.35rem 0 0;
+  max-width: 42rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary, #6b7280);
+}

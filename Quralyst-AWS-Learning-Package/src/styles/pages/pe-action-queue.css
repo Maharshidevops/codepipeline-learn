@@ -1,0 +1,110 @@
+/*
+ * PE Action Queue — Stylesheet for Action Queue Page & Scraper Controls.
+ * Unified card containers, rounded-rectangle status pills, and dark mode soft alpha fills.
+ */
+
+/* ── Status filter bar & pills ────────────────────────────────────────────── */
+.status-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.status-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-md, 12px);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  background: var(--surface-overlay, #f1f5f9);
+  color: var(--color-text-secondary, #64748b);
+  cursor: pointer;
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.status-filter-btn:hover:not(.is-active) {
+  background: var(--surface-hover, #e2e8f0);
+  border-color: var(--border-strong, #cbd5e1);
+  color: var(--color-text-primary, #0f172a);
+  transform: translateY(-1px);
+}
+
+.status-filter-btn__count {
+  font-weight: 700;
+}
+
+.status-filter-btn__note {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Light mode active pills */
+.status-filter-btn--pending.is-active {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fde68a;
+}
+
+.status-filter-btn--running.is-active {
+  background: #e0e7ff;
+  color: #3730a3;
+  border-color: #c7d2fe;
+}
+
+.status-filter-btn--completed.is-active {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.status-filter-btn--failed.is-active {
+  background: #ffe4e6;
+  color: #9f1239;
+  border-color: #fecdd3;
+}
+
+/* Dark mode overrides — soft warm slate containers and alpha-tinted status pills */
+:root[data-theme='dark'] .status-filter-btn {
+  background: var(--surface-overlay, #2e3344);
+  border-color: var(--border-subtle, #33394b);
+  color: #cbd5e1;
+}
+
+:root[data-theme='dark'] .status-filter-btn:hover:not(.is-active) {
+  background: var(--surface-hover, #373d52);
+  border-color: var(--border-strong, #475569);
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .status-filter-btn--pending.is-active {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fcd34d;
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+:root[data-theme='dark'] .status-filter-btn--running.is-active {
+  background: rgba(99, 102, 241, 0.16);
+  color: #818cf8;
+  border-color: rgba(129, 140, 248, 0.3);
+}
+
+:root[data-theme='dark'] .status-filter-btn--completed.is-active {
+  background: rgba(16, 185, 129, 0.16);
+  color: #6ee7b7;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+:root[data-theme='dark'] .status-filter-btn--failed.is-active {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+  border-color: rgba(248, 113, 113, 0.3);
+}

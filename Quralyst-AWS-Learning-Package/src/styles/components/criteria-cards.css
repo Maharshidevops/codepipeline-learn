@@ -1,0 +1,404 @@
+/* ============================================
+   CRITERIA CARDS COMPONENT
+   Modular card variants for research forms
+   ============================================ */
+
+/* ============================================
+   BASE CRITERIA CARD
+   Shared styles for all card variants
+   ============================================ */
+
+.criteria-card {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+}
+
+.criteria-card:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off hover shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 8px 24px rgba(40, 37, 97, 0.12);
+}
+
+/* Card Typography */
+.criteria-card h2,
+.criteria-card h3,
+.criteria-card h4 {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.criteria-card h4 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.criteria-card .form-label {
+  font-weight: 500;
+}
+
+/* ============================================
+   LIGHT BLUE VARIANT
+   For header/title sections
+   ============================================ */
+
+.criteria-card--light {
+  background: var(--surface-accent);
+  border: 0px solid rgba(125, 179, 226, 0.25);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off brand-blue shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 4px 16px rgba(125, 179, 226, 0.15);
+}
+
+.criteria-card--light h2,
+.criteria-card--light h3,
+.criteria-card--light h4 {
+  color: var(--color-primary, #282561);
+}
+
+.criteria-card--light p,
+.criteria-card--light .text-muted {
+  color: var(--color-text-primary, #333333);
+}
+
+.criteria-card--light .form-label {
+  color: var(--color-primary, #282561);
+}
+
+.criteria-card--light .form-check-label {
+  color: var(--color-text-primary, #333333);
+}
+
+/* ============================================
+   DEEP BLUE VARIANT
+   For highlighted sections (Geographic, Ideal Buyer)
+   ============================================ */
+
+.criteria-card--deep {
+  background: var(--brand-navy);
+  border: none;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 4px 20px rgba(35, 35, 95, 0.25);
+}
+
+.criteria-card--deep h2,
+.criteria-card--deep h3,
+.criteria-card--deep h4,
+.criteria-card--deep .fw-bold {
+  color: var(--color-text-white, #ffffff) !important;
+}
+
+.criteria-card--deep p,
+.criteria-card--deep .text-muted,
+.criteria-card--deep .text-white-50 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.criteria-card--deep .form-label {
+  color: var(--color-text-white, #ffffff) !important;
+}
+
+.criteria-card--deep .form-check-label {
+  color: var(--color-text-white, #ffffff) !important;
+}
+
+.criteria-card--deep .form-control {
+  background: var(--surface-raised);
+  border-color: transparent;
+}
+
+.criteria-card--deep .form-control:focus {
+  border-color: var(--color-secondary, #7db3e2);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off focus glow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 0 0 3px rgba(125, 179, 226, 0.25);
+}
+
+/* Deep variant button styling */
+.criteria-card--deep .btn-standard {
+  background: var(--color-primary, #282561) !important;
+  border: 1px solid var(--color-white, #ffffff) !important;
+  padding: 4px 24px;
+  color: var(--color-text-white, #ffffff) !important;
+}
+
+.criteria-card--deep .btn-standard:hover {
+  background: var(--color-secondary-hover) !important;
+  border-color: var(--color-white, #ffffff) !important;
+  color: var(--color-text-white, #ffffff) !important;
+}
+
+/* ============================================
+   WHITE VARIANT
+   For standard form sections
+   ============================================ */
+
+/* Standard form-section card — matches the shared .card chrome (layout.css): surface-raised fill,
+   2px subtle border, 20px radius, the same soft shadow. The border is what makes it read as a proper
+   container (a shadow-only edge is invisible on dark surfaces). */
+.criteria-card--white {
+  background: var(--surface-raised);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.criteria-card--white:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off hover shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 4px 20px rgba(40, 37, 97, 0.1);
+}
+
+.criteria-card--white h2,
+.criteria-card--white h3,
+.criteria-card--white h4 {
+  color: var(--color-primary, #282561);
+}
+
+.criteria-card--white p,
+.criteria-card--white .text-muted {
+  color: var(--color-text-secondary, #666666) !important;
+}
+
+.criteria-card--white .form-label {
+  color: var(--color-primary, #282561);
+}
+
+.criteria-card--white .form-check-label {
+  color: var(--color-text-primary, #333333);
+}
+
+/* ============================================
+   CRITERIA TITLE & DESCRIPTION
+   For page headers
+   ============================================ */
+
+.criteria-title {
+  color: var(--color-primary, #282561);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.criteria-desc {
+  color: var(--color-text-secondary, #666666);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+/* ============================================
+   GLASSMORPHISM VARIANT
+   Transparent blur effect for modern UI
+   ============================================ */
+
+.criteria-card--glass {
+  background: rgba(125, 179, 226, 0.2);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid var(--color-glass-border);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off glass shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 8px 32px rgba(40, 37, 97, 0.1);
+}
+
+.criteria-card--glass:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off hover shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 12px 40px rgba(40, 37, 97, 0.15);
+}
+
+.criteria-card--glass h2,
+.criteria-card--glass h3,
+.criteria-card--glass h4 {
+  color: var(--color-primary, #282561);
+}
+
+.criteria-card--glass p,
+.criteria-card--glass .text-muted {
+  color: var(--color-text-secondary, #666666);
+}
+
+.criteria-card--glass .form-label {
+  color: var(--color-primary, #282561);
+}
+
+.criteria-card--glass .form-check-label {
+  color: var(--color-text-primary, #333333);
+}
+
+.criteria-card--glass a {
+  color: var(--color-primary, #282561);
+  text-decoration: underline;
+}
+
+.criteria-card--glass a:hover {
+  color: var(--color-secondary, #7db3e2);
+}
+
+/* ============================================
+   FORM ELEMENT ENHANCEMENTS
+   Consistent form styling across variants
+   ============================================ */
+
+.criteria-card .form-check-input[type='radio'],
+.criteria-card .form-check-input[type='checkbox'] {
+  border-color: var(--color-primary, #282561);
+}
+
+.criteria-card .form-check-input:checked {
+  background-color: var(--color-primary, #282561);
+  border-color: var(--color-primary, #282561);
+}
+
+/* Circular checkboxes for buyer type selection */
+.criteria-card .buyer-enhance-mode-input.form-check-input[type='checkbox'] {
+  border-radius: 50%;
+}
+
+/* Clear inputs button styling */
+.criteria-card .btn-clear-inputs {
+  background: transparent;
+  border: 1px solid currentColor;
+  color: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-xl);
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.criteria-card--deep .btn-clear-inputs {
+  color: var(--color-text-white, #ffffff);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.criteria-card--deep .btn-clear-inputs:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-white, #ffffff);
+}
+
+.criteria-card--white .btn-clear-inputs,
+.criteria-card--light .btn-clear-inputs {
+  color: var(--color-primary, #282561);
+  border-color: var(--color-primary, #282561);
+}
+
+.criteria-card--white .btn-clear-inputs:hover,
+.criteria-card--light .btn-clear-inputs:hover {
+  background: var(--color-primary, #282561);
+  color: var(--color-text-white, #ffffff);
+}
+
+/* Standard Button on White Card */
+.criteria-card--white .btn-standard {
+  background: var(--color-bg-white, #ffffff) !important;
+  border: 1px solid var(--color-primary, #282561) !important;
+  color: var(--color-primary, #282561) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 4px 24px;
+  transition: all 0.2s ease;
+}
+
+.criteria-card--white .btn-standard:hover {
+  background: var(--color-secondary, #7db3e2) !important;
+  border-color: var(--color-secondary, #7db3e2) !important;
+  color: var(--color-text-white, #ffffff) !important;
+  transform: translateY(-1px);
+}
+
+/* Premium Custom Radio Buttons */
+.criteria-card .form-check-input[type='radio'],
+.criteria-card .form-check-input[type='checkbox'] {
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-control-muted);
+  /* Gray-450 - Darker for better visibility */
+  border: none;
+  margin-top: 0.1rem;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all 0.2s ease;
+}
+
+.criteria-card .form-check-input[type='radio']:checked,
+.criteria-card .form-check-input[type='checkbox']:checked {
+  background-color: var(--color-white, #ffffff);
+  border: 5px solid var(--color-secondary, #7db3e2);
+  background-image: none;
+  box-shadow: 0 0 0 1px var(--color-secondary, #7db3e2);
+  /* Optional ring definition */
+}
+
+/* Ensure labels are vertically aligned with the larger radios */
+.criteria-card .form-check-label {
+  padding-left: 8px;
+  padding-top: 4px;
+  /* Adjustment for 24px height */
+  vertical-align: middle;
+  font-size: 15px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .criteria-card {
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
+
+  .criteria-card h3,
+  .criteria-card h4 {
+    font-size: 1.15rem;
+  }
+
+  /* Stack inline radio/checkbox rows on narrow screens */
+  .criteria-card .form-check-inline {
+    display: flex;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ─── Dark-mode overrides for criteria-card--white form controls ──────── */
+:root[data-theme='dark'] .criteria-card--white .form-control,
+:root[data-theme='dark'] .criteria-card--white .form-select,
+:root[data-theme='dark'] .criteria-card--white textarea.form-control {
+  background: var(--surface-overlay) !important;
+  border: 1.5px solid var(--border-strong) !important;
+  color: var(--color-text-primary) !important;
+}
+
+:root[data-theme='dark'] .criteria-card--white .form-control::placeholder,
+:root[data-theme='dark'] .criteria-card--white textarea.form-control::placeholder {
+  color: var(--color-text-light) !important;
+  opacity: 0.7 !important;
+}
+
+:root[data-theme='dark'] .criteria-card--white .form-control:focus,
+:root[data-theme='dark'] .criteria-card--white .form-select:focus,
+:root[data-theme='dark'] .criteria-card--white textarea.form-control:focus {
+  border-color: var(--color-primary) !important;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- dark focus ring one-off */
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+}
+
+:root[data-theme='dark'] .criteria-card--white:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- dark hover shadow one-off */
+  box-shadow: 0 4px 20px rgba(129, 140, 248, 0.08);
+}
+
+:root[data-theme='dark'] .criteria-card--white .list-group-item {
+  background: transparent !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+:root[data-theme='dark'] .criteria-card--white .btn-standard {
+  background: var(--surface-overlay) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+
+:root[data-theme='dark'] .criteria-card--white .btn-standard:hover {
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-white, #ffffff) !important;
+}

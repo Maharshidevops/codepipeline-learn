@@ -1,0 +1,413 @@
+/* ============================================
+   FINANCIAL VERTICALS PAGE STYLES
+   Page-specific styles for financial_verticals.html
+   ============================================ */
+
+/* Page top spacing now comes from the shared .main-content workspace box (Phase 24) — the bare
+   .page-top-padding override was removed so it can't re-add top padding globally. */
+
+/* ============================================
+   WIZARD STEP CONTAINERS
+   ============================================ */
+
+.wizard-step {
+  display: none;
+}
+
+.wizard-step.active {
+  display: block;
+}
+
+/* ============================================
+   WIZARD NAVIGATION
+   ============================================ */
+
+.wizard-nav-btn {
+  background: var(--color-primary, #282561) !important;
+  color: var(--color-text-white, #ffffff) !important;
+  border: none !important;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.wizard-nav-btn:hover {
+  background: var(--color-secondary, #7db3e2) !important;
+  transform: translateY(-2px);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- brand-navy shadow variant, deliberate one-off */
+  box-shadow: 0 8px 20px rgba(40, 37, 97, 0.25);
+}
+
+/* ============================================
+   CUSTOM DROPDOWN OVERRIDES
+   Match quralyst-research dropdown sizing
+   ============================================ */
+
+.custom-dropdown {
+  padding: 0px 0px;
+}
+
+.custom-dropdown-btn {
+  background: var(--surface-overlay);
+  min-height: 40px;
+  max-height: 40px;
+  padding: 8px 16px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+}
+
+/* ============================================
+   SIZE PREFERENCE TEXT FIELDS
+   Match quralyst-research form-control padding
+   ============================================ */
+
+.size-preference-card .form-control {
+  padding: 8px 16px;
+}
+
+.form-control {
+  padding: 8px 16px;
+}
+
+/* ============================================
+   PE EXPOSURE CHECKBOXES
+   Round checkbox structure with bg toggle
+   ============================================ */
+
+.pe-checkbox-container {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-overlay);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.pe-checkbox-container:hover {
+  background-color: var(--surface-hover);
+}
+
+.pe-checkbox-container.checked {
+  background-color: var(--color-secondary, #7db3e2);
+}
+
+.pe-checkbox-container .form-check-input {
+  margin: 0 12px 0 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  accent-color: var(--color-primary, #282561);
+}
+
+.pe-checkbox-container.checked .form-check-input:checked {
+  accent-color: var(--color-primary, #282561);
+}
+
+.pe-checkbox-container .form-check-label {
+  margin: 0;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--color-primary, #282561);
+  transition: color 0.25s ease;
+}
+
+/* ============================================
+   REQUEST CONTACT CHECKBOX
+   ============================================ */
+
+.request-contact-container {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--surface-overlay);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.request-contact-container.checked {
+  background-color: var(--color-secondary);
+}
+
+.request-contact-container.checked .form-check-label {
+  color: var(--color-primary);
+}
+
+.request-contact-container .form-check-input {
+  margin: 0 12px 0 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  accent-color: var(--color-primary, #282561);
+}
+
+.request-contact-container .form-check-label {
+  margin: 0;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--color-text-primary, #333333);
+  transition: color 0.25s ease;
+}
+
+/* ============================================
+   INPUT FIELD STYLING
+   ============================================ */
+
+.business-queries-list {
+  margin-bottom: 12px;
+}
+
+.business-query-group {
+  margin-bottom: 8px;
+}
+
+.business-query-group .input-query {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  background: var(--surface-raised);
+  color: var(--color-text-primary);
+  width: 100%;
+  height: 5rem;
+}
+
+.business-query-group .input-query:focus {
+  border-color: var(--color-border-focus);
+  background: var(--surface-raised);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- brand-navy shadow variant, deliberate one-off */
+  box-shadow: 0 0 0 3px rgba(40, 37, 97, 0.1);
+}
+
+/* ============================================
+   CUSTOM INDUSTRY TEXT INPUT
+   ============================================ */
+
+.industry-text-input,
+.sub-industry-text-input {
+  padding: 8px 16px;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .wizard-nav-btn {
+    font-size: 1rem;
+    padding: 0.875rem 1rem !important;
+  }
+
+  .pe-checkbox-container,
+  .request-contact-container {
+    padding: 0.625rem 1rem;
+  }
+}
+
+/* ============================================
+   PE EXPOSURE ERROR MESSAGE
+   ============================================ */
+
+.pe-exposure-error-message {
+  display: none;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-danger-bg);
+  border: 1px solid var(--color-danger-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-danger);
+  font-weight: 500;
+}
+
+.pe-exposure-error-message.show {
+  display: block;
+}
+
+/* ============================================
+   FV DATABASE CREATION (Excel upload page)
+   Port of financial_verticals_database.html. White cards use surface tokens (theme-aware); the
+   upload hero keeps its branded gradient with white text (reads in both themes).
+   ============================================ */
+.upload-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.requirements-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px var(--shadow-light);
+}
+
+.requirements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requirements-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--color-text-primary);
+}
+
+.requirements-list li:last-child {
+  border-bottom: none;
+}
+
+.requirements-list li i {
+  color: var(--color-success);
+  margin-right: 0.5rem;
+}
+
+.upload-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  color: var(--color-text-white, #ffffff);
+  box-shadow: 0 15px 35px var(--shadow-medium);
+}
+
+.upload-area {
+  border: 3px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  padding: 3rem 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.upload-area:hover,
+.upload-area:focus-visible {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.15);
+  outline: none;
+}
+
+.upload-area.dragover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  border-color: #4caf50;
+  background: rgba(76, 175, 80, 0.15);
+}
+
+.upload-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+.file-input {
+  display: none;
+}
+
+.btn-upload {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-text-white, #ffffff);
+  padding: 0.75rem 2rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-upload:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--color-text-white, #ffffff);
+}
+
+.btn-upload:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.file-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+
+.progress-container {
+  margin-top: 2rem;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #4caf50, #45a049);
+  transition: width 0.3s ease;
+}
+
+.result-container {
+  margin-top: 2rem;
+}
+
+.result-card {
+  background: var(--surface-raised);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px var(--shadow-medium);
+}
+
+.result-success {
+  border-left: 5px solid var(--color-success);
+}
+
+.result-error {
+  border-left: 5px solid var(--color-danger);
+}
+
+/* Success/error status icon in the result-card header (migrated from inline styles) */
+.result-status-icon {
+  font-size: 2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+  background: var(--surface-overlay);
+  border-radius: 10px;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.stat-number--file {
+  font-size: 1rem;
+  word-break: break-word;
+}
+
+.stat-label {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}

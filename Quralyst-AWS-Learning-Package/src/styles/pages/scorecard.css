@@ -1,0 +1,77 @@
+/* Scorecard — beat global tables.css (nowrap / clipped cells / extra chrome). */
+
+.sc-page {
+  width: 100%;
+}
+
+.sc-page .sc-runs .bt-table {
+  table-layout: auto;
+}
+
+.sc-page .sc-runs .bt-table thead th,
+.sc-page .sc-runs .bt-table td {
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+  max-width: none;
+}
+
+.sc-page .sc-runs .bt-table td.sc-runs__name {
+  white-space: normal;
+  min-width: 14rem;
+}
+
+.sc-page .sc-runs .bt-table th.sc-runs__num,
+.sc-page .sc-runs .bt-table td.sc-runs__num {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.sc-page .sc-runs .bt-table th.sc-runs__expand,
+.sc-page .sc-runs .bt-table td.sc-runs__expand {
+  width: 2rem;
+  padding-right: 0;
+}
+
+.sc-page .sc-runs .bt-row--expanded > td {
+  white-space: normal;
+  overflow: visible;
+  vertical-align: top;
+  background: var(--surface-overlay, #f8f9fa);
+  padding: 0.75rem 1rem !important;
+}
+
+.sc-runs__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+}
+
+.sc-runs__name {
+  font-weight: 600;
+  color: var(--color-text-primary, #333);
+  overflow-wrap: anywhere;
+}
+
+.sc-runs__kind {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, #666);
+}
+
+.sc-runs__won {
+  color: var(--color-success, #059669);
+  font-weight: 600;
+}
+
+.sc-runs__lost {
+  color: var(--color-danger, #dc2626);
+  font-weight: 600;
+}
+
+.sc-runs__chevron {
+  display: inline-flex;
+  color: var(--color-text-secondary, #666);
+  font-size: 0.75rem;
+}

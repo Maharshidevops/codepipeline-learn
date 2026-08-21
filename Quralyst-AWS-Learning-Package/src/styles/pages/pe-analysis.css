@@ -1,0 +1,643 @@
+/*
+ * PE Analysis — QURALYST-20 Analysis.tsx visual parity (tables-first FE).
+ * Overrides global tables.css blue headers / fixed 220px columns under `.pean-page`.
+ */
+
+:root {
+  --pean-indigo-950: var(--color-text-primary, #1e1b4b);
+  --pean-title: var(--color-text-primary, #1e1b4b);
+  --pean-muted: var(--color-text-light, #64748b);
+  --pean-ink: var(--color-text-primary, #0f172a);
+  --pean-border: var(--border-subtle, #e2e8f0);
+  --pean-card: var(--surface-raised, #fff);
+  --pean-th-bg: var(--surface-overlay, #f8fafc);
+  --pean-th-color: var(--color-text-secondary, #64748b);
+  --pean-row-hover: var(--surface-hover, #f8fafc);
+  --pean-link: var(--color-link, #282561);
+  --pean-menu-shadow: var(--shadow-popover, 0 8px 24px rgba(15, 23, 42, 0.1));
+  --pean-invested-bg: #ecfdf5;
+  --pean-invested-fg: #059669;
+  --pean-exited-bg: #fef2f2;
+  --pean-exited-fg: #dc2626;
+  --pean-skel: var(--border-subtle, #e2e8f0);
+  --pean-pill-radius: var(--radius-md, 12px);
+  --pean-focus-ring: var(
+    --focus-ring,
+    0 0 0 3px color-mix(in srgb, var(--pean-link) 15%, transparent)
+  );
+  --pean-card-shadow: var(--shadow-card, 0 1px 2px rgba(15, 23, 42, 0.05));
+  --pean-card-shadow-soft: var(--shadow-subtle, 0 1px 2px rgba(15, 23, 42, 0.04));
+}
+
+:root[data-theme='dark'] {
+  --pean-indigo-950: #f3f4f6;
+  --pean-title: #f3f4f6;
+  --pean-muted: #94a3b8;
+  --pean-ink: #f3f4f6;
+  --pean-border: var(--border-subtle, #33394b);
+  --pean-card: var(--surface-raised, #242836);
+  --pean-th-bg: var(--surface-overlay, #2e3344);
+  --pean-th-color: #cbd5e1;
+  --pean-row-hover: var(--surface-hover, #32384a);
+  --pean-link: #818cf8;
+  --pean-menu-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --pean-invested-bg: rgba(16, 185, 129, 0.16);
+  --pean-invested-fg: #6ee7b7;
+  --pean-exited-bg: rgba(239, 68, 68, 0.16);
+  --pean-exited-fg: #fca5a5;
+  --pean-skel: rgba(255, 255, 255, 0.08);
+}
+
+.pean-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.pean-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pean-header__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.pean-crumb {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--pean-muted);
+  line-height: 1;
+}
+
+.pean-crumb__current {
+  color: var(--pean-ink);
+  font-weight: 500;
+}
+
+.pean-title {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--pean-title);
+  line-height: 2.25rem;
+}
+
+.pean-subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--pean-muted);
+  max-width: 42rem;
+}
+
+.pean-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* ── Pill select (Fluid & Smooth rectangular-rounded edges) ─────────────── */
+.pean-pill {
+  position: relative;
+  min-width: 10.5rem;
+}
+
+.pean-pill__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 2.25rem;
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--pean-border);
+  border-radius: var(--pean-pill-radius);
+  background: var(--pean-card);
+  color: var(--pean-ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.15s ease;
+}
+
+.pean-pill__trigger:hover {
+  border-color: color-mix(in srgb, var(--pean-link) 40%, var(--pean-border));
+  transform: translateY(-1px);
+}
+
+.pean-pill.is-open .pean-pill__trigger {
+  border-color: var(--pean-link);
+  box-shadow: var(--pean-focus-ring);
+  transform: translateY(0);
+}
+
+.pean-pill__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pean-pill__chevron {
+  font-size: 0.75rem;
+  color: var(--pean-muted);
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pean-pill.is-open .pean-pill__chevron {
+  transform: rotate(180deg);
+}
+
+.pean-pill__menu {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  z-index: 30;
+  min-width: 100%;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  background: var(--pean-card);
+  border: 1px solid var(--pean-border);
+  border-radius: var(--radius-md, 12px);
+  box-shadow: var(--pean-menu-shadow);
+  max-height: 16rem;
+  overflow: auto;
+  backdrop-filter: blur(8px);
+  animation: pean-menu-appear 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pean-menu-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pean-pill__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: var(--radius-sm, 8px);
+  background: transparent;
+  color: var(--pean-ink);
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.pean-pill__option:hover {
+  background: var(--pean-th-bg);
+}
+
+.pean-pill__option.is-selected {
+  background: color-mix(in srgb, var(--pean-link) 12%, transparent);
+  color: var(--pean-link);
+  font-weight: 600;
+}
+
+/* ── KPI tiles ──────────────────────────────────────────────────────────── */
+.pean-kpis {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 992px) {
+  .pean-kpis {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.pean-kpi {
+  background: var(--pean-card);
+  border: 1px solid var(--pean-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: var(--pean-card-shadow);
+}
+
+.pean-kpi__value {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--pean-ink);
+}
+
+.pean-kpi__label {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: var(--pean-muted);
+}
+
+.pean-kpi__skel {
+  display: block;
+  width: 4rem;
+  height: 1.75rem;
+  border-radius: 0.35rem;
+  background: var(--pean-skel);
+  margin-bottom: 0.25rem;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+.pean-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1200px) {
+  .pean-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pean-card {
+  background: var(--pean-card);
+  border: 1px solid var(--pean-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  height: 100%;
+  box-shadow: var(--pean-card-shadow-soft);
+}
+
+.pean-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.pean-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--pean-ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.35;
+}
+
+.pean-card__title i {
+  color: var(--pean-muted);
+  font-size: 1rem;
+}
+
+.pean-card__desc {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--pean-muted);
+}
+
+.pean-card__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  font-size: 0.875rem;
+  color: var(--pean-muted);
+}
+
+.pean-card__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+}
+
+/* ── Tables — kill global tables.css ────────────────────────────────────── */
+.pean-table-wrap {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid var(--pean-border);
+  background: var(--pean-card);
+  max-height: none;
+  box-shadow: none;
+}
+
+.pean-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.pean-page table.pean-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  table-layout: auto !important;
+  font-size: 0.875rem !important;
+  margin-bottom: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+.pean-page table.pean-table thead tr {
+  background: var(--pean-th-bg) !important;
+  border-bottom: 1px solid var(--pean-border) !important;
+}
+
+.pean-page table.pean-table thead th,
+.pean-page table.pean-table th {
+  background: var(--pean-th-bg) !important;
+  background-image: none !important;
+  background-color: var(--pean-th-bg) !important;
+  color: var(--pean-th-color) !important;
+  position: static !important;
+  top: auto !important;
+  z-index: auto !important;
+  border: none !important;
+  border-bottom: 1px solid var(--pean-border) !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  padding: 0.625rem 0.75rem !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  vertical-align: middle !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.pean-page table.pean-table th.pean-th--num,
+.pean-page table.pean-table td.pean-td--num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.pean-page table.pean-table th.pean-th--rank,
+.pean-page table.pean-table td.pean-td--rank {
+  width: 2.5rem !important;
+  color: var(--pean-muted) !important;
+}
+
+.pean-page table.pean-table td {
+  padding: 0.625rem 0.75rem !important;
+  vertical-align: middle !important;
+  border: none !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--pean-border) 70%, transparent) !important;
+  color: var(--pean-ink) !important;
+  font-size: 0.8125rem !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  cursor: default !important;
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  transition: none !important;
+}
+
+.pean-page table.pean-table td:hover {
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: default !important;
+}
+
+.pean-page table.pean-table tbody tr:nth-child(even),
+.pean-page table.pean-table tbody tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+.pean-page table.pean-table tbody tr:hover {
+  background: var(--pean-row-hover) !important;
+}
+
+/* ── Sticky first column for Analysis tables on small/medium screens ──────── */
+@media (max-width: 1199.98px) {
+  .pean-page table.pean-table th:first-child,
+  .pean-page table.pean-table td:first-child {
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 5 !important;
+    background: var(--surface-raised, #ffffff) !important;
+    background-color: var(--surface-raised, #ffffff) !important;
+    border-right: 1px solid var(--border-subtle, #e2e8f0) !important;
+    box-shadow: var(--shadow-subtle, 2px 0 4px rgba(0, 0, 0, 0.05)) !important;
+  }
+
+  .pean-page table.pean-table thead th:first-child {
+    z-index: 15 !important;
+    background: var(--pean-th-bg, #f8fafc) !important;
+    background-color: var(--pean-th-bg, #f8fafc) !important;
+  }
+
+  .pean-page table.pean-table tbody tr:hover td:first-child {
+    background: var(--pean-th-bg, #f8fafc) !important;
+    background-color: var(--pean-th-bg, #f8fafc) !important;
+  }
+}
+
+.pean-page table.pean-table tbody tr:hover td {
+  background: transparent !important;
+}
+
+.pean-page table.pean-table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.pean-page table.pean-table tfoot td {
+  border-top: 1px solid var(--pean-border) !important;
+  border-bottom: none !important;
+  font-weight: 600;
+  color: var(--pean-muted) !important;
+  background: var(--pean-th-bg) !important;
+}
+
+.pean-page table.pean-table a {
+  color: var(--pean-ink);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.pean-page table.pean-table a:hover {
+  color: var(--pean-link);
+  text-decoration: underline;
+}
+
+.pean-page table.pean-table .pean-muted {
+  color: var(--pean-muted) !important;
+}
+
+.pean-page table.pean-table .pean-mono {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* ── Recent-by-sector lists ─────────────────────────────────────────────── */
+.pean-sectors {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .pean-sectors {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1200px) {
+  .pean-sectors {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.pean-sector__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--pean-ink);
+}
+
+.pean-sector__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--pean-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.pean-sector__item {
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--pean-border);
+}
+
+.pean-sector__item:last-child {
+  border-bottom: none;
+}
+
+.pean-sector__item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  width: 100%;
+}
+
+.pean-sector__top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 0;
+  width: 100%;
+}
+
+.pean-sector__company {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--pean-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.pean-sector__firm {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--pean-muted);
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.pean-sector__firm:hover {
+  color: var(--pean-link);
+  text-decoration: underline;
+}
+
+.pean-sector__date {
+  font-size: 0.75rem;
+  color: var(--pean-muted);
+}
+
+.pean-kind {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--pean-pill-radius);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+}
+
+.pean-kind--invested {
+  background: var(--pean-invested-bg);
+  color: var(--pean-invested-fg);
+}
+
+.pean-kind--exited {
+  background: var(--pean-exited-bg);
+  color: var(--pean-exited-fg);
+}
+
+/* ── Charts ─────────────────────────────────────────────────────────────── */
+.pean-chart {
+  width: 100%;
+  min-height: 17.5rem;
+}
+
+.pean-chart .apexcharts-canvas {
+  margin: 0 auto;
+}
+
+/* ── Footer note ────────────────────────────────────────────────────────── */
+.pean-footnote {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--pean-muted);
+}

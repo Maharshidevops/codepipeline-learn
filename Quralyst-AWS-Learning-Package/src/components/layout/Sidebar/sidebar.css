@@ -1,0 +1,780 @@
+/* ============================================
+   SIDEBAR COMPONENT STYLES
+   Replit-style PE / IB / Research vertical rail
+   Compact density matches pe-scraper Sidebar (w-56, text-sm, tight pads)
+   ============================================ */
+
+/* Sidebar Base — Replit indigo rail */
+.sidebar {
+  background: #1e1b4b;
+  color: #c7d2fe;
+  z-index: 1000;
+  display: flex;
+  transition: transform 0.3s ease;
+  font-size: 12.5px;
+  line-height: 1.2;
+}
+
+.sidebar--replit {
+  background: #1e1b4b;
+}
+
+:root[data-theme='dark'] .sidebar,
+:root[data-theme='dark'] .sidebar-menu {
+  background: #151b27 !important;
+  border-right: 1px solid var(--border-subtle, #334158);
+}
+
+:root[data-theme='dark'] .sidebar-flyout {
+  background: #1f2738 !important;
+  border: 1px solid var(--border-subtle, #334158) !important;
+}
+
+:root[data-theme='dark'] .sidebar-minimized-tracker {
+  background: #1f2738;
+}
+
+/* Desktop: fixed left rail */
+@media (min-width: 992px) {
+  .sidebar {
+    position: fixed;
+    align-items: stretch;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar-topbar {
+    display: contents;
+  }
+
+  .sidebar-mobile-toggle {
+    display: none !important;
+  }
+}
+
+/* Top bar wrapper — on desktop collapses via display:contents so logo sits in column flow */
+.sidebar-topbar {
+  flex: 0 0 auto;
+}
+
+/* ===== Exact Replit pe-scraper Sidebar sizes =====
+   aside: w-56 (224px)
+   logo:  pt-7 pb-5 px-5, img w-36 (144px)
+   switch: mx-3 mb-5, p-1, btn py-2 text-[10px], icon 14px
+   nav:    gap-0.5 px-3, link gap-2.5 px-3 py-2 text-sm, icon 16px
+   account: border divider + px-3 py-4
+*/
+.sidebar-logo {
+  padding: 28px 20px 20px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.sidebar-logo a {
+  display: block;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.sidebar-logo-img {
+  width: 144px;
+  height: auto;
+  display: block;
+  margin-inline: auto;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-logo-img:hover {
+  transform: scale(1.02);
+}
+
+.sidebar-vertical-switch {
+  display: flex;
+  gap: 2px;
+  margin: 0 12px 20px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  flex: 0 0 auto;
+}
+
+.sidebar-vertical-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: rgba(199, 210, 254, 0.45);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar-vertical-btn i,
+.sidebar-vertical-btn .sidebar-icon {
+  font-size: 14px;
+  line-height: 1;
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-vertical-btn:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Replit muted indigo */
+  color: rgba(199, 210, 254, 0.75);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-vertical-btn.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--color-white, #ffffff);
+}
+
+.sidebar-vertical-btn.locked:not(.active) {
+  opacity: 0.7;
+}
+
+.sidebar-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+@media (min-width: 992px) {
+  .sidebar-menu {
+    padding: 0;
+  }
+}
+
+.sidebar-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  margin: 0;
+  border-radius: var(--radius-sm);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Replit muted indigo */
+  color: rgba(199, 210, 254, 0.65);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.25;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar-nav-link i,
+.sidebar-nav-link .sidebar-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  font-size: 14px;
+  line-height: 1;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Replit muted indigo */
+  color: #c7d2fe;
+  text-decoration: none;
+}
+
+.sidebar-nav-link.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white, #ffffff);
+}
+
+.sidebar-nav-link--muted {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Replit muted indigo */
+  color: rgba(199, 210, 254, 0.45);
+}
+
+.sidebar-nav-link--muted:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Replit muted indigo */
+  color: rgba(199, 210, 254, 0.8);
+}
+
+.sidebar-nav-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-nav-badge {
+  flex: 0 0 auto;
+  min-width: 18px;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(125, 179, 226, 0.35);
+  color: var(--color-white, #ffffff);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.sidebar-nav-soon {
+  flex: 0 0 auto;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Replit muted indigo */
+  color: rgba(199, 210, 254, 0.45);
+  text-transform: uppercase;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Replit muted indigo */
+  color: rgba(199, 210, 254, 0.65);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: var(--radius-sm);
+}
+
+.sidebar-item i {
+  width: 14px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Replit muted indigo */
+  color: #c7d2fe;
+  text-decoration: none;
+}
+
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white, #ffffff);
+}
+
+.sidebar-account {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding: 0 12px 16px;
+}
+
+.sidebar-account-divider {
+  height: 1px;
+  margin: 12px 4px 10px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-account .sidebar-nav-link {
+  font-size: 12px;
+}
+
+.sidebar-account .sidebar-nav-link i {
+  width: 13px;
+  height: 13px;
+  font-size: 13px;
+}
+
+/* Profile nav — small avatar + "Profile" label (matches Deals / Settings row style) */
+.sidebar-nav-link--profile {
+  gap: 10px;
+}
+
+.sidebar-profile-thumb {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 102, 241, 0.35);
+  color: inherit;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sidebar-profile-thumb__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidebar-profile-thumb__initials {
+  line-height: 1;
+}
+
+.sidebar-logout-btn {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- deliberate logout accent */
+  color: rgba(255, 107, 107, 0.85);
+}
+
+.sidebar-logout-btn:hover {
+  background: rgba(255, 107, 107, 0.12);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- deliberate logout accent */
+  color: #ff8a8a;
+}
+
+.sidebar-user-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding-top: 0;
+  padding-bottom: var(--chrome-pad-bottom);
+}
+
+.sidebar-minimized-tracker {
+  background: var(--color-bg-white);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin: 12px 0 4px;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.sidebar-minimized-tracker:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.sidebar-minimized-tracker[data-finished='true'] {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent */
+  border-color: #28a745;
+  background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%);
+}
+
+.minimized-tracker-maximize-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  background: var(--color-primary, #282561);
+  border: none;
+  border-radius: 6px;
+  color: var(--color-text-white, #ffffff);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.minimized-tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.minimized-tracker-title {
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.minimized-tracker-percentage {
+  color: var(--color-primary);
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.minimized-progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  position: relative;
+}
+
+.minimized-progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-secondary);
+  border-radius: var(--radius-xs);
+  transition: width 0.5s ease;
+}
+
+.minimized-tracker-pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent */
+  background: #4ade80;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+.sidebar-theme-switch {
+  display: flex;
+  gap: 4px;
+  margin: 6px 0 4px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+}
+
+.sidebar-theme-option {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.sidebar-theme-option i {
+  margin: 0;
+}
+
+.sidebar-theme-option:hover {
+  color: var(--color-white, #ffffff);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-theme-option.active {
+  background: var(--color-secondary, #7db3e2);
+  color: var(--color-white, #ffffff);
+}
+
+.sidebar-mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-white, #ffffff);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.sidebar-mobile-toggle:hover,
+.sidebar-mobile-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-white, #ffffff);
+  outline: none;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.sidebar-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.sidebar-badge--count {
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background: rgba(125, 179, 226, 0.35);
+  color: var(--color-white, #ffffff);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+.sidebar-badge--pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- status accent */
+  background: #4ade80;
+  animation: pulse 2s infinite;
+}
+
+/* ===== MOBILE: top bar + left drawer ===== */
+@media (max-width: 991.98px) {
+  .sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100% !important;
+    /* Tall enough for stacked logo mark + wordmark without clipping */
+    height: 56px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    z-index: 1050 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .sidebar-topbar {
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    height: 56px;
+    padding: 6px 12px 6px 6px;
+    box-sizing: border-box;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- matches Replit #1E1B4B */
+    background: #1e1b4b;
+    position: relative;
+    z-index: 1052;
+    overflow: hidden;
+  }
+
+  .sidebar-mobile-toggle {
+    display: inline-flex !important;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    /* Above notification bell (z-index 1040) so the menu can always be opened */
+    position: relative;
+    z-index: 1053;
+  }
+
+  .sidebar-logo {
+    padding: 0 !important;
+    text-align: left !important;
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex !important;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .sidebar-logo a {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    line-height: 0;
+  }
+
+  /* Fit stacked SVG without stretch — height-capped so it stays small in the bar */
+  .sidebar-logo-img {
+    width: auto !important;
+    height: 36px !important;
+    max-width: min(120px, 50vw) !important;
+    object-fit: contain;
+    object-position: left center;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .sidebar-logo-img:hover {
+    transform: none !important;
+  }
+
+  /* Left slide-in drawer — same width as Replit w-56 */
+  .sidebar-menu {
+    position: fixed !important;
+    top: 56px !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: 0 !important;
+    width: min(224px, 86vw) !important;
+    max-height: none !important;
+    height: calc(100dvh - 56px) !important;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- matches Replit #1E1B4B */
+    background: #1e1b4b !important;
+    flex-direction: column !important;
+    padding: 8px 0 12px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    z-index: 1051 !important;
+    display: flex !important;
+    transform: translateX(-105%);
+    transition: transform 0.25s ease !important;
+    box-shadow: 8px 0 24px var(--shadow-overlay);
+  }
+
+  .sidebar-menu.show {
+    transform: translateX(0);
+  }
+
+  .sidebar-vertical-switch {
+    margin: 0 12px 16px !important;
+  }
+
+  .sidebar-nav {
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1 1 auto;
+  }
+
+  /* Smaller type/icons only — keep Replit padding/gap */
+  .sidebar-nav-link,
+  .sidebar-item {
+    font-size: 12.5px !important;
+    padding: 8px 12px !important;
+    gap: 10px;
+  }
+
+  .sidebar-nav-link i,
+  .sidebar-item i {
+    font-size: 14px !important;
+    width: 14px;
+    height: 14px;
+  }
+
+  .sidebar-vertical-btn {
+    font-size: 9px !important;
+    padding: 8px 4px !important;
+  }
+
+  .sidebar-vertical-btn i {
+    font-size: 12px !important;
+  }
+
+  .sidebar-account .sidebar-nav-link {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+  }
+
+  .sidebar-account .sidebar-nav-link i {
+    font-size: 13px !important;
+    width: 13px;
+    height: 13px;
+  }
+
+  .sidebar-overlay {
+    display: block !important;
+    z-index: 1045 !important;
+    top: 56px;
+    height: calc(100% - 56px);
+  }
+}
+
+@media (min-width: 992px) {
+  .sidebar-menu {
+    position: static !important;
+    max-height: none !important;
+    overflow: hidden !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+    background: transparent !important;
+    min-height: 0;
+    transform: none !important;
+    box-shadow: none !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .sidebar-nav {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 12px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+  }
+
+  .sidebar-logo {
+    padding: 28px 20px 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .sidebar-logo-img {
+    width: 144px;
+  }
+
+  .sidebar-collapse-toggle {
+    display: none !important;
+  }
+}
+
+.sidebar-group,
+.sidebar-flyout {
+  display: none;
+}

@@ -1,0 +1,81 @@
+# dependencies
+node_modules
+# build output
+dist
+dist-ssr
+# TypeScript incremental build cache (machine-local, regenerable)
+*.tsbuildinfo
+# local env files
+*.local
+.env.local
+.env.*.local
+.env.production
+# logs
+logs
+*.log
+npm-debug.log*
+# editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# python leftovers (legacy backend lives in Backup/)
+__pycache__/
+.venv/
+
+Backup/
+
+# tooling artifacts (bundle analysis + a11y lint report)
+stats.html
+lint-a11y.json
+lint-a11y.txt
+
+# local task tracker (agent/dev only — not for repo)
+task.md
+*.md
+# SSH private keys — never commit
+*.pem
+.env
+
+# Claude Code (AI agent config)
+# NOTE: `*.md` above is ignored for the local task-tracker workflow, so the committed
+# Claude docs must be explicitly re-included here (negations below).
+# COMMITTED (shared with the team):
+!CLAUDE.md
+!.claude/**/*.md
+!.cursor/**/*.md
+# (.claude/settings.json, .mcp.json, statusline.mjs and the hook .mjs files are not
+#  *.md and live under .claude/ which is not ignored, so they are tracked already.
+#  Likewise .cursor/ markdown — agents, skills, READMEs — is re-included above; its
+#  .mdc/.mjs/.json files aren't *.md so they're already tracked.)
+# IGNORED (personal / machine-local — never commit):
+CLAUDE.local.md
+.claude/settings.local.json
+.mcp.local.json
+.claude/**/__pycache__/
+
+# Graphify Cache Files
+graphify-out/
+**/graphify-out/
+graphify-out/cache/
+graphify-out/converted/
+graphify-out/.graphify_*
+# Personal AWS learning package docs (override the broad *.md rule above)
+!README.md
+!TECHNICAL_ANALYSIS.md
+!devops-learning/**/*.md
+!FILE_INVENTORY.txt
+
+# If this package is initialized as a NEW personal learning repo, keep company deployment/history
+# metadata out of that repo unless you have explicit authorization to retain it.
+buildspec.company-reference.yml
+Quralyst Frontend Dev.md
+# Consider excluding these from a personal repo after reviewing organizational policy:
+# appspec.yml
+# scripts/codedeploy/
+# Phases/

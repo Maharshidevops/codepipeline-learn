@@ -1,0 +1,20 @@
+/* ============================================
+   SCALE TOKENS (Phase 28)
+   Theme-invariant design-scale tokens — these never change per theme, so they
+   live outside the theme contract in colors.css. Values are census-driven:
+   each step is a radius the codebase already used dozens of times as a literal.
+   ============================================ */
+:root {
+  /* Radius scale */
+  --radius-xs: 4px; /* chips, tiny accents */
+  --radius-sm: 8px; /* inputs-in-menus, small cards */
+  --radius-md: 12px; /* cards, alerts */
+  --radius-lg: 16px; /* suggestion menus, panels */
+  --radius-xl: 20px; /* primary card/container radius */
+  --radius-2xl: 24px; /* hero cards */
+  --radius-pill: 50px; /* pill buttons/inputs */
+  --radius-full: 999px; /* fully-rounded tags */
+}
+
+/* Deliberately NOT tokenized: 50%/45% (idiomatic circles), 3px (scrollbar thumbs),
+   compound corner values (e.g. 1rem 0 0 1rem), and rem-based Bootstrap overrides. */

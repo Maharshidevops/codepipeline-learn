@@ -1,0 +1,16 @@
+/* Trailing Send Email column — keep buttons clear of the vertical scrollbar. */
+
+.send-email-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-right: 0.75rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Extra room on the last column (header + cells) next to the scrollbar. */
+.results-table-shell .table thead th:last-child,
+.results-table-shell .table tbody td:last-child {
+  padding-right: 1.25rem;
+}

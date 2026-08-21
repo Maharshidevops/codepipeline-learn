@@ -1,0 +1,104 @@
+/* DataTable — loading/empty + quiet (API Usage–parity) variant. */
+
+.data-table-state {
+  text-align: center;
+  padding: 2rem;
+}
+
+.data-table-state--empty {
+  color: var(--color-text-secondary);
+}
+
+/* Quiet variant — mirrors usage.css grid/list chrome (muted header, soft borders). */
+.table-responsive.data-table--quiet {
+  border: 1px solid var(--border-subtle, var(--bs-border-color));
+  border-radius: var(--radius-xl, 0.75rem);
+  box-shadow: none;
+  max-height: none;
+  background: var(--surface-raised, #fff);
+  overflow: auto;
+}
+
+.table-responsive.data-table--quiet .table,
+.table-responsive.data-table--quiet table {
+  box-shadow: none;
+  table-layout: auto;
+  min-width: 100%;
+  width: 100%;
+  border-radius: 0;
+}
+
+.table-responsive.data-table--quiet .table thead th,
+.table-responsive.data-table--quiet table thead th {
+  background: var(--surface-overlay, rgba(0, 0, 0, 0.03)) !important;
+  color: var(--color-text-muted, var(--bs-secondary-color)) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem !important;
+  text-align: left !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border-subtle, var(--bs-border-color)) !important;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  white-space: nowrap;
+  opacity: 1 !important;
+}
+
+.table-responsive.data-table--quiet .table td,
+.table-responsive.data-table--quiet table td {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  padding: 0.65rem 1rem !important;
+  font-size: 0.8125rem !important;
+  text-align: left;
+  vertical-align: middle;
+  border: none !important;
+  border-top: 1px solid var(--border-subtle, var(--bs-border-color)) !important;
+  color: var(--color-text-primary, var(--bs-body-color));
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform: none !important;
+  box-shadow: none !important;
+  transition: background 0.15s ease;
+}
+
+.table-responsive.data-table--quiet .table tbody tr:first-child td,
+.table-responsive.data-table--quiet table tbody tr:first-child td {
+  border-top: none !important;
+}
+
+.table-responsive.data-table--quiet .table tbody tr:nth-child(even),
+.table-responsive.data-table--quiet .table tbody tr:nth-child(odd),
+.table-responsive.data-table--quiet table tbody tr:nth-child(even),
+.table-responsive.data-table--quiet table tbody tr:nth-child(odd) {
+  background-color: transparent;
+}
+
+.table-responsive.data-table--quiet .table tbody tr:hover td,
+.table-responsive.data-table--quiet table tbody tr:hover td,
+.table-responsive.data-table--quiet .table td:hover,
+.table-responsive.data-table--quiet table td:hover {
+  background-color: var(--surface-overlay, rgba(0, 0, 0, 0.02)) !important;
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: default;
+}
+
+.table-responsive.data-table--quiet .table td.clickable-cell,
+.table-responsive.data-table--quiet table td.clickable-cell {
+  cursor: pointer;
+}
+
+.table-responsive.data-table--quiet .table td.clickable-cell:hover,
+.table-responsive.data-table--quiet table td.clickable-cell:hover {
+  background-color: var(--surface-overlay, rgba(0, 0, 0, 0.04)) !important;
+}

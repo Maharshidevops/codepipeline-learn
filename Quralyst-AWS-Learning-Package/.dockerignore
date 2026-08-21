@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.github
+scripts
+appspec.yml
+buildspec.yml
+task.md
+README.md
+e2e
+playwright-report
+test-results
+.env.local
+.env.*.local

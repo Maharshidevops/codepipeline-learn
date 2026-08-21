@@ -1,0 +1,50 @@
+version: 0.2
+
+# Personal AWS learning buildspec.
+# Architecture: GitHub -> CodePipeline -> CodeBuild -> build artifact -> S3 deploy action.
+# This intentionally does NOT build Docker images, push to ECR, use Secrets Manager,
+# or deploy to EC2/CodeDeploy.
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 22
+    commands:
+      - echo "Node $(node --version) / npm $(npm --version)"
+      - npm ci
+
+  pre_build:
+    commands:
+      - echo "Running quality gates"
+      - npm run lint
+      - npm run typecheck
+      - |
+        if [ "${RUN_TESTS:-true}" = "true" ]; then
+          npm run test:run -- --maxWorkers=2 --minWorkers=1
+        else
+          echo "RUN_TESTS=false; skipping Vitest for this learning run"
+        fi
+
+  build:
+    commands:
+      - echo "Creating a personal production env file for Vite"
+      - |
+        {
+          echo "VITE_API_BASE_URL=${VITE_API_BASE_URL:-}"
+          echo "VITE_BACKEND_CONNECTION_TEST_URL=${VITE_BACKEND_CONNECTION_TEST_URL:-}"
+          echo "VITE_ERROR_REPORTING_DSN=${VITE_ERROR_REPORTING_DSN:-}"
+          echo "VITE_LOG_SHIPPING=${VITE_LOG_SHIPPING:-false}"
+          echo "VITE_LOG_TO_TERMINAL=false"
+          echo "VITE_APP_VERSION=${CODEBUILD_RESOLVED_SOURCE_VERSION:-local}"
+        } > .env.production
+      - npm run build
+      - test -f dist/index.html
+      - find dist -type f -name '*.map' -delete
+      - echo "Build output size:"
+      - du -sh dist
+
+artifacts:
+  base-directory: dist
+  files:
+    - '**/*'
+  discard-paths: no

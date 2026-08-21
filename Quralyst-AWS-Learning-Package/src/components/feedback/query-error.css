@@ -1,0 +1,23 @@
+/* QueryError (Phase 28 WS5) — co-located styles for the shared error+retry block. Mirrors the
+   `.no-data-placeholder` look (view-result.css) but ships with the component so it renders the
+   same on any page regardless of which page stylesheet is loaded. */
+.query-error {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--surface-overlay);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.query-error-icon {
+  font-size: 3rem;
+  color: var(--color-text-light);
+}
+
+.query-error-title {
+  color: var(--color-text-secondary);
+}
+
+.query-error-message {
+  color: var(--color-text-light);
+}

@@ -1,0 +1,100 @@
+/* Controlled tab row used by Result Type tabs, Admin queue tabs, and PE dataset components. */
+.quralyst-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  list-style: none;
+  border: none;
+}
+
+.quralyst-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid var(--border-subtle, #e0e7ee);
+  background: var(--surface-overlay, #ffffff);
+  color: var(--color-text-secondary, #64748b);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.quralyst-tab:hover:not(.active) {
+  background: var(--surface-hover, #f1f5f9);
+  border-color: var(--border-strong, #cbd5e1);
+  color: var(--color-text-primary, #0f172a);
+  transform: translateY(-1px);
+}
+
+.quralyst-tab.active {
+  background: var(--color-primary, #282561);
+  border-color: var(--color-primary, #282561);
+  color: var(--color-text-white, #ffffff);
+  font-weight: 600;
+  box-shadow: var(--shadow-subtle, 0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+.quralyst-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill, 50px);
+  background: color-mix(in srgb, var(--color-primary, #282561) 15%, transparent);
+  color: var(--color-primary, #282561);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.quralyst-tab.active .quralyst-tab-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* Dark mode tab overrides: soft slate containers and electric indigo active fill */
+:root[data-theme='dark'] .quralyst-tab {
+  background: var(--surface-overlay, #2e3344);
+  border-color: var(--border-subtle, #33394b);
+  color: #94a3b8;
+}
+
+:root[data-theme='dark'] .quralyst-tab:hover:not(.active) {
+  background: var(--surface-hover, #373d52);
+  border-color: var(--border-strong, #475569);
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .quralyst-tab.active {
+  background: var(--color-link, #818cf8);
+  border-color: var(--color-link, #818cf8);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .quralyst-tab-count {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .quralyst-tab.active .quralyst-tab-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .quralyst-tab {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+}

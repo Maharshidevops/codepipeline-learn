@@ -1,0 +1,577 @@
+{
+  "version": 1,
+  "description": "Shared Python\u2194TS BD scoring parity cases (F36.1 / F36.3). Do not edit expected without updating both engines.",
+  "cases": [
+    {
+      "id": "empty_ib",
+      "template_slug": "sell-side-mandate-readiness-v1",
+      "notes": "empty \u2192 unscored",
+      "field_values": {},
+      "expected": {
+        "score_total": 0,
+        "module_scores": {
+          "m1": 0,
+          "m2": 0,
+          "m3": 0,
+          "m4": 0,
+          "m5": 0
+        },
+        "score_breakdown": {
+          "m1": {
+            "founding_year_range": 0
+          },
+          "m2": {
+            "revenue_range": 0,
+            "employee_count": 0
+          },
+          "m3": {
+            "management_layer": 0,
+            "revenue_per_employee": 0
+          },
+          "m4": {
+            "primary_customer_segment": 0,
+            "business_footprint": 0
+          },
+          "m5": {
+            "job_postings": 0,
+            "website_quality": 0,
+            "social_activity": 0
+          }
+        },
+        "bonus_score": 0,
+        "is_disqualified": false,
+        "tier": "unscored"
+      }
+    },
+    {
+      "id": "empty_pe",
+      "template_slug": "acquisition-target-readiness-v1",
+      "notes": "empty \u2192 unscored",
+      "field_values": {},
+      "expected": {
+        "score_total": 0,
+        "module_scores": {
+          "m1": 0,
+          "m2": 0,
+          "m3": 0,
+          "m4": 0,
+          "m5": 0
+        },
+        "score_breakdown": {
+          "m1": {
+            "founding_year_range": 0
+          },
+          "m2": {
+            "revenue_range": 0,
+            "employee_count": 0
+          },
+          "m3": {
+            "management_layer": 0,
+            "revenue_per_employee": 0
+          },
+          "m4": {
+            "primary_customer_segment": 0,
+            "revenue_type": 0
+          },
+          "m5": {
+            "job_postings": 0,
+            "website_quality": 0,
+            "social_activity": 0
+          }
+        },
+        "bonus_score": 0,
+        "is_disqualified": false,
+        "tier": "unscored"
+      }
+    },
+    {
+      "id": "mgmt_none_ib",
+      "template_slug": "sell-side-mandate-readiness-v1",
+      "notes": "IB management none \u2192 6",
+      "field_values": {
+        "management_layer": "none"
+      },
+      "expected": {
+        "score_total": 6,
+        "module_scores": {
+          "m1": 0,
+          "m2": 0,
+          "m3": 6,
+          "m4": 0,
+          "m5": 0
+        },
+        "score_breakdown": {
+          "m1": {
+            "founding_year_range": 0
+          },
+          "m2": {
+            "revenue_range": 0,
+            "employee_count": 0
+          },
+          "m3": {
+            "management_layer": 6,
+            "revenue_per_employee": 0
+          },
+          "m4": {
+            "primary_customer_segment": 0,
+            "business_footprint": 0
+          },
+          "m5": {
+            "job_postings": 0,
+            "website_quality": 0,
+            "social_activity": 0
+          }
+        },
+        "bonus_score": 0,
+        "is_disqualified": false,
+        "tier": "tier4"
+      }
+    },
+    {
+      "id": "mgmt_none_pe",
+      "template_slug": "acquisition-target-readiness-v1",
+      "notes": "PE management none \u2192 2",
+      "field_values": {
+        "management_layer": "none"
+      },
+      "expected": {
+        "score_total": 2,
+        "module_scores": {
+          "m1": 0,
+          "m2": 0,
+          "m3": 2,
+          "m4": 0,
+          "m5": 0
+        },
+        "score_breakdown": {
+          "m1": {
+            "founding_year_range": 0
+          },
+          "m2": {
+            "revenue_range": 0,
+            "employee_count": 0
+          },
+          "m3": {
+            "management_layer": 2,
+            "revenue_per_employee": 0
+          },
+          "m4": {
+            "primary_customer_segment": 0,
+            "revenue_type": 0
+          },
+          "m5": {
+            "job_postings": 0,
+            "website_quality": 0,
+            "social_activity": 0
+          }
+        },
+        "bonus_score": 0,
+        "is_disqualified": false,
+        "tier": "tier4"
+      }
+    },
+    {
+      "id": "tier1_ib",
+      "template_slug": "sell-side-mandate-readiness-v1",
+      "notes": "112 / tier1",
+      "field_values": {
+        "founding_year_range": "y1989",
+        "revenue_range": "r5",
+        "employee_count": 20,
+        "management_layer": "none",
+        "primary_customer_segment": "industrial_govt",
+        "business_footprint": "s1",
+        "job_postings": "none",
+        "website_quality": "old",
+        "social_activity": "inactive"
+      },
+      "expected": {
+        "score_total": 112,
+        "module_scores": {
+          "m1": 35,
+          "m2": 23,
+          "m3": 10,
+          "m4": 15,
+          "m5": 15
+        },
+        "score_breakdown": {
+          "m1": {
+            "founding_year_range": 35
+          },
+          "m2": {
+            "revenue_range": 16,
+            "employee_count": 7
+          },
+          "m3": {
+            "management_layer": 6,
+            "revenue_per_employee": 4
+          },
+          "m4": {
+            "primary_customer_segment": 10,
+            "business_footprint": 5
+          },
+          "m5": {
+            "job_postings": 6,
+            "website_quality": 5,
+            "social_activity": 4
+          }
+        },
+        "bonus_score": 14,
+        "is_disqualified": false,
+        "tier": "tier1"
+      }
+    },
+    {
+      "id": "bonus_cap_ib",
+      "template_slug": "sell-side-mandate-readiness-v1",
+      "notes": "bonus cap 20 \u2192 118",
+      "field_values": {
+        "founding_year_range": "y1989",
+        "revenue_range": "r5",
+        "employee_count": 20,
+        "management_layer": "none",
+        "primary_customer_segment": "industrial_govt",
+        "business_footprint": "s1",
+        "job_postings": "none",
+        "website_quality": "old",
+        "social_activity": "inactive",
+        "bonus_industry_association": true,
+        "bonus_local_network": true,
+        "bonus_no_third_party_capital": true
+      },
+      "expected": {
+        "score_total": 118,
+        "module_scores": {
+          "m1": 35,
+          "m2": 23,
+          "m3": 10,
+          "m4": 15,
+          "m5": 15
+        },
+        "score_breakdown": {
+          "m1": {
+            "founding_year_range": 35
+          },
+          "m2": {
+            "revenue_range": 16,
+            "employee_count": 7
+          },
+          "m3": {
+            "management_layer": 6,
+            "revenue_per_employee": 4
+          },
+          "m4": {
+            "primary_customer_segment": 10,
+            "business_footprint": 5
+          },
+          "m5": {
+            "job_postings": 6,
+            "website_quality": 5,
+            "social_activity": 4
+          }
+        },
+        "bonus_score": 20,
+        "is_disqualified": false,
+        "tier": "tier1"
+      }
+    },
+    {
+      "id": "dq_ib",
+      "template_slug": "sell-side-mandate-readiness-v1",
+      "notes": "disqualified",
+      "field_values": {
+        "dq_active_process": true,
+        "founding_year_range": "y1989"
+      },
+      "expected": {
+        "score_total": 0,
+        "is_disqualified": true,
+        "tier": "disqualified",
+        "module_scores": {},
+        "score_breakdown": {},
+        "bonus_score": 0
+      }
+    },
+    {
+      "id": "row_mapping",
+      "template_slug": null,
+      "notes": "row mapping pins",
+      "kind": "mapping",
+      "row": {
+        "revenue": "$7M",
+        "number_of_employees": "11-50"
+      },
+      "expected_field_values": {
+        "revenue_range": "r5",
+        "employee_count": 30
+      },
+      "expected_employees_5": 5
+    },
+    {
+      "id": "synth_full",
+      "template_slug": null,
+      "notes": "synthetic config covering select/integer/ratio/bonus/cap/tier",
+      "kind": "inline_config",
+      "config": {
+        "modules": [
+          {
+            "id": "m1",
+            "criteria": [
+              {
+                "id": "seg",
+                "type": "single_select",
+                "options": [
+                  {
+                    "value": "a",
+                    "score": 4
+                  },
+                  {
+                    "value": "b",
+                    "score": 1
+                  }
+                ]
+              },
+              {
+                "id": "n",
+                "type": "integer",
+                "scoring_bands": [
+                  {
+                    "min": null,
+                    "max": 5,
+                    "score": 2
+                  },
+                  {
+                    "min": 6,
+                    "max": null,
+                    "score": 8
+                  }
+                ]
+              },
+              {
+                "id": "ratio",
+                "type": "computed",
+                "computation": {
+                  "type": "ratio",
+                  "numerator_field": "seg",
+                  "denominator_field": "n",
+                  "numerator_midpoints": {
+                    "a": 100
+                  }
+                },
+                "scoring_bands": [
+                  {
+                    "min": 10,
+                    "max": null,
+                    "score": 7
+                  },
+                  {
+                    "min": null,
+                    "max": 9.999,
+                    "score": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "disqualifiers": [
+          {
+            "id": "dq_x"
+          }
+        ],
+        "bonus_rules": [
+          {
+            "id": "auto_eq",
+            "type": "auto",
+            "score": 3,
+            "conditions": [
+              {
+                "field": "seg",
+                "operator": "eq",
+                "value": "a"
+              }
+            ]
+          },
+          {
+            "id": "auto_unk",
+            "type": "auto",
+            "score": 1,
+            "conditions": [
+              {
+                "field": "seg",
+                "operator": "zzz",
+                "value": "no"
+              }
+            ]
+          },
+          {
+            "id": "man",
+            "type": "manual",
+            "score": 50
+          }
+        ],
+        "tier_thresholds": [
+          {
+            "key": "low",
+            "min_score": 0
+          },
+          {
+            "key": "hi",
+            "min_score": 15
+          }
+        ],
+        "max_total_score": 30,
+        "max_bonus_score": 10
+      },
+      "field_values": {
+        "seg": "a",
+        "n": 5,
+        "man": true
+      },
+      "expected": {
+        "score_total": 23,
+        "module_scores": {
+          "m1": 13
+        },
+        "score_breakdown": {
+          "m1": {
+            "seg": 4,
+            "n": 2,
+            "ratio": 7
+          }
+        },
+        "bonus_score": 10,
+        "is_disqualified": false,
+        "tier": "hi"
+      }
+    },
+    {
+      "id": "synth_dq",
+      "template_slug": null,
+      "kind": "inline_config",
+      "config": {
+        "modules": [
+          {
+            "id": "m1",
+            "criteria": [
+              {
+                "id": "seg",
+                "type": "single_select",
+                "options": [
+                  {
+                    "value": "a",
+                    "score": 4
+                  },
+                  {
+                    "value": "b",
+                    "score": 1
+                  }
+                ]
+              },
+              {
+                "id": "n",
+                "type": "integer",
+                "scoring_bands": [
+                  {
+                    "min": null,
+                    "max": 5,
+                    "score": 2
+                  },
+                  {
+                    "min": 6,
+                    "max": null,
+                    "score": 8
+                  }
+                ]
+              },
+              {
+                "id": "ratio",
+                "type": "computed",
+                "computation": {
+                  "type": "ratio",
+                  "numerator_field": "seg",
+                  "denominator_field": "n",
+                  "numerator_midpoints": {
+                    "a": 100
+                  }
+                },
+                "scoring_bands": [
+                  {
+                    "min": 10,
+                    "max": null,
+                    "score": 7
+                  },
+                  {
+                    "min": null,
+                    "max": 9.999,
+                    "score": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "disqualifiers": [
+          {
+            "id": "dq_x"
+          }
+        ],
+        "bonus_rules": [
+          {
+            "id": "auto_eq",
+            "type": "auto",
+            "score": 3,
+            "conditions": [
+              {
+                "field": "seg",
+                "operator": "eq",
+                "value": "a"
+              }
+            ]
+          },
+          {
+            "id": "auto_unk",
+            "type": "auto",
+            "score": 1,
+            "conditions": [
+              {
+                "field": "seg",
+                "operator": "zzz",
+                "value": "no"
+              }
+            ]
+          },
+          {
+            "id": "man",
+            "type": "manual",
+            "score": 50
+          }
+        ],
+        "tier_thresholds": [
+          {
+            "key": "low",
+            "min_score": 0
+          },
+          {
+            "key": "hi",
+            "min_score": 15
+          }
+        ],
+        "max_total_score": 30,
+        "max_bonus_score": 10
+      },
+      "field_values": {
+        "dq_x": true,
+        "seg": "a"
+      },
+      "expected": {
+        "score_total": 0,
+        "is_disqualified": true,
+        "tier": "disqualified",
+        "module_scores": {},
+        "score_breakdown": {},
+        "bonus_score": 0
+      }
+    }
+  ]
+}

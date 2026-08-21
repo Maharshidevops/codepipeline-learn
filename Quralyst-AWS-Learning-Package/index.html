@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quralyst</title>
+    <link rel="icon" type="image/png" href="/images/quralyst-icon-png.png" />
+    <!-- Theme (Phase 25): meta + no-FOUC bootstrap. Sets data-theme / data-bs-theme on <html> before
+         first paint so a returning dark-mode user never flashes light. Keep the theme ids + dark
+         meta color in sync with src/styles/themes.ts + src/styles/core/colors.css.
+         CSP NOTE (Phase 31): the built index.html carries a CSP meta tag that allowlists this exact
+         inline script by SHA-256 — if you edit ANYTHING between <script> and </script> below,
+         recompute the hash in vite.config.ts (command in the comment there). -->
+    <meta name="theme-color" content="#ffffff" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('quralyst.theme') || 'light';
+          var resolved =
+            t === 'dark'
+              ? 'dark'
+              : t === 'light'
+                ? 'light'
+                : window.matchMedia('(prefers-color-scheme: dark)').matches
+                  ? 'dark'
+                  : 'light'; // auto
+          var el = document.documentElement;
+          el.setAttribute('data-theme', resolved);
+          el.setAttribute('data-bs-theme', resolved);
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', resolved === 'dark' ? '#0e0e16' : '#ffffff');
+        } catch (e) {
+          /* localStorage blocked → light default */
+        }
+      })();
+    </script>
+    <!-- Vendor CSS/fonts are self-hosted via npm since Phase 30 (imported at the top of
+         src/main.tsx in cascade order); the app contacts no third-party origins at runtime. -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

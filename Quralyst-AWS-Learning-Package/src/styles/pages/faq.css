@@ -1,0 +1,307 @@
+/**
+ * FAQ Page Styles
+ * Styles for the FAQ accordion and layout
+ */
+
+/* Outer padding now comes from the shared .main-content workspace box (Phase 24). */
+.faq-container {
+  background: transparent;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+
+.faq-logo {
+  margin-bottom: 30px;
+}
+
+.faq-logo img {
+  width: 120px;
+  height: auto;
+}
+
+.faq-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  font-family: var(--font-primary);
+}
+
+.faq-subtitle {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+
+.faq-return-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.faq-return-btn:hover {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  text-decoration: none;
+  transform: translateY(-2px);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  box-shadow: 0 4px 12px rgba(40, 37, 97, 0.2);
+}
+
+.faq-content {
+  width: 100%;
+  padding: 40px 20px;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  background: #2f2b5c;
+  border-radius: var(--radius-xl);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faq-sections-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.faq-section-btn {
+  border: 1px solid var(--color-secondary, #7db3e2);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  background: #ffffff;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  color: #2f2b5c;
+  border-radius: var(--radius-full);
+  padding: 0 16px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.faq-section-btn:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  background: #e8f4fa;
+}
+
+.faq-section-btn.active {
+  background: var(--color-secondary, #7db3e2);
+  color: var(--color-text-white, #ffffff);
+}
+
+.faq-section-panel {
+  display: none;
+}
+
+.faq-section-panel.active {
+  display: block;
+}
+
+.faq-item {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  background: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-subtle);
+}
+
+.faq-item:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  cursor: pointer;
+  user-select: none;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  background: #ffffff;
+  transition: background 0.3s ease;
+  outline: none;
+}
+
+.faq-question:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  background: #f8f9fa;
+}
+
+.faq-question:focus {
+  outline: none;
+}
+
+.faq-question-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--brand-navy);
+  margin: 0;
+  flex: 1;
+  padding-right: 20px;
+  line-height: 1.4;
+}
+
+.faq-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  background: #e8f4fa;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.faq-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--color-secondary, #7db3e2);
+  stroke-width: 3;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+  background: var(--color-secondary, #7db3e2);
+}
+
+.faq-item.active .faq-icon svg {
+  stroke: var(--color-white, #ffffff);
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease,
+    padding 0.4s ease;
+  padding: 0 25px;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 900px;
+  padding: 0 25px 25px 25px;
+}
+
+.faq-answer-text {
+  font-size: 16px;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- light-fixed legacy surface; FAQ dark support is a recorded follow-up */
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+  padding-top: 10px;
+}
+
+.faq-answer-rich p {
+  margin: 0 0 10px 0;
+}
+
+.faq-answer-rich ul {
+  margin: 0 0 10px 0;
+  padding-left: 20px;
+}
+
+.faq-answer-rich li {
+  margin-bottom: 6px;
+  line-height: 1.65;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faq-container {
+    padding: 20px 10px;
+  }
+
+  .faq-title {
+    font-size: 28px;
+  }
+
+  .faq-subtitle {
+    font-size: 16px;
+  }
+
+  .faq-sections-nav {
+    gap: 8px;
+  }
+
+  .faq-section-btn {
+    font-size: 13px;
+    padding: 0 12px;
+    height: 36px;
+  }
+
+  .faq-content {
+    padding: 30px 15px;
+    border-radius: 15px;
+  }
+
+  .faq-question {
+    padding: 15px 20px;
+  }
+
+  .faq-question-text {
+    font-size: 16px;
+  }
+
+  .faq-answer-text {
+    font-size: 15px;
+  }
+
+  .faq-icon {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+  }
+
+  .faq-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-title {
+    font-size: 24px;
+  }
+
+  .faq-question {
+    padding: 12px 15px;
+  }
+
+  .faq-question-text {
+    font-size: 15px;
+  }
+
+  .faq-content {
+    padding: 20px 10px;
+  }
+}

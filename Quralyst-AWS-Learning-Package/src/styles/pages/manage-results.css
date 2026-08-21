@@ -1,0 +1,190 @@
+/* ============================================
+   MANAGE RESULTS PAGE STYLES
+   Styles for quralyst_research/manage_results.html
+   ============================================ */
+
+/* ===== HEADER SECTION ===== */
+.manage-results-header {
+  padding: 0px 0px;
+}
+
+.manage-results-main-title {
+  color: var(--color-primary);
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.manage-results-subtitle {
+  color: var(--color-primary);
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.manage-results-actions .btn {
+  font-size: 14px;
+  padding: 0.4rem 0.8rem;
+}
+
+/* ===== CARD HEADER ===== */
+.card-header h5 {
+  font-size: 20px;
+  color: var(--color-primary);
+}
+
+.card-header .btn {
+  font-size: 14px;
+  padding: 0.4rem 0.8rem;
+}
+
+/* ===== CRM TABLE ===== */
+#crm-table {
+  margin-bottom: 0;
+}
+
+#crm-table thead th {
+  background: var(--color-primary);
+  color: var(--color-text-white, #ffffff);
+  border: 1px solid var(--border-subtle);
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#crm-table tbody tr:hover {
+  background-color: var(--surface-hover);
+  transition: all 0.2s ease;
+}
+
+/* Prevent global table hover transform from creating stacking issues */
+#crm-table td:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ===== CRM FORM CONTROLS ===== */
+.crm-field-input {
+  border: 1px solid var(--border-subtle);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.crm-field-input:focus {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  border-color: #667eea;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* Fill the table cell only (same as column width); portal menu width follows button via JS */
+#crm-table .custom-dropdown--sm {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#crm-table td.crm-table-field-cell {
+  min-width: 0;
+}
+
+#crm-table .custom-dropdown {
+  position: relative;
+  z-index: 20;
+}
+
+#crm-table .custom-dropdown-btn--sm {
+  min-height: 38px !important;
+  max-height: 38px !important;
+  padding: 8px 36px 8px 12px !important;
+  font-size: 13px !important;
+  border-radius: var(--radius-xl) !important;
+  background-size: 14px !important;
+  background-position: right 10px center !important;
+}
+
+#crm-table .custom-dropdown-btn--sm span {
+  font-size: 13px;
+}
+
+#crm-table .custom-dropdown--sm .custom-dropdown-content {
+  border-radius: var(--radius-md);
+  margin-top: 2px;
+  z-index: 2000;
+}
+
+#crm-table .custom-dropdown--sm .custom-dropdown-item {
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+/* ===== SAVE BUTTON ===== */
+.crm-row-save-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.crm-saved-badge {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-success);
+  color: var(--color-text-white, #ffffff);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.crm-saved-badge--visible {
+  display: inline-block;
+}
+
+.save-row-btn {
+  transition: all 0.3s ease;
+}
+
+.save-row-btn:hover {
+  transform: translateY(-2px);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#save-all-btn .crm-save-all-progress {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+#save-all-btn .crm-save-all-finished {
+  font-weight: 400;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+/* ===== NO DATA STATE ===== */
+.no-crm-data {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.no-data-icon {
+  font-size: 4rem;
+  color: var(--color-text-light);
+  margin-bottom: 20px;
+}
+
+.no-data-title {
+  color: var(--color-primary);
+  margin-bottom: 15px;
+}
+
+.no-data-message {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+}

@@ -1,0 +1,473 @@
+/*
+ * PE Corrections — QURALYST-20 Corrections.tsx visual parity.
+ * Overrides global tables.css blue headers / fixed 220px columns under `.pecorr-page`.
+ */
+
+:root {
+  --pecorr-indigo-950: var(--color-text-primary, #1e1b4b);
+  --pecorr-muted: var(--color-text-light, #64748b);
+  --pecorr-ink: var(--color-text-primary, #0f172a);
+  --pecorr-border: var(--border-subtle, #e2e8f0);
+  --pecorr-card: var(--surface-raised, #fff);
+  --pecorr-th-bg: var(--surface-overlay, #f8fafc);
+  --pecorr-th-color: var(--color-text-secondary, #64748b);
+  --pecorr-row-hover: var(--surface-hover, #f8fafc);
+  --pecorr-link: var(--color-link, #282561);
+  --pecorr-skel: var(--border-subtle, #e2e8f0);
+  --pecorr-card-shadow: var(--shadow-card, 0 1px 2px rgba(15, 23, 42, 0.04));
+  --pecorr-strike: var(--color-text-light, #94a3b8);
+}
+
+:root[data-theme='dark'] {
+  --pecorr-indigo-950: #f3f4f6;
+  --pecorr-muted: #94a3b8;
+  --pecorr-ink: #f3f4f6;
+  --pecorr-border: var(--border-subtle, #33394b);
+  --pecorr-card: var(--surface-raised, #242836);
+  --pecorr-th-bg: var(--surface-overlay, #2e3344);
+  --pecorr-th-color: #cbd5e1;
+  --pecorr-row-hover: var(--surface-hover, #32384a);
+  --pecorr-link: #818cf8;
+  --pecorr-skel: rgba(255, 255, 255, 0.08);
+  --pecorr-strike: #64748b;
+}
+
+.pecorr-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+.pecorr-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pecorr-header__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.pecorr-crumb {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--pecorr-muted);
+  line-height: 1;
+}
+
+.pecorr-crumb__current {
+  color: var(--pecorr-ink);
+  font-weight: 500;
+}
+
+.pecorr-title {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--pecorr-indigo-950);
+  line-height: 2.25rem;
+}
+
+.pecorr-subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--pecorr-muted);
+  max-width: 42rem;
+}
+
+.pecorr-apply-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+.pecorr-card {
+  background: var(--pecorr-card);
+  border: 1px solid var(--pecorr-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--pecorr-card-shadow);
+  overflow: hidden;
+}
+
+.pecorr-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem 0.75rem;
+}
+
+.pecorr-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--pecorr-ink);
+  line-height: 1.35;
+}
+
+.pecorr-card__title-icon {
+  color: var(--pecorr-link);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.pecorr-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.35rem;
+  padding: 0 0.45rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--surface-overlay, #f1f5f9);
+  color: var(--pecorr-ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.pecorr-card__body {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.pecorr-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 6rem;
+  padding: 1.5rem 0.5rem;
+  font-size: 0.875rem;
+  color: var(--pecorr-muted);
+  text-align: center;
+}
+
+.pecorr-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+.pecorr-skel {
+  display: block;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 0.375rem;
+  background: var(--pecorr-skel);
+}
+
+.pecorr-last-apply {
+  margin-top: 0;
+  padding: 1rem 1.25rem;
+}
+
+.pecorr-last-apply__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--pecorr-ink);
+}
+
+.pecorr-last-apply__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ── Inline change / badges ─────────────────────────────────────────────── */
+.pecorr-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-wrap: wrap;
+}
+
+.pecorr-change__before {
+  color: var(--pecorr-strike);
+  text-decoration: line-through;
+}
+
+.pecorr-change__arrow {
+  color: color-mix(in srgb, var(--pecorr-muted) 50%, transparent);
+}
+
+.pecorr-change__after {
+  font-weight: 500;
+  color: var(--pecorr-ink);
+}
+
+.pecorr-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.pecorr-subject {
+  font-weight: 500;
+  max-width: 12.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pecorr-muted {
+  color: var(--pecorr-muted) !important;
+}
+
+.pecorr-row--disabled {
+  color: var(--pecorr-muted);
+}
+
+.pecorr-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* ── Tables — kill global tables.css ──────────────────────────────────────
+ * Match pe-firm-detail: target `table.pecorr-table` directly (no page ancestor
+ * required) so blue gradient headers / 220px columns cannot win on specificity
+ * or load-order. Also cover Bootstrap `.table` leftovers + dry-run modal.
+ */
+.pecorr-table-wrap,
+.pecorr-page .table-responsive {
+  overflow: auto !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid var(--pecorr-border, #e2e8f0) !important;
+  background: var(--pecorr-card, #fff) !important;
+  max-height: none !important;
+  box-shadow: none !important;
+}
+
+table.pecorr-table,
+.pecorr-page table.pecorr-table,
+.pecorr-page table.table,
+.pecorr-modal table.table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  table-layout: auto !important;
+  font-size: 0.875rem !important;
+  margin-bottom: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+table.pecorr-table thead,
+.pecorr-page table.pecorr-table thead,
+.pecorr-page table.table thead,
+.pecorr-modal table.table thead {
+  background: var(--pecorr-th-bg, #f8fafc) !important;
+}
+
+table.pecorr-table thead tr,
+.pecorr-page table.pecorr-table thead tr,
+.pecorr-page table.table thead tr,
+.pecorr-modal table.table thead tr {
+  background: var(--pecorr-th-bg, #f8fafc) !important;
+  border-bottom: 1px solid var(--pecorr-border, #e2e8f0) !important;
+}
+
+table.pecorr-table thead th,
+table.pecorr-table th,
+.pecorr-page table.pecorr-table thead th,
+.pecorr-page table.pecorr-table th,
+.pecorr-page table.table thead th,
+.pecorr-page table.table th,
+.pecorr-modal table.table thead th,
+.pecorr-modal table.table th {
+  background: var(--pecorr-th-bg, #f8fafc) !important;
+  background-image: none !important;
+  background-color: var(--pecorr-th-bg, #f8fafc) !important;
+  color: var(--pecorr-th-color, #64748b) !important;
+  position: static !important;
+  top: auto !important;
+  z-index: auto !important;
+  border: none !important;
+  border-bottom: 1px solid var(--pecorr-border, #e2e8f0) !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  padding: 0.625rem 0.75rem !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  vertical-align: middle !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+table.pecorr-table th.pecorr-th--num,
+table.pecorr-table td.pecorr-td--num,
+.pecorr-page table.pecorr-table th.pecorr-th--num,
+.pecorr-page table.pecorr-table td.pecorr-td--num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+table.pecorr-table th.pecorr-th--when,
+table.pecorr-table td.pecorr-td--when,
+.pecorr-page table.pecorr-table th.pecorr-th--when,
+.pecorr-page table.pecorr-table td.pecorr-td--when {
+  text-align: right !important;
+  white-space: nowrap !important;
+  font-size: 0.75rem !important;
+  color: var(--pecorr-muted, #64748b) !important;
+}
+
+table.pecorr-table td,
+.pecorr-page table.pecorr-table td,
+.pecorr-page table.table td,
+.pecorr-modal table.table td {
+  padding: 0.625rem 0.75rem !important;
+  vertical-align: middle !important;
+  border: none !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--pecorr-border, #e2e8f0) 70%, transparent) !important;
+  color: var(--pecorr-ink, #0f172a) !important;
+  font-size: 0.8125rem !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  cursor: default !important;
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  transition: none !important;
+}
+
+table.pecorr-table td:hover,
+.pecorr-page table.pecorr-table td:hover,
+.pecorr-page table.table td:hover,
+.pecorr-modal table.table td:hover {
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: default !important;
+}
+
+table.pecorr-table tbody tr:nth-child(even),
+table.pecorr-table tbody tr:nth-child(odd),
+.pecorr-page table.pecorr-table tbody tr:nth-child(even),
+.pecorr-page table.pecorr-table tbody tr:nth-child(odd),
+.pecorr-page table.table tbody tr:nth-child(even),
+.pecorr-page table.table tbody tr:nth-child(odd),
+.pecorr-modal table.table tbody tr:nth-child(even),
+.pecorr-modal table.table tbody tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+table.pecorr-table tbody tr:hover,
+.pecorr-page table.pecorr-table tbody tr:hover {
+  background: var(--pecorr-row-hover, #f8fafc) !important;
+}
+
+table.pecorr-table tbody tr:hover td,
+.pecorr-page table.pecorr-table tbody tr:hover td {
+  background: transparent !important;
+}
+
+table.pecorr-table tbody tr:last-child td,
+.pecorr-page table.pecorr-table tbody tr:last-child td,
+.pecorr-page table.table tbody tr:last-child td,
+.pecorr-modal table.table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+table.pecorr-table td.pecorr-td--desc,
+.pecorr-page table.pecorr-table td.pecorr-td--desc {
+  max-width: 26rem;
+  color: var(--pecorr-muted, #64748b) !important;
+}
+
+table.pecorr-table td.pecorr-td--firm,
+.pecorr-page table.pecorr-table td.pecorr-td--firm {
+  color: var(--pecorr-muted, #64748b) !important;
+  font-size: 0.75rem !important;
+}
+
+/* Apply button — Q20 primary (not pill-radius standard) */
+.pecorr-page .pecorr-apply-btn.btn.btn-standard,
+.pecorr-page .pecorr-apply-btn.q-btn {
+  border-radius: 0.5rem !important;
+  padding: 0.5rem 1rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pecorr-page .pecorr-apply-btn:hover:not(:disabled),
+.pecorr-page .pecorr-apply-btn:focus:not(:disabled),
+.pecorr-page .pecorr-apply-btn:active:not(:disabled) {
+  background: var(--color-primary, #282561);
+  border-color: var(--color-primary, #282561);
+  color: #ffffff;
+  box-shadow: none;
+  transform: none;
+}
+
+.pecorr-page .q-btn:hover:not(:disabled),
+.pecorr-page .q-btn:focus:not(:disabled),
+.pecorr-page .q-btn:active:not(:disabled) {
+  transform: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.pecorr-page .q-btn--primary:hover:not(:disabled),
+.pecorr-page .q-btn--primary:focus:not(:disabled),
+.pecorr-page .q-btn--primary:active:not(:disabled) {
+  background: var(--color-primary, #282561);
+  border-color: var(--color-primary, #282561);
+  color: #ffffff;
+}
+
+.pecorr-page .q-btn--secondary:hover:not(:disabled),
+.pecorr-page .q-btn--secondary:focus:not(:disabled),
+.pecorr-page .q-btn--secondary:active:not(:disabled) {
+  background: var(--surface-overlay, #29344a);
+  border-color: var(--border-subtle, #334158);
+  color: var(--color-text-primary, #f8fafc);
+}
+
+:root[data-theme='dark'] .pecorr-page .q-btn--primary:hover:not(:disabled),
+:root[data-theme='dark'] .pecorr-page .q-btn--primary:focus:not(:disabled),
+:root[data-theme='dark'] .pecorr-page .q-btn--primary:active:not(:disabled),
+:root[data-theme='dark'] .pecorr-page .pecorr-apply-btn:hover:not(:disabled) {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .pecorr-title {
+    font-size: 1.5rem;
+    line-height: 1.875rem;
+  }
+}

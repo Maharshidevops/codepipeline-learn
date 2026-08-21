@@ -1,0 +1,70 @@
+{
+  "plugins": ["stylelint-declaration-strict-value"],
+  "ignoreFiles": [
+    "dist/**",
+    "node_modules/**",
+    "Backup/**",
+    "src/styles/core/colors.css",
+    "src/styles/core/tokens.css"
+  ],
+  "rules": {
+    "color-no-invalid-hex": true,
+    "declaration-block-no-duplicate-properties": [
+      true,
+      { "ignore": ["consecutive-duplicates-with-different-values"] }
+    ],
+    "scale-unlimited/declaration-strict-value": [
+      ["/color$/", "fill", "stroke", "background", "box-shadow", "border-radius", "border"],
+      {
+        "ignoreVariables": true,
+        "ignoreFunctions": { "": true, "box-shadow": false },
+        "ignoreValues": {
+          "/color$/": [
+            "currentColor",
+            "transparent",
+            "inherit",
+            "initial",
+            "unset",
+            "/^#/",
+            "/^rgba?/"
+          ],
+          "fill": ["currentColor", "none", "transparent", "/^#/", "/^rgba?/"],
+          "stroke": ["currentColor", "none", "transparent", "/^#/", "/^rgba?/"],
+          "background": ["none", "transparent", "inherit", "currentColor", "/^#/", "/^rgba?/"],
+          "box-shadow": ["none", "inset", "0", "/^-?[0-9.]+(px|rem|em|%)$/", "/^rgba?/", "/^#/"],
+          "border": [
+            "none",
+            "0",
+            "solid",
+            "dashed",
+            "dotted",
+            "transparent",
+            "currentColor",
+            "inherit",
+            "/^-?[0-9.]+(px|rem|em)$/",
+            "/^#/",
+            "/^rgba?/"
+          ],
+          "border-radius": [
+            "0",
+            "0px",
+            "50%",
+            "45%",
+            "3px",
+            "5px",
+            "6px",
+            "9px",
+            "10px",
+            "14px",
+            "15px",
+            "18px",
+            "25px",
+            "999px",
+            "/^[0-9.]+(rem|px|em)$/"
+          ]
+        },
+        "disableFix": true
+      }
+    ]
+  }
+}

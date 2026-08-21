@@ -1,0 +1,53 @@
+version: 0.0
+os: linux
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Quralyst Frontend — AWS CodeDeploy Application Specification
+# Application : quralyst-frontend
+# Group       : quralyst-frontend-dev-dg
+# EC2 Target  : Quralyst-Frontend-Dev (i-052d7a32c303f0d0c)
+# Serve path  : Docker Container (Host proxy)
+# ─────────────────────────────────────────────────────────────────────────────
+
+files:
+  - source: /
+    destination: /home/ubuntu/Frontend/
+
+file_exists_behavior: OVERWRITE
+
+permissions:
+  - object: /home/ubuntu/Frontend
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+    mode: "755"
+    type:
+      - directory
+  - object: /home/ubuntu/Frontend/scripts/codedeploy
+    pattern: "**/*.sh"
+    owner: ubuntu
+    group: ubuntu
+    mode: "755"
+    type:
+      - file
+
+hooks:
+  BeforeInstall:
+    - location: scripts/codedeploy/before_install.sh
+      timeout: 120
+      runas: root
+
+  AfterInstall:
+    - location: scripts/codedeploy/after_install.sh
+      timeout: 300
+      runas: root
+
+  ApplicationStart:
+    - location: scripts/codedeploy/application_start.sh
+      timeout: 120
+      runas: root
+
+  ValidateService:
+    - location: scripts/codedeploy/validate_service.sh
+      timeout: 120
+      runas: root

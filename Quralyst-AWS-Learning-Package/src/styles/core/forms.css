@@ -1,0 +1,330 @@
+/* ============================================
+   FORMS
+   Form Elements and Input Styles
+   ============================================ */
+
+:root {
+  /* Form Spacing */
+  --form-group-margin: 24px;
+  --input-padding-y: 16px;
+  --input-padding-x: 20px;
+
+  /* Form Borders */
+  --input-border-width: 2px;
+  --input-radius: var(--radius-pill);
+}
+
+/* Form Layout */
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: var(--form-group-margin);
+}
+
+.form-group label {
+  display: block;
+  font-size: var(--font-size-base, 16px);
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--color-text-primary, #333333);
+  margin-bottom: 8px;
+}
+
+/* Form Inputs */
+.form-group input {
+  width: 100%;
+  padding: var(--input-padding-y) var(--input-padding-x);
+  border: var(--input-border-width) solid var(--color-border-light, #e5e7eb);
+  border-radius: var(--input-radius);
+  font-size: var(--font-size-base, 16px);
+  background: var(--color-bg-white, #ffffff);
+  color: var(--color-text-primary, #333333);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: var(--color-border-focus, #282561);
+}
+
+.form-group input::placeholder {
+  color: var(--color-text-light);
+}
+
+/* Auth Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Login: keep me logged in + forgot password (one row, same typography) */
+.auth-form-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px 16px;
+  margin-bottom: var(--form-group-margin, 24px);
+  min-height: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.auth-form-options__remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 200;
+  line-height: 1.4;
+  color: var(--color-text-secondary, #666666);
+  cursor: pointer;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.auth-form-options__remember span:hover {
+  text-decoration: underline;
+}
+
+.auth-form-options__remember input[type='checkbox'] {
+  margin: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.auth-form-options__forgot {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.auth-form-options__forgot a {
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-text-secondary, #666666);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.auth-form-options__forgot a:hover {
+  text-decoration: underline;
+}
+
+/* Comment Input */
+.comment-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Comment Form */
+.comment-form {
+  background-color: var(--color-bg-white, white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 15px;
+  margin-top: 10px;
+}
+
+/* ===== FORM CONTROL STYLES ===== */
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  font-size: 18px;
+  background: var(--surface-raised);
+  color: var(--color-text-primary);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:hover {
+  border-color: var(--color-secondary);
+}
+
+.form-control:focus {
+  border-color: var(--color-border-focus);
+}
+
+/* Form Check Inputs (Checkbox & Radio) */
+.form-check-input {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Bootstrap-blue focus ring, legacy parity */
+  box-shadow: 0 0 0 0.15rem rgba(0, 123, 255, 0.1);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-check-input:hover {
+  border-color: var(--color-secondary) !important;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- secondary-blue focus glow, deliberate one-off */
+  box-shadow: 0 0 0 3px rgba(125, 179, 226, 0.25);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-border-focus);
+  border: 2px solid var(--color-border-focus);
+}
+
+.form-check-input:focus {
+  border-color: var(--color-border-focus);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Bootstrap-blue focus ring, legacy parity */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* ===== HOVER STATES FOR ALL INPUT ELEMENTS ===== */
+
+/* Select/Dropdown hover */
+select.form-control:hover,
+select.form-select:hover,
+.form-select:hover {
+  border-color: var(--color-secondary) !important;
+}
+
+/* Textarea hover */
+textarea.form-control:hover {
+  border-color: var(--color-secondary);
+}
+
+/* Toggle Switch hover */
+.form-switch .form-check-input:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- secondary-blue focus glow, deliberate one-off */
+  box-shadow: 0 0 0 3px rgba(125, 179, 226, 0.35) !important;
+}
+
+/* Custom Dropdown Button hover */
+.custom-dropdown-btn:hover {
+  border-color: var(--color-secondary) !important;
+}
+
+/* Placeholder Styles */
+input[type='number']::-webkit-input-placeholder,
+input[type='text']::-webkit-input-placeholder {
+  color: var(--color-text-light);
+  opacity: 1;
+}
+
+input[type='number']::-moz-placeholder,
+input[type='text']::-moz-placeholder {
+  color: var(--color-text-light);
+  opacity: 1;
+}
+
+input[type='number']:-ms-input-placeholder,
+input[type='text']:-ms-input-placeholder {
+  color: var(--color-text-light);
+  opacity: 1;
+}
+
+input[type='number']::placeholder,
+input[type='text']::placeholder {
+  color: var(--color-text-light);
+  opacity: 1;
+}
+
+/* Input Group */
+.input-group-text.bg-white {
+  background: var(--surface-raised) !important;
+  border-radius: 1rem 0 0 1rem !important;
+}
+
+/* ============================================
+   TOGGLE SWITCH
+   iOS-style Toggle Switch Component
+   ============================================ */
+
+/* Custom Toggle Switch - use with .form-check.form-switch */
+.form-switch .form-check-input {
+  width: 3rem !important;
+  height: 1.5rem !important;
+  margin-top: 0.6rem !important;
+  margin-left: 0.2rem !important;
+  cursor: pointer !important;
+  background-color: var(--color-control-muted) !important;
+  border: none !important;
+  border-radius: 1.5rem !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='white'/%3e%3c/svg%3e") !important;
+  background-position: left center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  transition:
+    background-color 0.2s ease,
+    background-position 0.2s ease !important;
+  flex-shrink: 0 !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  position: relative !important;
+}
+
+/* Hide any pseudo-elements that might show a tick */
+.form-switch .form-check-input::before,
+.form-switch .form-check-input::after {
+  display: none !important;
+  content: none !important;
+}
+
+.form-switch .form-check-input:focus {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- brand-navy shadow variant, deliberate one-off */
+  box-shadow: 0 0 0 3px rgba(40, 37, 97, 0.15) !important;
+  background-color: var(--color-control-muted) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='white'/%3e%3c/svg%3e") !important;
+}
+
+.form-switch .form-check-input:checked {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  background-position: right center !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='white'/%3e%3c/svg%3e") !important;
+}
+
+.form-switch .form-check-input:checked::before,
+.form-switch .form-check-input:checked::after {
+  display: none !important;
+  content: none !important;
+}
+
+.form-switch .form-check-input:checked:focus {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- brand-navy shadow variant, deliberate one-off */
+  box-shadow: 0 0 0 3px rgba(40, 37, 97, 0.25) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='white'/%3e%3c/svg%3e") !important;
+}
+
+.form-switch .form-check-input:disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- deliberate one-off, predates token system (Phase 28) */
+  background-color: #c4c9d2 !important;
+}
+
+/* Toggle Switch Container - Proper alignment */
+.form-switch {
+  display: flex !important;
+  align-items: flex-start !important;
+  padding-left: 0 !important;
+  min-height: auto !important;
+}
+
+/* Toggle Switch Label Alignment */
+.form-switch .form-check-label {
+  flex: 1;
+  min-width: 0;
+  margin-left: 0.75rem !important;
+  cursor: pointer !important;
+}
+
+.form-switch.disabled .form-check-label {
+  color: var(--color-control-muted) !important;
+  cursor: not-allowed !important;
+}

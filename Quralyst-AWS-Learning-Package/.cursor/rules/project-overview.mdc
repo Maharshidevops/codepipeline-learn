@@ -1,0 +1,111 @@
+---
+description: Quralyst frontend — what it is, stack ground-truth, non-negotiable rules, architecture map, and working agreement. Read first.
+alwaysApply: true
+---
+
+# Quralyst Frontend — entry point for any AI editor
+
+The **React + TypeScript SPA** for Quralyst, a multi-tenant B2B research platform. It is the rewrite
+of a legacy Flask+Jinja app (preserved verbatim under `Backup/` for logic and `UI/` for visual
+snapshots — never deleted, used as the source of truth when porting screens).
+
+It talks to a **FastAPI backend** in a separate repo (`Business-Research-Tool---Quralyst`) through a
+single typed service seam. **There is no mock mode** — the app requires the backend running.
+
+## Stack (ground truth)
+
+- **Vite 5** + **React 19** with the **React Compiler** (auto-memoization — do not hand-add
+  `useMemo`/`useCallback` for what the compiler handles; write clean components).
+- **TypeScript strict.** Routing: **React Router v6** (`createBrowserRouter`, nested layout routes,
+  `lazy()` + `Suspense`, `viewTransition`, per-route `handle.title`).
+- **Server state: TanStack Query v5.** **Client/UI state: Zustand.** **Forms: React Hook Form + Zod.**
+- **Charts: ApexCharts** (Summary page only, lazy chunk; colors read live from theme tokens).
+- **Styling:** plain global CSS on a **design-token system** (no CSS Modules). Theme contract in
+  `src/styles/core/colors.css`; radius/shadow scales in `core/tokens.css`. **stylelint blocks raw
+  color/radius/shadow literals.**
+- **Assets fully self-hosted** (Bootswatch Flatly, Bootstrap Icons, @fontsource) — the built app makes
+  **zero third-party requests**. Don't add CDN `<link>`/`<script>` tags.
+- **Security:** build-injected **CSP** meta tag (hash-allowlisted inline scripts); httpOnly-cookie auth
+  with **CSRF double-submit**; permission-map authorization (`can()`); idle-session timeout.
+- **Observability:** env-gated **Sentry** + ring-buffered log shipping to `/api/logs`; `X-Request-ID`.
+- **Quality:** ESLint 9 (flat + jsx-a11y) · Prettier 3 · stylelint · Vitest + Testing Library +
+  vitest-axe · husky + lint-staged + secretlint pre-commit. CI build runs on **Node 22**.
+
+## Non-negotiable rules
+
+1. **Git (humans drive branches & PRs).** Never push to or PR into **`main`**. Work on feature
+   branches off **`Dev-frontend`**; PRs target **`Dev-frontend`** (the CI/CD trigger). The AI never
+   creates a branch or opens a PR — ask for approval and the base branch, then `git pull` latest first.
+2. **Design tokens only.** No raw color, radius, or shadow literals in CSS — use the tokens
+   (`var(--…)`). stylelint will fail otherwise.
+3. **One network seam.** Every backend call goes through `src/services/http.ts` and the typed services
+   in `src/services/api/*` — never call `fetch`/axios directly in a component. Requests use
+   `credentials: 'include'`, echo the CSRF token on mutations, and map snake_case↔camelCase via
+   `lib/caseMapper`. Server state uses TanStack Query, not ad-hoc effects.
+4. **Keep it self-hosted & CSP-safe.** Don't introduce third-party network requests or inline scripts
+   that aren't hash-allowlisted.
+5. **Accessibility is required.** jsx-a11y must pass; new UI needs a `vitest-axe` check. No regressions.
+6. **TypeScript strict.** No `any` without a written reason; model API types in `src/types`.
+7. **Never commit secrets** (secretlint enforces). Env is read once in `src/config.ts`; the only public
+   vars are the documented `VITE_*` ones.
+
+## Architecture map
+
+```
+src/
+  pages/        Route components, one per screen (admin/, auth/, billing/, organization/)
+  layouts/      Shell layouts (AppLayout, AuthLayout, ResultLayout, OrgSettingsLayout)
+  routes/       router.tsx (route tree + handle.title) · paths.ts · ProtectedRoute · RoleRoute
+  features/     Feature-scoped composition (research wizard steps, result-workspace widgets, comments)
+  components/   Reusable UI — ui/ primitives, domain/ widgets, feedback/, form/, layout/, wizard/
+  services/     http.ts (the single fetch seam) + endpoints.ts + api/* typed services
+  store/        Zustand stores (authStore, progressStore, uiStore)
+  hooks/        Shared hooks (useAuth, usePermissions, useIdleTimeout, useThemeTokens, …)
+  lib/          Pure utils (caseMapper, logger, reportError, viewTransition, datetime, …)
+  styles/       Global CSS — core/ → components/ → pages/ (LOAD ORDER IS LOAD-BEARING)
+  types/        Shared domain types · config.ts  Env read once into a typed `config`
+```
+
+Most `src/` folders have their own `README.md` describing each file — read it before adding to a folder.
+
+## Conventions
+
+- **Components:** function components only; let the React Compiler memoize. Primitives in
+  `components/ui/`, compose features in `features/`.
+- **Styling:** token-driven, theme-aware; read live theme values with `useThemeTokens`. Respect the
+  `core/ → components/ → pages/` load order.
+- **Data fetching:** TanStack Query keys are stable and typed; mutations invalidate the right keys.
+  Errors and auth (401/403/CSRF) are handled in the http seam.
+- **Routing/state:** routes in `routes/router.tsx` with `handle.title`; guard with `ProtectedRoute` /
+  `RoleRoute`. Auth/permission state in `authStore` + `usePermissions().can()`.
+
+## Backend relationship
+
+In dev, `npm run dev` runs on `:5173` and the **Vite proxy** forwards backend path prefixes
+(`/auth`, `/api`, `/organization`, `/admin`, `/billing`, `/research`, `/financial-verticals`, …) to
+**FastAPI on `:8000`**. Auth is an httpOnly cookie session with CSRF double-submit; the app boots
+unauthenticated and restores via `GET /auth/me`. Backend speaks **camelCase**. API contract:
+`Phases/REF-API-CONTRACTS.md`.
+
+## Knowledge graph (graphify) — NOT installed here
+
+graphify is **not set up in this repo.** Do **not** run `graphify` / graph commands or assume a graph
+exists — use normal search and the per-folder `README.md`s. If `graphify-out/graph.json` ever appears,
+follow the backend's graphify conventions then (and only then).
+
+## Working agreement
+
+- **Plan before editing** non-trivial/multi-step work; wait for go-ahead. Small obvious fixes proceed.
+- **Research/suggestions = a written, explained summary.** **Options = pros & cons first.**
+- **Git is user-driven** — never create branches or PRs; ask for approval + base branch, pull first.
+
+## Common commands
+
+```bash
+npm run dev        # :5173 (backend on :8000 must be running first)
+npm run build      # tsc --noEmit + production build (injects CSP)
+npm run typecheck  # type-only check
+npm run lint       # ESLint (incl. jsx-a11y)
+npm run lint:css   # stylelint (raw color/radius/shadow literals blocked)
+npm run test:run   # Vitest single run (unit + integration + a11y axe)
+```

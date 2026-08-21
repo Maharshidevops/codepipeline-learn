@@ -1,0 +1,109 @@
+/* Per-row comments UI (Phase 29). The .comment-* classes are the legacy comment-system styles
+   relocated from preview-result.css (they were orphaned by the migration) so they load with the
+   CommentModal wherever the workspace renders it — not only on the Preview tab. The textarea +
+   save/cancel buttons reuse .comment-textarea / .btn-comment-save / .btn-comment-cancel from the
+   global tables.css. */
+
+.comment-section {
+  background-color: var(--surface-overlay);
+  border-left: 4px solid var(--color-info);
+  padding: 15px;
+  margin: 10px 0;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- off-scale radius, legacy parity (WS2 deferred) */
+  border-radius: 0 8px 8px 0;
+}
+
+.comment-section + .comment-section {
+  margin-top: 16px;
+}
+
+.comment-slot-label {
+  font-weight: 600;
+  color: var(--color-primary, #282561);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.comment-item {
+  background-color: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 10px;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: var(--color-info);
+}
+
+.comment-timestamp {
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+}
+
+.comment-text {
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Count badge on the per-row comment button (data/preview tables). */
+.comment-indicator {
+  display: inline-block;
+  background-color: var(--color-success);
+  color: var(--color-text-white, #ffffff);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 20px;
+  margin-left: 5px;
+}
+
+/* Per-result stats strip (total + per-user breakdown). */
+.comment-stats {
+  background-color: var(--surface-accent);
+  border: 1px solid var(--border-subtle);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- off-scale radius, legacy parity (WS2 deferred) */
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.no-comments-message {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  padding: 20px;
+}
+
+/* Per-row entry button (icon + badge) rendered in the table's Comments column. */
+.comment-row-btn {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-primary, #282561);
+  font-size: 1rem;
+}
+
+.comment-row-btn:hover {
+  color: var(--color-secondary, #7db3e2);
+}

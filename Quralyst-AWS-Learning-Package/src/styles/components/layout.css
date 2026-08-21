@@ -1,0 +1,222 @@
+/* ============================================
+   LAYOUT COMPONENT STYLES
+   Main wrapper, content areas, and containers
+   ============================================ */
+
+/* ============================================
+   WORKSPACE LAYOUT TOKENS (Phase 24)
+   The whole shell is driven from these — retune here, not in per-page CSS.
+   ============================================ */
+
+/* Make the rail width an ANIMATABLE custom property. Unregistered custom properties flip discretely,
+   so on collapse the sidebar `width`, the content `margin-left`, and each bg-object `transform` each
+   ran their OWN transition off the same flip and drifted a frame apart — the visible white gap. Once
+   registered, the VARIABLE itself interpolates (transitioned on `body` below), so every consumer reads
+   the same value each frame and moves in perfect lockstep. No per-consumer transitions needed. */
+@property --sidebar-width {
+  syntax: '<length-percentage>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+:root {
+  /* Replit Sidebar uses Tailwind w-56 (14rem = 224px). Keep exact match. */
+  --sidebar-pct: 15%;
+  --sidebar-width: 224px;
+  --sidebar-width-collapsed: 224px;
+
+  /* Window content box: centered at --content-width with equal gutters (100% - 85% = 2 × 7.5%). */
+  --content-width: 85%;
+  /* Narrower box for form-centric / reading pages (processing forms + FAQ) — opted in per route via
+       the `main-content--narrow` class (AppLayout reads the route handle's `width: 'narrow'`). */
+  --content-width-narrow: 65%;
+  /* Wide dashboards (Research Home) — fill the shell with fixed gutters like Replit AppShell `px-8`,
+       so the sidebar gap stays ~32px on laptops instead of a percentage that feels too large. */
+  --content-pad-wide: 2rem;
+  --content-max-width: none; /* flip to e.g. 1600px to cap content on ultra-wide screens */
+
+  /* Vertical chrome spacing — the SAME tokens drive the sidebar logo top + logout bottom, so every
+       page's top/bottom edge lines up with the logo/logout by construction. */
+  --chrome-pad-top: 28px;
+  --chrome-pad-bottom: 16px;
+}
+
+/* Proportion tokens kept for compatibility; rail width matches Replit w-56 (224px). */
+@media (min-width: 1600px) {
+  :root {
+    --sidebar-pct: 14%;
+  }
+}
+
+@media (min-width: 2000px) {
+  :root {
+    --sidebar-pct: 14%;
+  }
+}
+
+/* The single source of the collapse animation: interpolate the rail width here and every consumer
+   (sidebar width, content margin, bg-object transform) follows in sync. */
+body {
+  transition: --sidebar-width 0.3s ease;
+}
+
+body.sidebar-collapsed {
+  --sidebar-width: var(--sidebar-width-collapsed);
+}
+
+/* Main Content Wrapper */
+.main-wrapper {
+  min-height: 100vh;
+  background: var(--surface-base);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Desktop - offset content by the (variable) sidebar width. No own transition: the width is animated
+   at the source (--sidebar-width on body), so margin-left follows the interpolating value frame-by-frame. */
+@media (min-width: 992px) {
+  .main-wrapper {
+    margin-left: var(--sidebar-width);
+  }
+}
+
+/* The one workspace box every authenticated page renders into (AppLayout > .main-content > Outlet):
+   centered at 85% of the window with 7.5% gutters, consistent top/bottom spacing from the tokens. */
+.main-content {
+  flex: 1;
+  width: var(--content-width);
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding-top: var(--chrome-pad-top);
+  padding-bottom: var(--chrome-pad-bottom);
+  box-sizing: border-box;
+  background: var(--surface-base);
+}
+
+/* Opt-in narrower workspace box (processing forms + FAQ). Same centering/gutters, just a tighter
+   measure so long forms and prose don't sprawl across wide monitors (Phase 36). */
+.main-content--narrow {
+  width: var(--content-width-narrow);
+}
+
+/* Wide dashboards (Research Home): full shell + fixed gutters. Inner page caps at max-w-7xl
+   on large monitors (see .rh-page) so big screens don’t sprawl edge-to-edge. */
+.main-content--wide {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  /* Medium / laptop: a bit more inset from the sidebar + a touch more top space */
+  padding-inline: 1.5rem;
+  padding-top: calc(var(--chrome-pad-top) + 0.5rem);
+  box-sizing: border-box;
+}
+
+@media (min-width: 1400px) {
+  .main-content--wide {
+    padding-inline: 2rem; /* Replit AppShell px-8 */
+    padding-top: calc(var(--chrome-pad-top) + 0.75rem); /* a little more top on big screens */
+  }
+}
+
+/* Container Styles */
+.container {
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--color-background, #ffffff);
+}
+
+/* Inside the workspace box, containers are passthroughs — the box already provides width + gutters
+   + top/bottom spacing, so containers fill it with no extra max-width/centering/padding that would
+   double up (the custom `.container` above otherwise adds 20px all round, varying per page). */
+.main-content .container,
+.main-content .container-fluid {
+  max-width: 100%;
+  margin-inline: 0;
+  padding: 0;
+  /* Transparent: the container is a layout wrapper, not a surface. Painting --color-background here
+       put an extra card-colored box behind every page's content (a visible middle layer between the
+       canvas and the actual cards). The cards/sections provide their own surfaces. */
+  background: transparent;
+}
+
+/* Dashboard Title */
+.dashboard-title h2 {
+  font-weight: 500;
+  color: var(--color-primary, #282561);
+}
+
+/* ============================================
+   RESPONSIVE LAYOUT STYLES
+   ============================================ */
+
+@media (max-width: 991.98px) {
+  .main-wrapper {
+    margin-left: 0 !important;
+    /* Match mobile top bar (56px) */
+    margin-top: 56px !important;
+  }
+
+  /* Use the full viewport on tablets/phones — the 65%/85% desktop gutters are too tight on small screens. */
+  .main-content,
+  .main-content--narrow,
+  .main-content--wide {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: 16px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-wrapper {
+    margin-top: 56px !important;
+  }
+
+  .main-content,
+  .main-content--narrow,
+  .main-content--wide {
+    padding-inline: 12px;
+  }
+}
+
+/* ===== MAIN CONTENT HEIGHT ===== */
+.main-content {
+  min-height: 70vh;
+}
+
+/* ===== NAVBAR STYLES ===== */
+.small-navbar {
+  min-height: 48px;
+  font-size: 1rem;
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+}
+
+.small-navbar .navbar-brand {
+  font-size: 1.1rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+
+/* ===== PAGE TOP PADDING ===== */
+/* Neutralized in Phase 24 — top spacing now comes from .main-content (--chrome-pad-top). Kept as a
+   no-op so existing `page-top-padding` classnames don't double the gap. */
+.page-top-padding {
+  padding-top: 0;
+}
+
+/* ===== ICON SECTION ===== */
+.icon-section {
+  color: var(--color-primary);
+  margin-right: 0.5rem;
+}
+
+/* ===== CARD STYLES ===== */
+/* The single `.card` definition now lives in components/cards.css (this duplicate was removed so there
+   is one source of truth — they were identical, just via different-named-but-equal tokens). */
+
+.main-wrapper,
+.main-content {
+  overflow: visible !important;
+}

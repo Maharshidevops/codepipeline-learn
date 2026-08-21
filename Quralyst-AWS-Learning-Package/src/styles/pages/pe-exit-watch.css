@@ -1,0 +1,526 @@
+/*
+ * PE Exit Watch — port of Replit QURALYST-20 ExitWatch.tsx.
+ * Overrides global tables.css blue headers / fixed 220px columns under `.pew-page`.
+ */
+
+:root {
+  --pew-card-radius: 1rem;
+  --pew-title-color: #0f172a;
+  --pew-icon-rose: #f43f5e;
+  --pew-th-bg: #f8fafc;
+  --pew-th-color: #64748b;
+  --pew-td-color: #0f172a;
+  --pew-muted: #64748b;
+  --pew-row-border: #e2e8f0;
+  --pew-row-hover: #f8fafc;
+  --pew-skel-bg: #e2e8f0;
+  --pew-menu-shadow: 0 4px 16px rgba(15, 23, 42, 0.1);
+  --pew-link: #2563eb;
+}
+
+:root[data-theme='dark'] {
+  --pew-title-color: var(--color-text-primary, #f8fafc);
+  --pew-icon-rose: #f43f5e;
+  --pew-th-bg: var(--surface-overlay, #29344a);
+  --pew-th-color: var(--color-text-secondary, #cbd5e1);
+  --pew-td-color: var(--color-text-primary, #f8fafc);
+  --pew-muted: var(--color-text-secondary, #cbd5e1);
+  --pew-row-border: var(--border-subtle, #334158);
+  --pew-row-hover: var(--surface-hover, #33415a);
+  --pew-skel-bg: #24324a;
+  --pew-menu-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --pew-link: #818cf8;
+}
+
+.pew-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0;
+}
+
+/* Header */
+.pew-header__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--pew-title-color);
+  line-height: 1.25;
+}
+
+.pew-header__icon {
+  font-size: 1.5rem;
+  color: var(--pew-icon-rose);
+  line-height: 1;
+}
+
+.pew-header__sub {
+  margin: 0.35rem 0 0;
+  max-width: 42rem;
+  font-size: 0.875rem;
+  color: var(--pew-muted);
+}
+
+/* Coverage */
+.pew-coverage {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 0.875rem 1rem;
+}
+
+.pew-coverage__value {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--pew-td-color);
+  line-height: 1.2;
+}
+
+.pew-coverage__label {
+  margin: 0.2rem 0 0;
+  font-size: 0.75rem;
+  color: var(--pew-muted);
+}
+
+/* Toolbar */
+.pew-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pew-search {
+  position: relative;
+  width: 18rem;
+  max-width: 100%;
+}
+
+.pew-search__icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  color: var(--pew-muted);
+  pointer-events: none;
+}
+
+.pew-input {
+  width: 100%;
+  height: 2.25rem;
+  font-size: 0.875rem;
+  padding: 0 0.875rem 0 2.25rem;
+  border: 1px solid var(--border-subtle, #cbd5e1);
+  border-radius: var(--radius-full, 999px);
+  background: var(--surface-raised, #ffffff);
+  color: var(--color-text-primary, #333);
+  box-shadow: var(--shadow-subtle, 0 1px 2px rgba(0, 0, 0, 0.04));
+}
+
+.pew-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus, #282561);
+  box-shadow: var(--focus-ring, 0 0 0 3px rgba(125, 179, 226, 0.15));
+}
+
+.pew-count {
+  margin-left: auto;
+  font-size: 0.875rem;
+  color: var(--pew-muted);
+}
+
+.pew-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-raised, #fff);
+  color: var(--color-text-primary, #333);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pew-btn:hover:not(:disabled) {
+  background: var(--pew-row-hover);
+}
+
+.pew-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pew-btn--link {
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--pew-link);
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+.pew-btn--link:hover:not(:disabled) {
+  background: transparent;
+  text-decoration: underline;
+}
+
+/* Compact pill / card selects */
+.pew-pill {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.pew-pill--tier {
+  width: 10rem;
+}
+
+.pew-pill--sector {
+  width: 13.75rem;
+}
+
+.pew-pill__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 0.75rem 0 0.875rem;
+  border: 1px solid var(--border-subtle, #cbd5e1);
+  border-radius: var(--radius-full, 999px);
+  background: var(--surface-raised, #fff);
+  color: var(--color-text-primary, #333);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.pew-pill.is-open .pew-pill__trigger,
+.pew-pill__trigger:focus-visible {
+  outline: none;
+  border-color: var(--color-border-focus, #282561);
+  box-shadow: var(--focus-ring, 0 0 0 3px rgba(125, 179, 226, 0.15));
+}
+
+.pew-pill__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.pew-pill__chevron {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--pew-muted);
+  opacity: 0.7;
+}
+
+.pew-pill.is-open .pew-pill__chevron {
+  transform: rotate(180deg);
+}
+
+.pew-pill__menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 40;
+  min-width: 100%;
+  max-height: 16rem;
+  overflow: auto;
+  margin: 0;
+  padding: 0.25rem;
+  list-style: none;
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 8px);
+  box-shadow: var(--pew-menu-shadow);
+}
+
+.pew-pill__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text-primary, #333);
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pew-pill__option:hover,
+.pew-pill__option.is-selected {
+  background: var(--pew-row-hover);
+}
+
+/* Table — kill global tables.css */
+.pew-table-wrap {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--pew-card-radius);
+  overflow: hidden;
+  box-shadow: none;
+  max-height: none;
+}
+
+.pew-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.pew-table-wrap.is-fetching {
+  opacity: 0.6;
+}
+
+.pew-page table.pew-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  table-layout: auto !important;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+.pew-page table.pew-table thead tr {
+  background: var(--pew-th-bg) !important;
+  border-bottom: 1px solid var(--pew-row-border);
+}
+
+.pew-page table.pew-table thead th,
+.pew-page table.pew-table th {
+  background: var(--pew-th-bg) !important;
+  background-image: none !important;
+  background-color: var(--pew-th-bg) !important;
+  color: var(--pew-th-color) !important;
+  position: static !important;
+  top: auto !important;
+  z-index: auto !important;
+  border: none !important;
+  border-bottom: 1px solid var(--pew-row-border) !important;
+  font-weight: 600 !important;
+  font-size: 0.6875rem !important;
+  padding: 0.625rem 0.75rem !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  vertical-align: middle !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.pew-page table.pew-table th.pew-th--num,
+.pew-page table.pew-table td.pew-td--num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.pew-page table.pew-table th.pew-th--ready {
+  width: 6rem !important;
+  min-width: 5.5rem !important;
+}
+
+.pew-page table.pew-table td {
+  padding: 0.75rem !important;
+  vertical-align: middle !important;
+  border: none !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--pew-row-border) 55%, transparent) !important;
+  color: var(--pew-td-color) !important;
+  font-size: 0.875rem !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  cursor: default !important;
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  transition: none !important;
+}
+
+.pew-page table.pew-table td:hover {
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: default !important;
+}
+
+.pew-page table.pew-table tbody tr:nth-child(even),
+.pew-page table.pew-table tbody tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+.pew-page table.pew-table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.pew-page table.pew-table tbody tr:hover {
+  background: var(--pew-row-hover) !important;
+}
+
+/* ── Sticky first column for Readiness on small/medium screens ───────────── */
+@media (max-width: 1199.98px) {
+  .pew-page table.pew-table th:first-child,
+  .pew-page table.pew-table td:first-child {
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 5 !important;
+    background: var(--surface-raised, #ffffff) !important;
+    background-color: var(--surface-raised, #ffffff) !important;
+    border-right: 1px solid var(--border-subtle, #e2e8f0) !important;
+    box-shadow: var(--shadow-subtle, 2px 0 4px rgba(0, 0, 0, 0.05)) !important;
+    min-width: 100px !important;
+  }
+
+  .pew-page table.pew-table thead th:first-child {
+    z-index: 15 !important;
+    background: var(--pew-th-bg, #f8fafc) !important;
+    background-color: var(--pew-th-bg, #f8fafc) !important;
+  }
+
+  .pew-page table.pew-table tbody tr:hover td:first-child {
+    background: var(--pew-th-bg, #f8fafc) !important;
+    background-color: var(--pew-th-bg, #f8fafc) !important;
+  }
+}
+
+.pew-page table.pew-table tbody tr:hover td {
+  background: transparent !important;
+}
+
+.pew-page table.pew-table td.pew-empty {
+  text-align: center !important;
+  padding: 3rem 1rem !important;
+  color: var(--pew-muted) !important;
+}
+
+/* Cells */
+.pew-company {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.pew-firm-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--pew-link);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.pew-firm-link:hover {
+  text-decoration: underline;
+}
+
+.pew-sector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.75rem;
+}
+
+.pew-sector__name {
+  font-weight: 500;
+  color: var(--pew-td-color);
+}
+
+.pew-geo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--pew-muted);
+}
+
+.pew-signal {
+  font-size: 0.75rem;
+  color: var(--pew-muted);
+  max-width: 17.5rem;
+}
+
+.pew-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--pew-muted);
+}
+
+.pew-empty__icon {
+  font-size: 2.5rem;
+  opacity: 0.35;
+  color: var(--pew-muted);
+}
+
+.pew-skel {
+  display: inline-block;
+  height: 0.875rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--pew-skel-bg);
+}
+
+.pew-footnote {
+  margin: 0;
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--pew-muted) 70%, transparent);
+}
+
+/* Company column max-width & text truncation for outlier company names */
+.pew-th--company,
+.pew-td--company {
+  max-width: 18rem !important;
+  width: 18rem !important;
+}
+
+.pew-company {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-weight: 500 !important;
+  min-width: 0 !important;
+  max-width: 17rem !important;
+  overflow: hidden !important;
+}
+
+.pew-company__name {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  min-width: 0 !important;
+  max-width: 12.5rem !important;
+  flex: 1 1 auto !important;
+}
+
+.pew-company .pew-btn--link {
+  flex-shrink: 0 !important;
+}

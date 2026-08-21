@@ -1,0 +1,24 @@
+---
+description: Routing, auth guards & client state rules — React Router v6, ProtectedRoute/RoleRoute, Zustand vs TanStack Query, permissions, session UX.
+globs: src/routes/**,src/store/**,src/hooks/**
+alwaysApply: false
+---
+
+# Routing, auth guards & client state
+
+**Applies to:** `src/routes/**`, `src/store/**`, `src/hooks/**`
+
+- **Routing:** React Router v6 via `createBrowserRouter` in `src/routes/router.tsx`. Routes are nested
+  under layout routes, use `lazy()` + `Suspense` for heavy screens, set the tab title via
+  `handle.title`, and cross-fade with `viewTransition`. Centralise paths in `routes/paths.ts` — don't
+  hard-code route strings.
+- **Guards:** wrap protected routes in `ProtectedRoute`; role-gated routes in `RoleRoute`. Don't roll
+  per-component auth checks.
+- **Client/UI state = Zustand** (`store/authStore`, `progressStore`, `uiStore`). **Server state stays
+  in TanStack Query** — don't mirror fetched data into Zustand.
+- **Auth/permissions:** read auth from `useAuth`/`authStore`; gate UI with `usePermissions().can(...)`
+  against the permission map — don't check raw roles inline.
+- **Session UX:** idle-timeout via `useIdleTimeout`; the app boots unauthenticated and restores via
+  `GET /auth/me`.
+- **No secrets/tokens in `localStorage`.** Auth is an httpOnly cookie; persist only non-sensitive UI
+  prefs if needed.

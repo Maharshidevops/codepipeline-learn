@@ -1,0 +1,56 @@
+/* Shared co-located styles for the small components/form/ pieces (Phase 28 WS5). */
+
+/* FieldArrayRepeater — row layout; the main area flexes beside the per-row remove button. */
+.field-array-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.field-array-row-main {
+  flex: 1;
+}
+
+/* ResettableRadioGroup — radios + the inline reset circle on one wrapping row. */
+.resettable-radio-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.resettable-radio-row .form-check-inline {
+  flex: 0 1 auto;
+}
+
+@media (max-width: 576px) {
+  .resettable-radio-row {
+    align-items: flex-start;
+  }
+
+  .resettable-radio-row .form-check-inline {
+    flex: 1 1 calc(50% - 8px);
+    min-width: calc(50% - 8px);
+  }
+
+  .resettable-radio-row .btn-reset-inline {
+    margin-left: auto;
+  }
+}
+
+/* FileUpload — bare selected-files list under the input (items styled by research-forms.css). */
+.file-upload-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+}
+
+/* CharCountTextarea — live "n/max" counter under the textarea. */
+.char-count-counter {
+  text-align: right;
+  font-size: 12px;
+  color: var(--color-text-light, #999999);
+  margin-top: 4px;
+}

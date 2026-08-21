@@ -1,0 +1,19 @@
+/* FitOverrideSelect (F6) — inline confirm/rationale modal (portaled to <body>). */
+.modal-backdrop-inline {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--shadow-overlay);
+}
+
+.fit-override-modal {
+  width: min(440px, 92vw);
+  background: var(--bs-body-bg, #fff);
+  color: var(--bs-body-color, inherit);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-modal);
+}

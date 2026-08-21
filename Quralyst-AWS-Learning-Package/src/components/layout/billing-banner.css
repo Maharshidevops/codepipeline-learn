@@ -1,0 +1,19 @@
+/* BillingBanner (Phase 28 WS5) — layout of the severity alert's content/CTA/dismiss row.
+   The alert chrome itself (.alert / .alert-{info,warning,danger}) lives in core/alerts.css. */
+.billing-banner-content {
+  flex: 1;
+}
+
+.billing-banner-title {
+  margin-right: 6px;
+}
+
+.billing-banner-cta {
+  margin-left: 12px;
+}
+
+/* Dismiss reuses .popup-close (×) but sits inline in the banner row, not absolutely positioned. */
+.billing-banner-dismiss {
+  position: static;
+  margin-left: 12px;
+}

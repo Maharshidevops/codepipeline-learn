@@ -1,0 +1,21 @@
+/* ============================================
+   COMPONENTS CSS INDEX
+   Main entry point for component styles
+   Import this file to include all component CSS
+   ============================================ */
+
+/* Order matters - load in correct dependency order */
+@import url('./layout.css');
+/* sidebar.css is co-located with the component (Sidebar.tsx imports it) — see Phase 11. */
+@import url('./cards.css');
+@import url('./criteria-cards.css');
+@import url('./tables.css');
+@import url('./pagination.css');
+@import url('./tooltips.css');
+@import url('./dropdowns.css');
+@import url('./form-controls.css');
+@import url('./research-forms.css');
+@import url('./reload-overlay.css');
+@import url('./results-common.css');
+@import url('./tab-nav.css');
+/* progress-modal.css is co-located with the component (ProgressModal.tsx imports it) — see Phase 11. */

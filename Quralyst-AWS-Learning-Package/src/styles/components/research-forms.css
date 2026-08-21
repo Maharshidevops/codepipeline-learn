@@ -1,0 +1,205 @@
+/* ============================================
+   RESEARCH FORMS COMPONENT STYLES
+   Common styling for research form pages:
+   - quralyst_research
+   - strategic_research
+   - financial_verticals
+   ============================================ */
+
+/* Criteria Container - main form wrapper */
+.criteria-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Page top spacing now comes from the shared .main-content workspace box (Phase 24). Kept as a no-op
+   so the classname doesn't add a top margin on top of the box's padding. */
+.page-top-padding {
+  margin-top: 0;
+}
+
+/* ============================================
+   PROCEED BUTTON CONTAINER
+   ============================================ */
+
+/* Proceed button container - fixed positioning */
+.proceed-button-container {
+  align-self: flex-start;
+  min-width: fit-content;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   FILE LIST STYLING
+   ============================================ */
+
+#file-list li {
+  color: var(--color-text-white);
+  font-size: 14px;
+  margin-bottom: 6px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.file-item-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.file-item-content:before {
+  content: '📎';
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.file-item-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-remove-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 1px;
+  color: var(--color-text-white);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.file-remove-btn:hover {
+  background: var(--color-danger);
+  transform: scale(1.1);
+}
+
+/* File upload section layout fixes */
+.criteria-card.bg-deepblue .flex-grow-1 {
+  min-height: 60px;
+}
+
+#file-list {
+  max-height: 150px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+#file-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+#file-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#file-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- scrollbar-thumb micro radius — off the scale by design */
+  border-radius: 2px;
+}
+
+/* ============================================
+   FILE INPUT BUTTON STYLING
+   ============================================ */
+
+input[type='file']::-webkit-file-upload-button {
+  background: var(--color-primary);
+  color: var(--color-text-white);
+  border: none;
+  border-radius: var(--radius-xl);
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+input[type='file']::-webkit-file-upload-button:hover {
+  background: var(--color-secondary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* Firefox file input button */
+input[type='file']::file-selector-button {
+  background: var(--color-primary);
+  color: var(--color-text-white);
+  border: none;
+  border-radius: var(--radius-xl);
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+input[type='file']::file-selector-button:hover {
+  background: var(--color-secondary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* Additional file input hover states */
+input[type='file']:hover::-webkit-file-upload-button {
+  background: var(--color-secondary) !important;
+  color: var(--color-text-white) !important;
+}
+
+input[type='file']:hover::file-selector-button {
+  background: var(--color-secondary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* ============================================
+   UPLOAD SECTION STYLING
+   ============================================ */
+
+.upload-section .input-group-text {
+  background: var(--surface-raised);
+  border-color: var(--border-subtle);
+  color: var(--color-primary);
+  font-size: 16px;
+}
+
+.upload-section .form-control {
+  background: var(--surface-raised);
+  border-color: var(--border-subtle);
+  color: var(--color-primary);
+}
+
+.upload-section .form-control:focus {
+  border-color: var(--color-secondary);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off focus glow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 0 0 0.2rem rgba(125, 179, 226, 0.25);
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .criteria-container {
+    padding: 15px;
+  }
+
+  .btn-standard {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}

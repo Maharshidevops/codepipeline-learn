@@ -1,0 +1,601 @@
+/* ============================================
+   DROPDOWN COMPONENT STYLES
+   Custom dropdown selects and menus
+   ============================================ */
+
+/* Chevron arrows as custom properties (Phase 28) — colors inside a data-URI can't read CSS vars,
+   so each theme provides the URI once and every control reads it. Replaces four embedded copies
+   + the Phase-26 dark override block. */
+:root {
+  --dropdown-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  --dropdown-arrow-disabled: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23999999' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Dark: light stroke for ALL states (parity with the old Phase-26 override, which also covered
+   disabled — on dark the muted border/text carry the disabled cue, not the arrow). */
+:root[data-theme='dark'] {
+  --dropdown-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23e6e6ec' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  --dropdown-arrow-disabled: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23e6e6ec' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* ===== FORM SELECT STANDARD STYLING ===== */
+/* Override Bootstrap's default form-select to match custom dropdowns. */
+.form-select,
+select.form-select {
+  background: var(--surface-overlay, #ffffff) !important;
+  border: 1px solid var(--border-subtle, #e0e0e0) !important;
+  border-radius: var(--radius-md, 12px) !important;
+  padding: 8px 36px 8px 14px !important;
+  font-size: var(--font-size-sm, 14px);
+  font-family: var(--font-primary), sans-serif;
+  color: var(--color-text-primary, #333333);
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+  min-height: 40px;
+  max-height: 40px;
+  /* Custom dropdown arrow matching the theme */
+  background-image: var(--dropdown-arrow) !important;
+  background-position: right 12px center !important;
+  background-repeat: no-repeat !important;
+  background-size: 16px !important;
+}
+
+.form-select:hover,
+select.form-select:hover {
+  border-color: var(--border-strong, #cbd5e1) !important;
+  transform: translateY(-1px);
+}
+
+.form-select:focus,
+select.form-select:focus {
+  border-color: var(--color-link, #818cf8) !important;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.18) !important;
+  outline: none !important;
+}
+
+.form-select:disabled,
+select.form-select:disabled {
+  background-color: var(--surface-overlay) !important;
+  border-color: var(--border-subtle) !important;
+  cursor: not-allowed;
+  color: var(--color-text-secondary);
+  opacity: 0.65;
+}
+
+/* Form select small variant */
+.form-select-sm,
+select.form-select-sm {
+  min-height: 36px;
+  max-height: 36px;
+  padding: 6px 32px 6px 12px !important;
+  font-size: 13px;
+  border-radius: var(--radius-md, 12px) !important;
+}
+
+/* ============================================
+   CUSTOM + LOCATION DROPDOWNS (shared chrome)
+   ============================================ */
+
+/* Containers */
+.custom-dropdown,
+.location-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Trigger buttons — shared unified chrome */
+.custom-dropdown-btn,
+.location-dropdown-display {
+  background: var(--surface-overlay, #ffffff);
+  border: 1px solid var(--border-subtle, #e0e0e0);
+  border-radius: var(--radius-md, 12px);
+  padding: 8px 14px;
+  font-size: var(--font-size-sm, 14px);
+  font-family: var(--font-primary);
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  min-height: 40px;
+  max-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-image: var(--dropdown-arrow);
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 36px;
+  overflow: hidden;
+}
+
+/* Per-variant text color: custom shows a value; location shows placeholder until .has-value */
+.custom-dropdown-btn {
+  color: var(--color-text, #333333);
+}
+
+.location-dropdown-display {
+  color: var(--color-text-light);
+}
+
+.location-dropdown-display.has-value {
+  color: var(--color-text, #333333);
+}
+
+.custom-dropdown-btn.disabled {
+  background-color: var(--surface-overlay);
+  border-color: var(--border-subtle);
+  cursor: not-allowed;
+  color: var(--color-text-secondary);
+  background-image: var(--dropdown-arrow-disabled);
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.custom-dropdown-btn.disabled:hover {
+  background-color: var(--surface-overlay);
+  border-color: var(--border-subtle);
+  color: var(--color-text-secondary);
+}
+
+.custom-dropdown-btn span {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 8px;
+}
+
+.custom-dropdown-btn:hover:not(.disabled),
+.location-dropdown-display:hover {
+  border-color: var(--color-secondary, #7db3e2);
+}
+
+.custom-dropdown-btn:hover:not(.disabled) {
+  background-color: var(--surface-raised);
+  color: var(--color-text, #333333);
+}
+
+.custom-dropdown-btn:focus:not(.disabled),
+.location-dropdown-display:focus {
+  border-color: var(--color-primary, #282561);
+  box-shadow: 0 0 0 0.06rem var(--color-primary, #282561);
+  outline: none;
+}
+
+/* Menus — shared chrome (continent / country / state / city suggestions) */
+.custom-dropdown-content,
+.location-dropdown-content,
+.city-suggestions {
+  display: none;
+  position: absolute;
+  background-color: var(--surface-popover);
+  min-width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  border: 2px solid var(--color-primary, #282561);
+  border-radius: 10px;
+  box-shadow: var(--shadow-popover);
+  z-index: 1000;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  box-sizing: border-box;
+}
+
+.location-dropdown-content {
+  padding: 8px 0;
+}
+
+.custom-dropdown-content.show,
+.location-dropdown-content.show,
+.city-suggestions.show {
+  display: block;
+}
+
+/* Render menu above overflow:hidden ancestors (e.g. data tables); enabled via data-dropdown-portal on select */
+/* min-width:100% is relative to body here and would span the viewport — width comes from JS (trigger width) */
+.custom-dropdown-content.dropdown-portal-open {
+  position: fixed !important;
+  z-index: 990;
+  margin-top: 0;
+  min-width: unset !important;
+  box-sizing: border-box;
+}
+
+/* Items — shared chrome */
+.custom-dropdown-item,
+.location-dropdown-item,
+.city-suggestion-item {
+  color: var(--color-primary, #282561);
+  padding: 12px 16px;
+  text-decoration: none;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  border-radius: 0px;
+  background: none;
+  width: 100%;
+  text-align: left;
+  display: block;
+}
+
+.location-dropdown-item {
+  padding: 10px 16px;
+}
+
+.custom-dropdown-item:hover,
+.location-dropdown-item:hover,
+.city-suggestion-item:hover,
+.city-suggestion-item:focus {
+  background-color: var(--color-primary, #282561);
+  color: var(--color-white, #ffffff);
+  outline: none;
+}
+
+.custom-dropdown-item.selected,
+.custom-dropdown-item.active,
+.location-dropdown-item.selected,
+.city-suggestion-item.selected {
+  background-color: var(--color-secondary, #7db3e2);
+  color: var(--color-white, #ffffff);
+  font-weight: 500;
+}
+
+.custom-dropdown-item:first-child,
+.city-suggestion-item:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.custom-dropdown-item:last-child,
+.city-suggestion-item:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+/* ============================================
+   DROPDOWN SCROLLBAR STYLING (shared)
+   ============================================ */
+
+.custom-dropdown-content::-webkit-scrollbar,
+.location-dropdown-content::-webkit-scrollbar,
+.city-suggestions::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-dropdown-content::-webkit-scrollbar-track,
+.location-dropdown-content::-webkit-scrollbar-track,
+.city-suggestions::-webkit-scrollbar-track {
+  background: var(--color-secondary, #7db3e2);
+  border-radius: 3px;
+}
+
+.custom-dropdown-content::-webkit-scrollbar-thumb,
+.location-dropdown-content::-webkit-scrollbar-thumb,
+.city-suggestions::-webkit-scrollbar-thumb {
+  background: var(--color-primary, #282561);
+  border-radius: 3px;
+}
+
+.custom-dropdown-content::-webkit-scrollbar-thumb:hover,
+.location-dropdown-content::-webkit-scrollbar-thumb:hover,
+.city-suggestions::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary, #282561);
+}
+
+/* Hide original select elements when using custom dropdown */
+.industry-select,
+.sub-industry-select {
+  display: none;
+}
+
+/* ============================================
+   LOCATION DROPDOWN EXTRAS
+   Searchable cascading location dropdowns
+   ============================================ */
+
+/* Location Dropdown Search Input */
+.location-dropdown-search {
+  width: calc(100% - 16px);
+  margin: 0 8px 8px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border, #e0e0e0);
+  border-radius: var(--radius-xl);
+  font-size: 14px;
+  font-family: var(--font-primary);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.location-dropdown-search:focus {
+  border-color: var(--color-primary, #282561);
+  box-shadow: 0 0 0 0.03rem var(--color-primary, #282561);
+}
+
+.location-dropdown-search::placeholder {
+  color: var(--color-text-light);
+}
+
+/* No Results Message */
+.location-dropdown-no-results {
+  padding: 20px 16px;
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Loading State */
+.location-dropdown-loading {
+  padding: 20px 16px;
+  text-align: center;
+  color: var(--color-primary, #282561);
+  font-size: 14px;
+}
+
+.location-dropdown-loading::after {
+  content: '...';
+  animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+  0%,
+  20% {
+    content: '.';
+  }
+
+  40% {
+    content: '..';
+  }
+
+  60%,
+  100% {
+    content: '...';
+  }
+}
+
+/* Hybrid Input Indicator */
+.location-hybrid-indicator {
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-secondary, #7db3e2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--color-white, #ffffff);
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* ===== LOCATION SELECTOR STYLES ===== */
+/* Text inputs in location selector - match dropdown button exactly (40px height) */
+/* Using very high specificity selectors to override Bootstrap */
+.geo-fields-set input[type='text'],
+.geo-fields-set input.form-control,
+.geo-fields-set input.form-control.rounded-pill,
+.geo-fields-set .col-md-2 input,
+.geo-fields-set .col-md-3 input,
+.geo-fields-set .city-input-wrapper input,
+input.location-text-input {
+  /* padding: 4px 16px !important; */
+  min-height: 40px !important;
+  max-height: 40px !important;
+  height: 40px !important;
+  background: var(--surface-raised) !important;
+  border: 2px solid var(--color-border, #e0e0e0) !important;
+  border-radius: var(--radius-pill) !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease;
+  box-sizing: border-box !important;
+  line-height: 22px !important;
+}
+
+.geo-fields-set input[type='text'].form-control:hover,
+.location-text-input:hover {
+  border-color: var(--color-secondary, #7db3e2);
+}
+
+.geo-fields-set input[type='text'].form-control:focus,
+.location-text-input:focus {
+  border-color: var(--color-primary, #282561);
+  box-shadow: 0 0 0 0.06rem var(--color-primary, #282561);
+  outline: none;
+}
+
+/* City input wrapper — flex:1 so suggestions align under the City field only
+   (not the adjacent remove button in the geo row). Menu chrome comes from the
+   shared .custom-dropdown-content / .custom-dropdown-item rules above. */
+.city-input-wrapper {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.city-input-wrapper .city-suggestions {
+  right: 0;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Location dropdowns in geo-fields-set */
+.geo-fields-set .custom-dropdown {
+  width: 100%;
+}
+
+.geo-fields-set .custom-dropdown-btn {
+  width: 100%;
+}
+
+/* ============================================
+   RESPONSIVE DROPDOWN STYLES (shared)
+   Last in the file so the mobile overrides win their equal-specificity base rules.
+   ============================================ */
+
+@media (max-width: 768px) {
+  .custom-dropdown-btn,
+  .location-dropdown-display {
+    font-size: 14px;
+    padding: 10px 14px;
+    min-height: 44px;
+    max-height: 44px;
+    background-size: 14px;
+    background-position: right 10px center;
+    padding-right: 35px;
+  }
+
+  .custom-dropdown-btn span {
+    padding-right: 6px;
+  }
+
+  .custom-dropdown-item,
+  .city-suggestion-item {
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+
+  .location-dropdown-item {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+
+  .custom-dropdown-content,
+  .location-dropdown-content,
+  .city-suggestions {
+    max-height: 250px;
+  }
+
+  .location-dropdown-search {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+/* ── Unified Dark Theme Dropdown Overrides ──────────────────────────────── */
+:root[data-theme='dark'] .custom-dropdown-btn,
+:root[data-theme='dark'] .location-dropdown-display,
+:root[data-theme='dark'] .form-select,
+:root[data-theme='dark'] select.form-select {
+  background-color: var(--surface-overlay, #2e3344) !important;
+  color: var(--color-text-primary, #f3f4f6) !important;
+  border: 1px solid var(--border-subtle, #33394b) !important;
+  border-radius: var(--radius-md, 12px) !important;
+}
+
+:root[data-theme='dark'] .custom-dropdown-btn:hover:not(.disabled),
+:root[data-theme='dark'] .location-dropdown-display:hover,
+:root[data-theme='dark'] .form-select:hover {
+  border-color: var(--border-strong, #475569) !important;
+  background-color: var(--surface-hover, #373d52) !important;
+  transform: translateY(-1px);
+}
+
+:root[data-theme='dark'] .custom-dropdown-btn:focus:not(.disabled),
+:root[data-theme='dark'] .location-dropdown-display:focus,
+:root[data-theme='dark'] .form-select:focus {
+  border-color: var(--color-link, #818cf8) !important;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.18) !important;
+}
+
+:root[data-theme='dark'] .custom-dropdown-content,
+:root[data-theme='dark'] .location-dropdown-content,
+:root[data-theme='dark'] .city-suggestions {
+  background-color: var(--surface-raised, #242836) !important;
+  border: 1px solid var(--border-subtle, #33394b) !important;
+  border-radius: var(--radius-md, 12px) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+:root[data-theme='dark'] .custom-dropdown-item,
+:root[data-theme='dark'] .location-dropdown-item,
+:root[data-theme='dark'] .city-suggestion-item {
+  color: var(--color-text-primary, #f3f4f6) !important;
+  border-radius: var(--radius-sm, 8px) !important;
+}
+
+:root[data-theme='dark'] .custom-dropdown-item:hover,
+:root[data-theme='dark'] .custom-dropdown-item.selected,
+:root[data-theme='dark'] .custom-dropdown-item.active,
+:root[data-theme='dark'] .location-dropdown-item:hover,
+:root[data-theme='dark'] .city-suggestion-item:hover {
+  background-color: rgba(99, 102, 241, 0.14) !important;
+  color: var(--color-link, #818cf8) !important;
+}
+
+/* Top Searchbar inside custom dropdown popover */
+.custom-dropdown-search {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-subtle, #e2e8f0);
+  background: var(--surface-overlay, #ffffff);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+:root[data-theme='dark'] .custom-dropdown-search {
+  border-bottom-color: var(--border-subtle, #334158);
+  background: var(--surface-overlay, #29344a);
+}
+
+.custom-dropdown-search__box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.custom-dropdown-search__icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: var(--color-text-secondary, #94a3b8);
+  pointer-events: none;
+}
+
+.custom-dropdown-search__input {
+  width: 100%;
+  height: 32px;
+  font-size: 13px;
+  padding: 0 10px 0 30px;
+  border: 1px solid var(--border-subtle, #cbd5e1);
+  border-radius: var(--radius-md, 8px);
+  background: var(--surface-raised, #ffffff);
+  color: var(--color-text-primary, #0f172a);
+}
+
+:root[data-theme='dark'] .custom-dropdown-search__input {
+  border-color: var(--border-subtle, #33394b);
+  background: var(--surface-base, #1a1d24);
+  color: var(--color-text-primary, #f3f4f6);
+}
+
+.custom-dropdown-search__input:focus {
+  outline: none;
+  border-color: var(--color-link, #818cf8);
+  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.2);
+}
+
+.custom-dropdown-empty {
+  color: var(--color-text-secondary, #94a3b8);
+  font-size: 13px;
+}

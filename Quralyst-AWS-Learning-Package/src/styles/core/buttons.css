@@ -1,0 +1,473 @@
+/* ============================================
+   BUTTONS
+   Core Button Styles
+   ============================================ */
+
+:root {
+  /* Button Sizing */
+  --btn-padding-y: 6px;
+  --btn-padding-x: 24px;
+  --btn-radius: var(--radius-xl);
+  --btn-radius-pill: var(--radius-pill);
+
+  /* Button Transitions */
+  --btn-transition: all 0.2s ease;
+}
+
+/* ===== STANDARD BUTTON ===== */
+/* Use this class for consistent button styling across the application */
+/* Uses !important to override Bootstrap's .btn class defaults */
+.btn-standard,
+.btn.btn-standard {
+  background: var(--color-primary, #6366f1) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--color-primary, #6366f1) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 6px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-standard:hover,
+.btn.btn-standard:hover {
+  background: #4f46e5 !important;
+  border-color: #4f46e5 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-standard:focus-visible,
+.btn.btn-standard:focus-visible {
+  background: #4f46e5 !important;
+  color: #ffffff !important;
+}
+
+.btn-standard:active,
+.btn.btn-standard:active {
+  background: #4338ca !important;
+  transform: translateY(1px);
+}
+
+.btn-standard:disabled,
+.btn.btn-standard:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-standard.btn-sm,
+.btn.btn-standard.btn-sm {
+  padding: 4px 14px;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
+/* ===== OUTLINE STANDARD ===== */
+.btn-outline-standard,
+.btn.btn-outline-standard {
+  background: var(--surface-raised, #ffffff) !important;
+  color: var(--color-text-primary, #1e293b) !important;
+  border: 1px solid var(--border-subtle, #e2e8f0) !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 6px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-outline-standard:hover,
+.btn.btn-outline-standard:hover {
+  background: var(--surface-hover, #f0f8ff) !important;
+  border-color: var(--color-primary, #6366f1) !important;
+  color: var(--color-primary, #6366f1) !important;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.12);
+}
+
+.btn-outline-standard:focus-visible,
+.btn.btn-outline-standard:focus-visible {
+  background: var(--surface-hover, #f0f8ff) !important;
+  border-color: var(--color-primary, #6366f1) !important;
+  color: var(--color-primary, #6366f1) !important;
+}
+
+.btn-outline-standard:active,
+.btn.btn-outline-standard:active {
+  background: var(--surface-accent, #e8f4fc) !important;
+  border-color: var(--color-primary, #6366f1) !important;
+  color: var(--color-primary, #6366f1) !important;
+  transform: translateY(1px);
+}
+
+.btn-outline-standard:disabled,
+.btn.btn-outline-standard:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-outline-standard.btn-sm,
+.btn.btn-outline-standard.btn-sm {
+  padding: 4px 14px;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
+/* ── Dark Mode Overrides for Outline Standard (Preserves Dark Mode Exactly) ── */
+:root[data-theme='dark'] .btn-outline-standard,
+:root[data-theme='dark'] .btn.btn-outline-standard {
+  background: var(--surface-overlay, #29344a) !important;
+  color: var(--color-text-primary, #f8fafc) !important;
+  border: 1px solid var(--border-subtle, #334158) !important;
+}
+
+:root[data-theme='dark'] .btn-outline-standard:hover,
+:root[data-theme='dark'] .btn.btn-outline-standard:hover {
+  background: var(--surface-hover, #33415a) !important;
+  border-color: #475569 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+:root[data-theme='dark'] .btn-outline-standard:focus-visible,
+:root[data-theme='dark'] .btn.btn-outline-standard:focus-visible {
+  background: var(--color-secondary, #7db3e2) !important;
+  border-color: var(--color-secondary, #7db3e2) !important;
+  color: var(--color-text-white, #ffffff) !important;
+}
+
+/* Danger outline — same shape as standard, red tone for destructive actions */
+.btn-outline-danger.btn-standard-shape,
+.btn.btn-outline-danger.btn-standard-shape {
+  border-radius: var(--btn-radius, 30px) !important;
+  font-weight: var(--font-weight-medium, 500);
+  padding: var(--btn-padding-y, 6px) var(--btn-padding-x, 24px);
+}
+
+.btn-outline-danger.btn-standard-shape.btn-sm,
+.btn.btn-outline-danger.btn-standard-shape.btn-sm {
+  padding: 4px 14px;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+
+/* ===== AUTH BUTTON ===== */
+/* Used in login/signup forms - pill shaped variant */
+.auth-button {
+  background: var(--color-primary, #282561);
+  color: var(--color-text-white, #ffffff);
+  border: none;
+  border-radius: var(--btn-radius-pill);
+  padding: 16px 0;
+  font-size: var(--font-size-md, 18px);
+  font-weight: var(--font-weight-semibold, 600);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 10px;
+}
+
+.auth-button:hover {
+  background: var(--color-secondary, #7db3e2);
+  color: var(--color-text-white, #ffffff);
+}
+
+/* ===== DELETE BUTTON ===== */
+/* Delete icon button - transparent style */
+.delete-icon-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.delete-icon-btn:hover,
+.delete-icon-btn:focus {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Delete link in action buttons */
+.delete-link {
+  color: var(--color-danger);
+  background: transparent;
+  border: 1px solid var(--color-danger);
+}
+
+.delete-link:hover {
+  background: var(--color-danger);
+  color: var(--color-white);
+}
+
+/* ===== ACTION BUTTON ===== */
+/* For buttons that need z-index priority */
+.action-btn {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* ===== POPUP BUTTONS ===== */
+/* Used in modal popups */
+.popup-btn {
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius-pill);
+  font-size: var(--font-size-base, 16px);
+  font-weight: var(--font-weight-medium, 500);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.popup-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.popup-btn-primary {
+  background: var(--color-primary, #282561);
+  color: var(--color-text-white, #ffffff);
+  border-color: var(--color-primary, #282561);
+}
+
+.popup-btn-primary:hover {
+  background: var(--color-secondary, #7db3e2);
+  color: var(--color-text-white, #ffffff);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.popup-btn-secondary {
+  background: var(--surface-raised, #ffffff);
+  color: var(--color-text-primary, #1e293b);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+}
+
+.popup-btn-secondary:hover {
+  background: var(--surface-hover, #f8fafc);
+  border-color: var(--color-primary, #6366f1);
+  color: var(--color-primary, #6366f1);
+  box-shadow: var(--shadow-subtle, 0 2px 8px rgba(0, 0, 0, 0.08));
+}
+
+:root[data-theme='dark'] .popup-btn-secondary {
+  background: var(--surface-overlay, #1e293b);
+  color: var(--color-text-primary, #f8fafc);
+  border: 1px solid var(--border-subtle, #334158);
+}
+
+:root[data-theme='dark'] .popup-btn-secondary:hover {
+  background: var(--surface-hover, #33415a);
+  border-color: #475569;
+  color: #ffffff;
+}
+
+/* ===== STOP PROCESSING BUTTON ===== */
+/* Special button for stopping processing operations */
+.btn-stop-processing {
+  background: var(--color-danger);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--btn-radius);
+  padding: 8px 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--btn-transition);
+}
+
+.btn-stop-processing:hover {
+  background: var(--color-danger-hover);
+}
+
+/* ===== RESET INLINE BUTTON ===== */
+/* Small circular reset button for inline placement (e.g., next to radio groups) */
+/* Navy blue styling with refresh/reset icon, matches snapshot design */
+.btn-reset-inline {
+  background: transparent;
+  border: 1px solid #e85a5a;
+  color: #e85a5a;
+  padding: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--btn-transition, all 0.2s ease);
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 2px 6px rgba(40, 37, 97, 0.3);
+}
+
+.btn-reset-inline:hover {
+  background: var(--color-secondary, #7db3e2);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red, predates token system; candidate for tokenizing later */
+  color: #e85a5a;
+  transform: scale(1.05);
+}
+
+.btn-reset-inline:active {
+  transform: scale(0.95);
+}
+
+.btn-reset-inline:focus {
+  outline: none;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off focus glow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 0 0 2px rgba(40, 37, 97, 0.3);
+}
+
+/* ===== CLEAR ALL BUTTON ===== */
+/* Coral-red circular icon-only button for clear all actions */
+/* Shows tooltip on hover */
+.btn-clear-all {
+  background: transparent;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red, predates token system; candidate for tokenizing later */
+  color: #e85a5a;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red, predates token system; candidate for tokenizing later */
+  border: 1.5px solid #e85a5a;
+  border-radius: 50%;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  font-size: 1.125rem;
+  line-height: 1;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: var(--btn-transition, all 0.2s ease);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-clear-all > i {
+  display: block;
+  line-height: 1;
+  font-size: inherit;
+  /* Optical balance: bi-x-lg sits a hair high in the circle */
+  transform: translateY(0.5px);
+}
+
+.btn-clear-all:hover {
+  background: var(--color-secondary, #7db3e2);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red (hover), predates token system; candidate for tokenizing later */
+  color: #d64545;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red (hover), predates token system; candidate for tokenizing later */
+  border-color: #d64545;
+}
+
+.btn-clear-all:active {
+  transform: scale(0.95);
+}
+
+.btn-clear-all:focus {
+  outline: none;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral-red focus glow, deliberate one-off (Phase 28) */
+  box-shadow: 0 0 0 2px rgba(232, 90, 90, 0.2);
+}
+
+.btn-clear-all:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== CLEAR ALL BUTTON WITH TEXT ===== */
+/* Coral-red bordered button with trash icon and text for clear all actions */
+.btn-clear-all-text {
+  background: transparent;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red, predates token system; candidate for tokenizing later */
+  color: #e85a5a;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red, predates token system; candidate for tokenizing later */
+  border: 1.5px solid #e85a5a;
+  border-radius: var(--btn-radius-pill, 50px);
+  padding: 8px 16px;
+  font-size: var(--font-size-sm, 14px);
+  font-weight: var(--font-weight-medium, 500);
+  cursor: pointer;
+  transition: var(--btn-transition, all 0.2s ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-clear-all-text:hover {
+  background: rgba(232, 90, 90, 0.1);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red (hover), predates token system; candidate for tokenizing later */
+  color: #d64545;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral delete red (hover), predates token system; candidate for tokenizing later */
+  border-color: #d64545;
+}
+
+.btn-clear-all-text:active {
+  transform: scale(0.98);
+}
+
+.btn-clear-all-text:focus {
+  outline: none;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- coral-red focus glow, deliberate one-off (Phase 28) */
+  box-shadow: 0 0 0 2px rgba(232, 90, 90, 0.2);
+}
+
+.btn-clear-all-text:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* Bare-button reset (Phase 28) — for icon/toggle buttons that carry their own styling. */
+.btn-unstyled {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ===== SCOPE TABS ===== */
+/* Navy pair matching Previous Results "+ New Target" (rep-pr-btn-primary).
+   No hover color shift — active vs inactive is the only state change. */
+.scope-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.scope-tabs__btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  border-radius: 0.5rem;
+  border: 1px solid var(--brand-navy, #282561);
+  background: var(--brand-navy, #282561);
+  color: var(--color-white, #ffffff);
+  cursor: pointer;
+}
+
+.scope-tabs__btn:hover,
+.scope-tabs__btn:focus,
+.scope-tabs__btn:focus-visible,
+.scope-tabs__btn:active {
+  background: var(--brand-navy, #282561);
+  border-color: var(--brand-navy, #282561);
+  color: var(--color-white, #ffffff);
+  box-shadow: none;
+  outline: none;
+}

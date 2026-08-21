@@ -1,0 +1,533 @@
+/* Enhanced Progress Modal Styles */
+.progress-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+}
+
+/* d-none Bootstrap class handles hiding */
+
+.progress-modal-content {
+  background: var(--surface-modal);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  max-width: 450px;
+  width: 90%;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+  text-align: center;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.progress-title {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: left;
+}
+
+/* Cycling Image Section */
+.progress-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  min-height: 200px;
+}
+
+.progress-cycling-image {
+  max-width: 430px;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Cycling Heading Section */
+.progress-heading-container {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  min-height: 2rem;
+}
+
+.progress-cycling-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Cycling Summary Section */
+.progress-summary-container {
+  text-align: center;
+  margin-bottom: 1rem;
+  min-height: 3rem;
+  padding: 0 1rem;
+}
+
+.progress-cycling-summary {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Smooth Fade Transitions for Cycling Content */
+.cycling-fade-out {
+  opacity: 0 !important;
+}
+
+.cycling-fade-in {
+  opacity: 1 !important;
+}
+
+/* Linear Progress Section */
+.progress-linear-section {
+  margin-bottom: 0.75rem;
+}
+
+/* Stage log (title + subtitle under progress bar) */
+.progress-log-section {
+  text-align: center;
+  margin-top: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.progress-log-title {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  line-height: 1.35;
+  min-height: 1.15em;
+  margin: 0;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.progress-log-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.35;
+  min-height: 1.1em;
+  margin: 0.2rem 0 0;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.progress-percentage-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.progress-percentage-label .percentage-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+/* Linear Progress Bar */
+.progress-bar-container {
+  width: 100%;
+  height: 12px;
+  background: var(--color-primary);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-secondary);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* File Stats Section */
+.file-stats-section {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.file-stats-text {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+/* Progress Actions */
+.progress-actions {
+  text-align: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-actions .btn-stop-processing {
+  background: var(--color-danger) !important;
+}
+
+.progress-actions .btn-stop-processing:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- deliberate one-off, predates token system (Phase 28) */
+  background: #ff6b6b !important;
+}
+
+/* Progress Modal Completed State */
+.progress-modal.completed .progress-bar-fill {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.progress-modal.completed .progress-title {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  color: #22c55e;
+}
+
+.progress-modal.completed .percentage-text,
+.progress-modal.completed .stage-text {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  color: #22c55e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .progress-modal-content {
+    padding: 1.25rem 1.5rem;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+    max-width: none;
+  }
+
+  .progress-cycling-image {
+    max-width: 120px;
+    max-height: 120px;
+  }
+
+  .progress-percentage-label .percentage-text {
+    font-size: 1.25rem;
+  }
+
+  .progress-percentage-label .stage-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* Custom Scrollbar for Progress Modal */
+.progress-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.progress-modal-content::-webkit-scrollbar-track {
+  background: var(--surface-overlay);
+  border-radius: 3px;
+}
+
+.progress-modal-content::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+
+.progress-modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-light);
+}
+
+/* ================================ */
+/* Legacy Styles - Kept for compatibility */
+/* ================================ */
+
+.progress-status-section {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.progress-subtitle {
+  color: var(--color-primary);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.progress-row-info {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+}
+
+.progress-file-section {
+  background: var(--surface-overlay);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.current-file-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-icon {
+  font-size: 2rem;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  color: #3498db;
+}
+
+.file-info {
+  flex: 1;
+}
+
+.file-label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.file-name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  word-break: break-all;
+  line-height: 1.3;
+}
+
+/* Connection status - kept for WebSocket fallback display */
+.connection-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  padding: 0.5rem;
+  background: var(--surface-overlay);
+  border-radius: var(--radius-sm);
+}
+
+.connection-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: connectionPulse 2s infinite;
+}
+
+.connection-dot.connected {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  background: #27ae60;
+  animation: none;
+}
+
+.connection-dot.disconnected {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  background: #e74c3c;
+}
+
+.connection-dot.fallback {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  background: #f39c12;
+}
+
+.connection-dot.connecting {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  background: #3498db;
+}
+
+@keyframes connectionPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* File upload enhancements */
+.file-item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  background: var(--surface-overlay);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+}
+
+.file-item-name {
+  color: var(--color-text-primary);
+  font-weight: 500;
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.file-remove-btn {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  background: #e74c3c;
+  color: var(--color-text-white, #ffffff);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.file-remove-btn:hover {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  background: #c0392b;
+}
+
+/* Stage breakdown - kept for potential future use */
+.stage-breakdown {
+  width: 100%;
+  max-width: 450px;
+}
+
+.stage-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.stage-item.waiting {
+  background: var(--surface-overlay);
+  border-left: 4px solid var(--border-strong);
+}
+
+.stage-item.active {
+  background: var(--surface-accent);
+  border-left: 4px solid #3498db;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- status glow, deliberate one-off */
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+}
+
+.stage-item.completed {
+  background: var(--color-success-bg);
+  border-left: 4px solid #27ae60;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- status glow, deliberate one-off */
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.2);
+}
+
+.stage-name {
+  font-weight: 600;
+  color: var(--color-text-primary);
+  min-width: 140px;
+  font-size: 0.9rem;
+}
+
+.stage-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--surface-overlay);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stage-progress-fill {
+  height: 100%;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  background: #3498db;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  width: 0%;
+  position: relative;
+}
+
+.stage-item.completed .stage-progress-fill {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  background: #27ae60;
+}
+
+.stage-item.active .stage-progress-fill {
+  background: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+.stage-status {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  min-width: 85px;
+  text-align: right;
+  font-weight: 500;
+}
+
+.stage-item.active .stage-status {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  color: #3498db;
+}
+
+.stage-item.completed .stage-status {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- legacy status accent, predates token system; tokenizing is a follow-up */
+  color: #27ae60;
+}
+
+/* Progress actions section */
+.progress-actions-section {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+}

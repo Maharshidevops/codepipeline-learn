@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CodeBuildLogs",
+      "Effect": "Allow",
+      "Action": ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
+      "Resource": "arn:aws:logs:REGION:ACCOUNT_ID:log-group:/aws/codebuild/quralyst-frontend-personal*"
+    },
+    {
+      "Sid": "PipelineArtifactBucket",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:GetObjectVersion", "s3:PutObject", "s3:GetBucketLocation"],
+      "Resource": [
+        "arn:aws:s3:::PIPELINE_ARTIFACT_BUCKET",
+        "arn:aws:s3:::PIPELINE_ARTIFACT_BUCKET/*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+/* Modal + CellModal (Phase 28 WS5) — shared co-located styles for the ui/Modal folder. */
+
+/* Generic Modal dialog width; max-width stays inline (driven by the `size` prop). */
+.app-modal-box {
+  width: 90%;
+
+  /* F65 — bound the dialog to the viewport and scroll its body.
+     `.popup-box` (core/alerts.css) sets padding but NO max-height, and `.popup-overlay` centres
+     with flex. A tall body — a 200-row bulk-import result list, a long confirm — therefore grew
+     the box past the viewport and overflowed off BOTH edges equally: the dialog looked
+     edge-to-edge with no top/bottom padding, and its footer button became unreachable.
+     Scoped to `.app-modal-box` (this component) rather than `.popup-box` so the legacy alert
+     popups in alerts.css are untouched. */
+  max-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+}
+
+/* The scroll container. `min-height: 0` is required — a flex child defaults to `min-height: auto`,
+   which refuses to shrink below its content and would silently defeat the max-height above. */
+.app-modal-box > .popup-message {
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* CellModal close is a real <button> (a11y, Phase 17); .btn-unstyled resets the UA chrome and
+   this keeps the ×-glyph in the surrounding font (UA buttons force their own font-family). */
+.cell-modal-close {
+  font-family: inherit;
+}

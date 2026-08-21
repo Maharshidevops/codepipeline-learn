@@ -1,0 +1,535 @@
+/* ============================================
+   TABLE COMPONENT STYLES
+   Unified table styling for all tables across the application
+   ============================================ */
+
+/* ===== TABLE TITLE ===== */
+.table-title {
+  color: var(--color-primary, #282561);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 0px;
+  line-height: 1.2;
+}
+
+.table-title .badge {
+  background-color: var(--color-secondary, #7db3e2);
+  color: var(--color-white, #ffffff);
+  font-size: 14px;
+  padding: 1rem 1rem;
+  margin-bottom: 8px;
+  margin-left: 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* ===== BASE TABLE STYLING ===== */
+.table,
+.unified-table,
+table {
+  border-radius: 0px;
+  overflow: hidden;
+  background: var(--surface-raised);
+  margin-bottom: 0;
+  table-layout: auto;
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  box-shadow: none;
+}
+
+/* ===== HEADER STYLING ===== */
+.table thead th,
+.unified-table thead th,
+table thead th,
+.preview-input-table thead th,
+.input-preview-table thead th,
+#inputFileTable thead th,
+.results-table thead th {
+  background: var(--surface-overlay, #f8f9fa) !important;
+  color: var(--color-text-secondary, #666) !important;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border: none !important;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb) !important;
+  font-weight: 500 !important;
+  font-size: 0.8125rem !important;
+  padding: 0.5rem 0.75rem !important;
+  text-align: left;
+  white-space: nowrap;
+  letter-spacing: normal;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  vertical-align: middle;
+  opacity: 1 !important;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* ===== CELL STYLING ===== */
+.table td,
+.unified-table td,
+table td,
+.preview-input-table td,
+.input-preview-table td,
+#inputFileTable td,
+.results-table td {
+  vertical-align: middle;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+  cursor: default;
+  transition: background-color 0.15s ease;
+  color: var(--color-text-primary, #333);
+  background: transparent;
+}
+
+/* ===== HOVER EFFECTS ===== */
+.table tbody tr:hover td,
+.unified-table tbody tr:hover td,
+table tbody tr:hover td,
+.table td:hover,
+.unified-table td:hover,
+table td:hover {
+  background-color: color-mix(in srgb, var(--surface-overlay, #f8f9fa) 50%, transparent) !important;
+  cursor: default;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.table td.clickable-cell,
+table td.clickable-cell,
+.clickable-cell {
+  cursor: pointer !important;
+}
+
+.table td.clickable-cell:hover,
+table td.clickable-cell:hover,
+.clickable-cell:hover {
+  background-color: var(--surface-overlay, rgba(0, 0, 0, 0.04)) !important;
+}
+
+/* Keyboard focus on an expandable cell */
+.clickable-cell:focus-visible {
+  outline: 2px solid var(--color-border-focus, #282561);
+  outline-offset: -2px;
+  background-color: var(--surface-hover, rgba(0, 0, 0, 0.03));
+}
+
+/* ===== ALTERNATING ROW COLORS ===== */
+.table tbody tr:nth-child(even),
+.unified-table tbody tr:nth-child(even),
+table tbody tr:nth-child(even),
+.table tbody tr:nth-child(odd),
+.unified-table tbody tr:nth-child(odd),
+table tbody tr:nth-child(odd) {
+  background-color: transparent;
+}
+
+/* ===== TABLE CONTAINERS ===== */
+.table-responsive {
+  border: 1px solid var(--border-strong);
+  border-radius: 0px;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 500px;
+  width: 100%;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: var(--surface-raised);
+}
+
+/* Enable sticky headers inside table-responsive */
+.table-responsive
+  table:not(.deal-table):not(.rd-table):not(.fv-table):not(.pef-table):not(.peh-table):not(
+    .pep-table
+  ):not(.pfd-table):not(.pew-table):not(.mm-table):not(.pean-table)
+  thead,
+.table-responsive
+  table:not(.deal-table):not(.rd-table):not(.fv-table):not(.pef-table):not(.peh-table):not(
+    .pep-table
+  ):not(.pfd-table):not(.pew-table):not(.mm-table):not(.pean-table)
+  thead
+  th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table-container {
+  max-height: 500px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-raised);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Enable sticky headers inside table-container */
+.table-container
+  table:not(.deal-table):not(.rd-table):not(.fv-table):not(.pef-table):not(.peh-table):not(
+    .pep-table
+  ):not(.pfd-table):not(.pew-table):not(.mm-table):not(.pean-table)
+  thead,
+.table-container
+  table:not(.deal-table):not(.rd-table):not(.fv-table):not(.pef-table):not(.peh-table):not(
+    .pep-table
+  ):not(.pfd-table):not(.pew-table):not(.mm-table):not(.pean-table)
+  thead
+  th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Ensure no borders between cells */
+.table:not(.deal-table):not(.rd-table):not(.fv-table):not(.pef-table):not(.peh-table):not(
+    .pep-table
+  ):not(.pfd-table):not(.pew-table):not(.mm-table):not(.pean-table)
+  tbody
+  td,
+.unified-table tbody td,
+table:not(.deal-table):not(.rd-table):not(.fv-table):not(.pef-table):not(.peh-table):not(
+    .pep-table
+  ):not(.pfd-table):not(.pew-table):not(.mm-table):not(.pean-table)
+  tbody
+  td {
+  border: none !important;
+}
+
+/* ===== UNIVERSAL TABLE CLASS ===== */
+.universal-table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.universal-table th,
+.universal-table td {
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+}
+
+/* ===== SPECIAL COLUMN SIZING ===== */
+/* Removed special sizing - all columns now have equal width */
+.rationale-column,
+.description-column {
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+}
+
+/* ===== BOOTSTRAP OVERRIDES ===== */
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: var(--surface-raised) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) {
+  background-color: var(--surface-stripe) !important;
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: var(--surface-hover) !important;
+}
+
+.table-bordered > :not(caption) > * > * {
+  border: none !important;
+}
+
+.table-preview {
+  margin-bottom: 2rem;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR STYLES
+   Applied to all table containers globally
+   ============================================ */
+
+/* Webkit (Chrome, Safari, Edge) */
+.table-container::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.table-container::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
+  background: var(--surface-overlay);
+  border-radius: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
+  background: var(--color-primary, #282561);
+  border-radius: 6px;
+  border: 2px solid var(--surface-overlay);
+}
+
+.table-container::-webkit-scrollbar-thumb:hover,
+.table-responsive::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-hover);
+}
+
+.table-container::-webkit-scrollbar-corner,
+.table-responsive::-webkit-scrollbar-corner {
+  background: var(--surface-overlay);
+}
+
+/* Firefox scrollbar */
+.table-container,
+.table-responsive {
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-primary, #282561) var(--surface-overlay);
+}
+
+/* ============================================
+   CELL MODAL STYLES
+   ============================================ */
+
+.cell-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.cell-modal-content {
+  background-color: var(--surface-modal);
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 70vh;
+  overflow-y: auto;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off modal shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.cell-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-primary, #23235f);
+}
+
+.cell-modal-title {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.cell-modal-close {
+  color: var(--color-text-light);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  margin-left: 15px;
+}
+
+.cell-modal-close:hover,
+.cell-modal-close:focus {
+  color: var(--color-text-primary);
+}
+
+.cell-modal-body {
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* ============================================
+   COMMENT CELL STYLES
+   Styles for inline comment editing in tables
+   ============================================ */
+
+/* Comment cell base styling */
+.comment-cell {
+  cursor: pointer !important;
+  background-color: var(--surface-overlay) !important;
+  transition: all 0.2s ease;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  height: auto !important;
+  min-height: 50px;
+  max-width: 220px;
+  vertical-align: top !important;
+}
+
+.comment-cell:hover {
+  background-color: var(--surface-hover) !important;
+  box-shadow: inset 0 0 0 2px var(--color-secondary, #7db3e2);
+}
+
+/* Placeholder state for empty comments */
+.comment-cell-placeholder {
+  color: var(--color-text-light) !important;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+/* Comment text display */
+.comment-cell .comment-text {
+  color: var(--color-text-primary);
+  font-style: normal;
+  display: inline;
+}
+
+.comment-cell .comment-author {
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-left: 4px;
+}
+
+/* Editing state */
+.comment-cell-editing {
+  padding: 8px !important;
+  background-color: var(--surface-raised) !important;
+  box-shadow: inset 0 0 0 2px var(--color-primary, #282561) !important;
+}
+
+/* Comment editor container */
+.comment-editor-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Comment textarea */
+.comment-textarea {
+  width: 100% !important;
+  min-height: 70px !important;
+  max-height: 120px;
+  resize: vertical;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xs);
+  padding: 8px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.comment-textarea:focus {
+  border-color: var(--color-secondary, #7db3e2);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off focus glow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 0 0 2px rgba(125, 179, 226, 0.25);
+  outline: none;
+}
+
+/* Comment button group */
+.comment-btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+/* Comment buttons */
+.btn-comment-save,
+.btn-comment-cancel {
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: var(--radius-xs);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-comment-save {
+  background-color: var(--color-primary, #282561);
+  color: var(--color-text-white);
+}
+
+.btn-comment-save:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-comment-save:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-comment-cancel {
+  background-color: var(--border-subtle);
+  color: var(--color-text-primary);
+}
+
+.btn-comment-cancel:hover {
+  background-color: var(--border-strong);
+}
+
+/* Comment toast notification */
+.comment-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  z-index: 10000;
+  animation: slideInRight 0.3s ease;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off toast shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.comment-toast-error {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+  border-left: 4px solid var(--color-danger);
+}
+
+.comment-toast-hide {
+  animation: slideOutRight 0.3s ease forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}

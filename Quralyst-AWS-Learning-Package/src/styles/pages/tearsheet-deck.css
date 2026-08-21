@@ -1,0 +1,72 @@
+/* Tearsheet deck — keep tables inside the 16:9 slide (no horizontal scroll). */
+
+.tearsheet-deck .tearsheet-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.tearsheet-deck .tearsheet-table {
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.tearsheet-deck .tearsheet-table th,
+.tearsheet-deck .tearsheet-table td {
+  padding: 0.4rem 0.5rem;
+  vertical-align: top;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  hyphens: auto;
+  border-color: var(--border-subtle);
+}
+
+.tearsheet-deck .tearsheet-table thead th {
+  background: var(--brand-navy, #282561);
+  color: var(--color-text-white, #fff);
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tearsheet-deck .tearsheet-table tbody td {
+  color: var(--color-text-primary);
+}
+
+.tearsheet-deck .tearsheet-table tbody tr:nth-child(even) {
+  background: var(--surface-stripe);
+}
+
+.tearsheet-slide-title .tearsheet-brand-logo {
+  position: absolute;
+  top: 1.75rem;
+  right: 2.25rem;
+  height: 2.25rem;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.tearsheet-slide-title .tearsheet-brand-mark {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 2rem;
+  height: 1.35rem;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.35;
+}
+
+/* Export mode: html2canvas should never see scrollable overflow. */
+.tearsheet-deck[data-exporting='true'] .tearsheet-table-wrap,
+.tearsheet-deck[data-exporting='true'] .overflow-hidden,
+.tearsheet-deck[data-exporting='true'] [data-tearsheet-slide] {
+  overflow: visible !important;
+}

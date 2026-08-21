@@ -1,0 +1,16 @@
+/* ============================================
+   BILLING STATUS PAGES
+   Checkout success/cancel + invite accept/invalid. Layout/spacing come from
+   Bootstrap utilities; this file only holds the page-owned bits that were
+   inline style props before Phase 28 WS5.
+   ============================================ */
+
+/* Hero icon on the invite pages. */
+.billing-status-icon {
+  font-size: 3rem;
+}
+
+/* Larger hero icon on the checkout result pages. */
+.billing-status-icon--lg {
+  font-size: 4rem;
+}

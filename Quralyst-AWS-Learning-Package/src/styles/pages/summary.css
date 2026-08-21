@@ -1,0 +1,484 @@
+/* ============================================
+   SUMMARY PAGE STYLES
+   Page-specific styles for summary.html
+   ============================================ */
+
+.summary-page {
+  min-height: 100vh;
+  padding-left: 45px;
+  padding-right: 45px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Header Section - Title and Back Button */
+.summary-header {
+  margin-bottom: 1.5rem;
+}
+
+.summary-header-title {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+/* Tabs */
+.nav-tabs {
+  border-bottom: none;
+  background: var(--color-bg-gray); /* Replaced #E2E8F0 */
+  padding: 5px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: var(--color-secondary);
+  color: var(--color-text-white);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+  background-color: var(--color-border-light); /* Replaced #cbd5e1 */
+}
+
+/* Override criteria-card for summary page cards */
+.summary-page .criteria-card {
+  height: 100%;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+/* Card Title */
+.summary-page .card-title {
+  color: var(--color-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* Criteria Card Text */
+.criteria-text {
+  color: var(--color-text-black);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Overflow containment for card content */
+.summary-page .criteria-card > * {
+  max-width: 100%;
+}
+
+.summary-page .criteria-card p,
+.summary-page .criteria-card span,
+.summary-page .criteria-card div {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.summary-page .criteria-card table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.summary-page .criteria-card td,
+.summary-page .criteria-card th {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.match-summary-text {
+  font-weight: 500;
+  color: var(--color-text-black);
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.match-summary-text small {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 400;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+/* Charts & Visuals */
+.chart-container {
+  min-height: 220px;
+}
+
+/* Progress Bars for Contacts */
+.contact-stat-item {
+  margin-bottom: 1rem;
+}
+
+.contact-stat-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.contact-stat-count {
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.progress-custom {
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-gray); /* Replaced #e2e8f0 */
+  overflow: hidden;
+  display: flex;
+  border: none;
+}
+
+.progress-bar-custom {
+  background-color: var(--color-secondary);
+  border-radius: 0;
+  border: none;
+}
+
+.progress-bar-custom-dark {
+  background-color: var(--color-primary);
+  border-radius: 0;
+  border: none;
+}
+
+/* Distribution Tables */
+.dist-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.dist-table th {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-bottom: 2px solid var(--color-border-light);
+  padding-bottom: 0.75rem;
+}
+
+.dist-table td {
+  padding: 0.5rem 0;
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-bg-gray);
+  vertical-align: middle;
+  font-size: 0.85rem;
+}
+
+.dist-bar-container {
+  width: 60px;
+  height: 6px;
+  background: var(--color-bg-gray); /* Replaced #e2e8f0 */
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.dist-bar-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 3px;
+}
+
+.revenue-range-text {
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.revenue-count {
+  font-weight: 600;
+  min-width: 30px;
+  display: inline-block;
+}
+
+/* ============================================
+   Employee Size Distribution – Image Match
+   ============================================ */
+
+.employee-size-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.employee-size-table thead th {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding-bottom: 0.75rem;
+}
+
+.employee-size-table tbody tr {
+  height: 40px;
+}
+
+.employee-size-table td {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Index column */
+.employee-size-table .index-col {
+  width: 12%;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Range column */
+.employee-size-table .range-col {
+  width: 30%;
+  font-weight: 500;
+}
+
+/* Companies column */
+.employee-size-table .companies-col {
+  width: 20%;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Percentage column */
+.employee-size-table .percentage-col {
+  width: 38%;
+}
+
+/* Percentage bar layout */
+.percentage-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progress-table {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-gray); /* Replaced #e2e8f0 */
+  overflow: hidden;
+  display: flex;
+  border: none;
+  width: 50px;
+}
+
+/* Percentage text */
+.percentage-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* State List */
+.state-list {
+  width: 100%;
+  overflow: hidden;
+}
+
+.state-table {
+  width: 100% !important;
+  table-layout: fixed !important;
+  max-width: 100% !important;
+}
+
+.state-table td {
+  border: none !important;
+  padding: 0.6rem 0.25rem !important;
+  vertical-align: middle;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+.state-table td:first-child {
+  width: 40px !important;
+}
+
+.state-table td:nth-child(2) {
+  width: auto;
+}
+
+.state-table td:nth-child(3),
+.state-table td:nth-child(4) {
+  width: 60px !important;
+}
+
+.state-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  display: inline-block;
+}
+
+.state-name {
+  color: var(--color-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.state-value {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.state-table tr {
+  transition: none !important;
+}
+
+.state-table tr:hover {
+  background-color: transparent !important;
+}
+
+.table-borderless td {
+  border: none !important;
+}
+
+.back-btn {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.back-btn:hover {
+  color: var(--color-primary);
+}
+
+/* Contact Icons */
+.contact-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  color: var(--color-primary);
+}
+
+/* Contacts Table */
+.contacts-table-responsive {
+  max-height: none !important;
+  overflow-y: visible !important;
+  overflow-x: auto;
+}
+
+.contacts-table {
+  width: 100%;
+  table-layout: fixed !important;
+  min-width: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.contacts-table thead th,
+.contacts-table tbody td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.contacts-table thead th {
+  background-color: var(--color-secondary);
+  color: var(--color-text-white);
+  font-weight: 600;
+  position: static !important;
+  top: auto !important;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.contacts-table tbody td {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .summary-page .criteria-card {
+    padding: 1rem;
+  }
+
+  .summary-header-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contacts-table {
+    min-width: 800px; /* Allow scroll on smaller screens */
+  }
+
+  .nav-tabs {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .nav-tabs .nav-link {
+    flex: 0 0 auto;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 640px) {
+  .summary-header-title {
+    font-size: 1.5rem;
+  }
+
+  .percentage-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+/* Helper Classes - State table column widths (override to prevent overflow) */
+.state-table .col-width-15,
+.state-table .col-width-35,
+.state-table .col-width-25,
+.state-table .col-width-24,
+.state-table .col-width-18,
+.state-table .col-width-20 {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+/* Equal width columns for 3-column layout */
+.col-width-33 {
+  width: 33.33%;
+}
+
+.icon-summary {
+  height: 20px;
+  margin-right: 10px;
+}

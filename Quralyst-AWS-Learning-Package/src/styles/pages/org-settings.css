@@ -1,0 +1,692 @@
+/* Organization settings — Replit `/usage` parity chrome.
+   Token-compliant (scale-unlimited/declaration-strict-value). */
+
+.org-settings-page {
+  --org-on-primary: #ffffff;
+  --org-success: #059669;
+  --org-danger: #dc2626;
+  --org-warn: #d97706;
+  --org-focus-ring: 0 0 0 2px rgba(40, 37, 97, 0.12);
+
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-block: 1.5rem 2.5rem;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+
+.org-settings-page .org-header {
+  margin-bottom: 1.25rem;
+}
+
+.org-settings-page .org-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary, #282561);
+  margin: 0;
+}
+
+.org-settings-page .org-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary, var(--bs-body-color));
+  margin: 0.4rem 0 0;
+  line-height: 1.2;
+}
+
+.org-settings-page .org-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+  margin: 0.5rem 0 0;
+  max-width: 48rem;
+  line-height: 1.5;
+}
+
+.org-settings-page .org-subtitle code {
+  font-size: 0.8125rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-sm, 0.375rem);
+  background: var(--surface-overlay, rgba(40, 37, 97, 0.06));
+  color: var(--color-primary, #282561);
+}
+
+.org-settings-page .org-subtitle a {
+  color: var(--color-primary, #282561);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.org-settings-page .org-meta-line {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* ── Sections ───────────────────────────────────────────────────────────── */
+
+.org-settings-page .org-section {
+  border: 1px solid var(--border-subtle, var(--bs-border-color));
+  border-radius: var(--radius-xl, 0.75rem);
+  background: var(--surface-raised, #fff);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.org-settings-page .org-section:last-child {
+  margin-bottom: 0;
+}
+
+.org-settings-page .org-section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--border-subtle, var(--bs-border-color));
+}
+
+.org-settings-page .org-section-header.is-flush {
+  border-bottom: none;
+}
+
+.org-settings-page .org-section-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-primary, var(--bs-body-color));
+  margin: 0;
+  line-height: 1.3;
+}
+
+.org-settings-page .org-section-sub {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+  margin: 0.25rem 0 0;
+  max-width: 40rem;
+  line-height: 1.45;
+}
+
+.org-settings-page .org-section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.org-settings-page .org-section-body {
+  padding: 1rem 1.1rem;
+}
+
+.org-settings-page .org-section-body.is-flush {
+  padding: 0;
+}
+
+.org-settings-page .org-section-body.is-table {
+  padding: 0;
+}
+
+/* Quiet DataTable sits flush inside org section (no double border). */
+.org-settings-page .org-section-body.is-table .data-table--quiet,
+.org-settings-page .org-table-pad .data-table--quiet {
+  border: none;
+  border-radius: 0;
+  max-height: min(70vh, 36rem);
+}
+
+.org-settings-page .org-table-pad {
+  padding: 0;
+  border-top: 1px solid var(--border-subtle, var(--bs-border-color));
+}
+
+/* ── Metric tiles ───────────────────────────────────────────────────────── */
+
+.org-settings-page .org-metrics {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .org-settings-page .org-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.org-settings-page .org-metrics.is-two {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  .org-settings-page .org-metrics.is-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.org-settings-page .org-metric-card {
+  border: 1px solid var(--border-subtle, var(--bs-border-color));
+  border-radius: var(--radius-xl, 0.75rem);
+  background: var(--surface-raised, #fff);
+  padding: 0.9rem 1rem;
+}
+
+.org-settings-page .org-metric-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+}
+
+.org-settings-page .org-metric-label svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--color-primary, #282561);
+  flex-shrink: 0;
+}
+
+.org-settings-page .org-metric-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  margin-top: 0.4rem;
+  color: var(--color-text-primary, var(--bs-body-color));
+}
+
+.org-settings-page .org-metric-sub {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+  margin-top: 0.4rem;
+}
+
+/* ── Feed / list ────────────────────────────────────────────────────────── */
+
+.org-settings-page .org-feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.org-settings-page .org-feed-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 1.1rem;
+  border-bottom: 1px solid var(--border-subtle, var(--bs-border-color));
+  font-size: 0.875rem;
+  color: var(--color-text-primary, var(--bs-body-color));
+}
+
+.org-settings-page .org-feed-item:last-child {
+  border-bottom: none;
+}
+
+.org-settings-page .org-feed-item.is-muted,
+.org-settings-page .org-feed-empty {
+  color: var(--color-text-muted, var(--bs-secondary-color));
+}
+
+.org-settings-page .org-feed-time {
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+  white-space: nowrap;
+}
+
+.org-settings-page .org-feed-status {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+}
+
+/* ── Forms ──────────────────────────────────────────────────────────────── */
+
+.org-settings-page .org-field {
+  margin-bottom: 1rem;
+}
+
+.org-settings-page .org-field:last-child {
+  margin-bottom: 0;
+}
+
+.org-settings-page .org-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-primary, var(--bs-body-color));
+  margin-bottom: 0.35rem;
+}
+
+.org-settings-page .org-help {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+  margin: 0.35rem 0 0;
+  line-height: 1.4;
+}
+
+.org-settings-page .org-help a {
+  color: var(--color-primary, #282561);
+}
+
+.org-settings-page .org-check {
+  margin-bottom: 0.65rem;
+}
+
+.org-settings-page .org-check:last-child {
+  margin-bottom: 0;
+}
+
+.org-settings-page .org-key-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .org-settings-page .org-key-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.org-settings-page .org-key-input-wrap {
+  position: relative;
+}
+
+.org-settings-page .org-key-input {
+  width: 100%;
+  font-size: 0.875rem;
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  border: 1px solid var(--border-subtle, var(--bs-border-color));
+  border-radius: var(--radius-md, 0.5rem);
+  background: var(--surface-raised, #fff);
+  color: var(--color-text-primary, var(--bs-body-color));
+}
+
+.org-settings-page .org-key-input:focus {
+  outline: none;
+  border-color: var(--color-primary, #282561);
+  box-shadow: var(--org-focus-ring);
+}
+
+.org-settings-page .org-key-input:read-only:not(.is-editable) {
+  background: var(--surface-overlay, rgba(0, 0, 0, 0.03));
+  cursor: default;
+}
+
+.org-settings-page .org-key-status {
+  position: absolute;
+  right: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted, var(--bs-secondary-color));
+  font-size: 0.875rem;
+  pointer-events: none;
+}
+
+.org-settings-page .org-key-status.is-unlocked {
+  color: var(--org-success);
+}
+
+.org-settings-page .org-invite-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+@media (min-width: 768px) {
+  .org-settings-page .org-invite-form {
+    grid-template-columns: 1fr minmax(8rem, 10rem) auto;
+  }
+}
+
+.org-settings-page .org-domain-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.org-settings-page .org-domain-form .form-control {
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+/* ── Toolbar (Members) ──────────────────────────────────────────────────── */
+
+.org-settings-page .org-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 0;
+}
+
+.org-settings-page .org-search-wrap {
+  position: relative;
+}
+
+.org-settings-page .org-search-wrap .org-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted, var(--bs-secondary-color));
+  pointer-events: none;
+  font-size: 0.875rem;
+}
+
+.org-settings-page .org-search-wrap .form-control {
+  padding-left: 2.25rem;
+  border-radius: var(--radius-md, 0.5rem);
+}
+
+.org-settings-page .org-table-pad {
+  padding: 0 0 0.5rem;
+}
+
+.org-settings-page .org-pagination-wrap {
+  padding: 0.75rem 1.1rem 1rem;
+  border-top: 1px solid var(--border-subtle, var(--bs-border-color));
+}
+
+/* ── Delta colors (ledger) ──────────────────────────────────────────────── */
+
+.org-settings-page .org-delta-pos {
+  color: var(--org-success);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.org-settings-page .org-delta-neg {
+  color: var(--org-danger);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Domain list ────────────────────────────────────────────────────────── */
+
+.org-settings-page .org-feed-item.is-stacked {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.org-settings-page .org-domain-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+}
+
+.org-settings-page .org-field-narrow {
+  max-width: 28rem;
+}
+
+.org-settings-page .org-domain-token {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+  word-break: break-all;
+}
+
+.org-settings-page .cell-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+/* ── Billing body inside org section ────────────────────────────────────── */
+
+.org-settings-page .org-billing-body {
+  padding: 0.25rem 0 0;
+}
+
+.org-settings-page .org-billing-body .card {
+  border: 1px solid var(--border-subtle, var(--bs-border-color));
+  border-radius: var(--radius-xl, 0.75rem);
+  box-shadow: none;
+}
+
+/* ── Loading ────────────────────────────────────────────────────────────── */
+
+.org-tab-loading {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.org-settings-page .org-empty {
+  padding: 2rem 1.1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-muted, var(--bs-secondary-color));
+}
+
+/* Tab nav spacing under flat header */
+.org-settings-page .tab-nav {
+  margin-bottom: 1.25rem;
+}
+
+/* ─── Dark Mode Overrides for Organization Pages ──────────────────── */
+/* stylelint-disable scale-unlimited/declaration-strict-value -- dark mode accent overrides */
+:root[data-theme='dark'] .org-settings-page {
+  --org-focus-ring: 0 0 0 2px rgba(129, 140, 248, 0.25);
+}
+
+:root[data-theme='dark'] .org-settings-page .org-eyebrow {
+  color: #818cf8;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-title {
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-subtitle {
+  color: #cbd5e1;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-subtitle code {
+  background: rgba(99, 102, 241, 0.18);
+  color: #a5b4fc;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-subtitle a {
+  color: #818cf8;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-section {
+  border-color: #2e3446;
+  background: #1e2230;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-section-header {
+  border-bottom-color: #2e3446;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-section-title {
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-section-sub {
+  color: #cbd5e1;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-metric-card {
+  border-color: #2e3446;
+  background: #1e2230;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-metric-label {
+  color: #cbd5e1;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-metric-value {
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-metric-sub {
+  color: #94a3b8;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-feed-item {
+  border-bottom-color: #2e3446;
+  color: #cbd5e1;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-feed-time {
+  color: #64748b;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-label {
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-help {
+  color: #94a3b8;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-help a {
+  color: #818cf8;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-key-input,
+:root[data-theme='dark'] .org-settings-page .form-control,
+:root[data-theme='dark'] .org-settings-page .form-select,
+:root[data-theme='dark'] .org-settings-page textarea {
+  background: #141824 !important;
+  border-color: #2e3446 !important;
+  color: #f3f4f6 !important;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-key-input:focus,
+:root[data-theme='dark'] .org-settings-page .form-control:focus,
+:root[data-theme='dark'] .org-settings-page .form-select:focus,
+:root[data-theme='dark'] .org-settings-page textarea:focus {
+  border-color: #818cf8 !important;
+  box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.25) !important;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-key-input::placeholder,
+:root[data-theme='dark'] .org-settings-page .form-control::placeholder,
+:root[data-theme='dark'] .org-settings-page textarea::placeholder {
+  color: #64748b !important;
+}
+
+:root[data-theme='dark'] .org-settings-page .org-key-input:read-only:not(.is-editable) {
+  background: #0f121d !important;
+}
+
+:root[data-theme='dark'] .org-settings-page .card {
+  background: #1e2230 !important;
+  border-color: #2e3446 !important;
+  color: #f3f4f6 !important;
+}
+
+:root[data-theme='dark'] .org-settings-page .card-footer {
+  background: transparent !important;
+  border-top-color: #2e3446 !important;
+}
+
+:root[data-theme='dark'] .org-settings-page .card-title {
+  color: #f3f4f6 !important;
+}
+
+:root[data-theme='dark'] .org-settings-page .text-muted {
+  color: #94a3b8 !important;
+}
+
+:root[data-theme='dark'] .org-settings-page .table,
+:root[data-theme='dark'] .org-settings-page table {
+  color: #cbd5e1 !important;
+}
+
+:root[data-theme='dark'] .org-settings-page table th {
+  background: #171a26 !important;
+  color: #94a3b8 !important;
+  border-bottom-color: #2e3446 !important;
+}
+
+:root[data-theme='dark'] .org-settings-page table td {
+  border-bottom-color: #262b3a !important;
+  color: #cbd5e1 !important;
+}
+/* stylelint-enable scale-unlimited/declaration-strict-value */
+
+/* ── Organization Member Role Select & Badges ────────────────────────────── */
+
+.org-role-select {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: var(--radius-md, 6px);
+  border: 1px solid var(--border-subtle, #e2e8f0);
+  background-color: var(--surface-raised, #ffffff);
+  color: var(--color-text-primary, #1e293b);
+  cursor: pointer;
+  width: auto;
+  min-width: 100px;
+  line-height: 1.3;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.org-role-select:hover:not(:disabled) {
+  border-color: var(--color-primary, #6366f1);
+}
+
+.org-role-select:focus {
+  border-color: var(--color-primary, #6366f1);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.18);
+}
+
+.org-role-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+:root[data-theme='dark'] .org-role-select {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+:root[data-theme='dark'] .org-role-select:hover:not(:disabled) {
+  border-color: #818cf8;
+}
+
+:root[data-theme='dark'] .org-role-select option {
+  background-color: #1e293b;
+  color: #f8fafc;
+}
+
+.org-role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm, 4px);
+  text-transform: capitalize;
+}
+
+.org-role-badge--owner {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+:root[data-theme='dark'] .org-role-badge--owner {
+  background: rgba(129, 140, 248, 0.16);
+  color: #a5b4fc;
+  border-color: rgba(129, 140, 248, 0.32);
+}
+
+.org-role-text {
+  text-transform: capitalize;
+}

@@ -1,0 +1,134 @@
+/* ============================================
+   PREVIEW RESULT PAGE STYLES
+   Styles for quralyst_research/preview_result.html
+   ============================================ */
+
+/* ===== PAGE TITLE ===== */
+.preview-page-title {
+  color: var(--color-primary, #282561);
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.preview-page-subtitle {
+  color: var(--color-text-secondary, #666666);
+  font-size: 14px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.creator-name,
+.creation-date {
+  color: var(--color-primary, #282561) !important;
+  font-weight: 600;
+}
+
+/* The legacy comment-system classes (.comment-section/-item/-header/-author/-timestamp/-text/
+   -actions, .comment-indicator, .comment-stats, .no-comments-message) moved to
+   features/results/viewResult/comment-modal.css in Phase 29 so they load with the CommentModal
+   on every workspace tab, not only Preview. */
+
+/* ===== COMPANY ROW ===== */
+.company-row {
+  transition: background-color 0.2s;
+}
+
+.company-row:hover {
+  background-color: var(--surface-hover) !important;
+}
+
+.company-row.has-comments {
+  border-left: 4px solid var(--color-success);
+}
+
+.company-name-cell {
+  background-color: var(--surface-overlay) !important;
+  border-left: 3px solid var(--color-info) !important;
+  position: relative;
+}
+
+.company-name-cell:hover {
+  background-color: var(--surface-hover) !important;
+  border-left: 3px solid var(--color-info) !important;
+}
+
+/* ===== CLICKABLE CELLS ===== */
+.clickable-cell {
+  transition: background-color 0.2s;
+}
+
+.clickable-cell:hover {
+  background-color: var(--surface-hover) !important;
+}
+
+/* ===== INFO TOOLTIP ===== */
+.info-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.info-icon {
+  color: var(--color-secondary);
+  font-size: 18px;
+  cursor: help;
+  transition: color 0.2s ease;
+}
+
+.info-icon:hover {
+  color: var(--color-primary);
+}
+
+.info-tooltip .tooltip-text {
+  visibility: hidden;
+  width: 300px;
+  background-color: var(--color-primary);
+  color: var(--color-text-white, #ffffff);
+  text-align: left;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  position: absolute;
+  z-index: 1000;
+  top: 100%;
+  left: 50%;
+  margin-left: -150px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.info-tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.info-tooltip .tooltip-text::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent var(--color-primary) transparent;
+}
+
+/* ===== NO DATA PLACEHOLDER ===== */
+.preview-no-data {
+  background: var(--surface-overlay);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.preview-no-data i {
+  font-size: 3rem;
+}

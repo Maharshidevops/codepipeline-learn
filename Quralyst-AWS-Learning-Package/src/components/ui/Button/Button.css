@@ -1,0 +1,167 @@
+/* ── Universal QuraLyst Button Component Styles ────────────────────────── */
+.q-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.q-btn:focus-visible {
+  outline: 2px solid var(--color-primary, #6366f1);
+  outline-offset: 2px;
+}
+
+.q-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.q-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Sizes */
+.q-btn--sm {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.775rem;
+  border-radius: var(--radius-sm, 6px);
+}
+
+.q-btn--lg {
+  padding: 0.65rem 1.5rem;
+  font-size: 1rem;
+  border-radius: var(--radius-lg, 10px);
+}
+
+/* Shape */
+.q-btn--pill {
+  border-radius: 999px !important;
+}
+
+/* Icons & Spinner */
+.q-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q-btn__spinner {
+  display: inline-block;
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: q-btn-spin 0.75s linear infinite;
+}
+
+@keyframes q-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Variants ───────────────────────────────────────────────────────────── */
+
+/* 1. Primary (Solid Electric Indigo / Brand Accent) */
+.q-btn--primary {
+  background: var(--color-primary, #6366f1);
+  color: #ffffff;
+  border-color: var(--color-primary, #6366f1);
+}
+
+.q-btn--primary:hover:not(:disabled) {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+:root[data-theme='dark'] .q-btn--primary {
+  background: #6366f1;
+  color: #ffffff;
+  border-color: #6366f1;
+}
+
+:root[data-theme='dark'] .q-btn--primary:hover:not(:disabled) {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+}
+
+/* 2. Secondary (Slate Raised / Outline Container) */
+.q-btn--secondary {
+  background: var(--surface-raised, #ffffff);
+  color: var(--color-text-primary, #1e293b);
+  border-color: var(--border-subtle, #e2e8f0);
+}
+
+.q-btn--secondary:hover:not(:disabled) {
+  background: var(--surface-hover, #f8fafc);
+  border-color: var(--color-primary, #6366f1);
+  color: var(--color-primary, #6366f1);
+}
+
+:root[data-theme='dark'] .q-btn--secondary {
+  background: var(--surface-overlay, #1e293b);
+  color: var(--color-text-primary, #f8fafc);
+  border-color: var(--border-subtle, #334158);
+}
+
+:root[data-theme='dark'] .q-btn--secondary:hover:not(:disabled) {
+  background: var(--surface-hover, #33415a);
+  border-color: #475569;
+  color: #ffffff;
+}
+
+/* 3. Ghost (Transparent / Hover Slate Glow) */
+.q-btn--ghost {
+  background: transparent;
+  color: var(--color-text-primary, #f8fafc);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.q-btn--ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* 4. Danger (Translucent Rose Red -> Solid Red Hover) */
+.q-btn--danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.q-btn--danger:hover:not(:disabled) {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+:root[data-theme='dark'] .q-btn--danger {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+:root[data-theme='dark'] .q-btn--danger:hover:not(:disabled) {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}

@@ -1,0 +1,28 @@
+/* ============================================
+   CARD COMPONENT STYLES
+   Card containers and variants
+   ============================================ */
+
+/* Base Card */
+.card {
+  background: var(--color-background, #ffffff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Dark mode: soft warm slate cards with subtle hover lift */
+:root[data-theme='dark'] .card {
+  background: var(--surface-raised, #242836);
+  border-color: var(--border-subtle, #33394b);
+  box-shadow: var(--shadow-card);
+}
+
+:root[data-theme='dark'] .card:hover {
+  border-color: var(--color-border-focus, #818cf8);
+  box-shadow: var(--shadow-hover-lift);
+}

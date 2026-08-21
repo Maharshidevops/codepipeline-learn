@@ -1,0 +1,22 @@
+/* ToastProvider (Phase 28 WS5) — styles for the rich signup-success popup body. The popup chrome
+   itself (.popup-overlay/.popup-box/.user-details-card) lives in core/alerts.css. */
+.signup-success-body {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.signup-success-intro {
+  margin-bottom: 16px;
+  color: var(--color-text-primary);
+  font-size: 16px;
+}
+
+.signup-success-details {
+  text-align: left;
+}
+
+.signup-success-note {
+  margin-top: 16px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}

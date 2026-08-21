@@ -1,0 +1,17 @@
+/* OfflineBanner (Phase 28 WS5) — sticky full-width offline notice pinned above everything.
+   Shadow is a deliberate literal: 0.4 alpha has no matching --shadow-* token. */
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  background: var(--color-danger);
+  color: var(--color-text-white);
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}

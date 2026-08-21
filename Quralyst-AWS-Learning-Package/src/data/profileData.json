@@ -1,0 +1,770 @@
+{
+  "countries": [
+    {
+      "code": "AF",
+      "name": "Afghanistan"
+    },
+    {
+      "code": "DZ",
+      "name": "Algeria"
+    },
+    {
+      "code": "AO",
+      "name": "Angola"
+    },
+    {
+      "code": "AR",
+      "name": "Argentina"
+    },
+    {
+      "code": "AU",
+      "name": "Australia"
+    },
+    {
+      "code": "AT",
+      "name": "Austria"
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh"
+    },
+    {
+      "code": "BE",
+      "name": "Belgium"
+    },
+    {
+      "code": "BO",
+      "name": "Bolivia"
+    },
+    {
+      "code": "BR",
+      "name": "Brazil"
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria"
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia"
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon"
+    },
+    {
+      "code": "CA",
+      "name": "Canada"
+    },
+    {
+      "code": "CL",
+      "name": "Chile"
+    },
+    {
+      "code": "CN",
+      "name": "China"
+    },
+    {
+      "code": "CO",
+      "name": "Colombia"
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica"
+    },
+    {
+      "code": "HR",
+      "name": "Croatia"
+    },
+    {
+      "code": "CU",
+      "name": "Cuba"
+    },
+    {
+      "code": "CZ",
+      "name": "Czech Republic"
+    },
+    {
+      "code": "DK",
+      "name": "Denmark"
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic"
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador"
+    },
+    {
+      "code": "EG",
+      "name": "Egypt"
+    },
+    {
+      "code": "SV",
+      "name": "El Salvador"
+    },
+    {
+      "code": "EE",
+      "name": "Estonia"
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia"
+    },
+    {
+      "code": "FJ",
+      "name": "Fiji"
+    },
+    {
+      "code": "FI",
+      "name": "Finland"
+    },
+    {
+      "code": "FR",
+      "name": "France"
+    },
+    {
+      "code": "DE",
+      "name": "Germany"
+    },
+    {
+      "code": "GH",
+      "name": "Ghana"
+    },
+    {
+      "code": "GR",
+      "name": "Greece"
+    },
+    {
+      "code": "GT",
+      "name": "Guatemala"
+    },
+    {
+      "code": "HN",
+      "name": "Honduras"
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong"
+    },
+    {
+      "code": "HU",
+      "name": "Hungary"
+    },
+    {
+      "code": "IS",
+      "name": "Iceland"
+    },
+    {
+      "code": "IN",
+      "name": "India"
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia"
+    },
+    {
+      "code": "IR",
+      "name": "Iran"
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq"
+    },
+    {
+      "code": "IE",
+      "name": "Ireland"
+    },
+    {
+      "code": "IL",
+      "name": "Israel"
+    },
+    {
+      "code": "IT",
+      "name": "Italy"
+    },
+    {
+      "code": "CI",
+      "name": "Ivory Coast"
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica"
+    },
+    {
+      "code": "JP",
+      "name": "Japan"
+    },
+    {
+      "code": "JO",
+      "name": "Jordan"
+    },
+    {
+      "code": "KZ",
+      "name": "Kazakhstan"
+    },
+    {
+      "code": "KE",
+      "name": "Kenya"
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait"
+    },
+    {
+      "code": "LA",
+      "name": "Laos"
+    },
+    {
+      "code": "LV",
+      "name": "Latvia"
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon"
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania"
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg"
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia"
+    },
+    {
+      "code": "MX",
+      "name": "Mexico"
+    },
+    {
+      "code": "MA",
+      "name": "Morocco"
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique"
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar"
+    },
+    {
+      "code": "NP",
+      "name": "Nepal"
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands"
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand"
+    },
+    {
+      "code": "NI",
+      "name": "Nicaragua"
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria"
+    },
+    {
+      "code": "NO",
+      "name": "Norway"
+    },
+    {
+      "code": "OM",
+      "name": "Oman"
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan"
+    },
+    {
+      "code": "PA",
+      "name": "Panama"
+    },
+    {
+      "code": "PG",
+      "name": "Papua New Guinea"
+    },
+    {
+      "code": "PY",
+      "name": "Paraguay"
+    },
+    {
+      "code": "PE",
+      "name": "Peru"
+    },
+    {
+      "code": "PH",
+      "name": "Philippines"
+    },
+    {
+      "code": "PL",
+      "name": "Poland"
+    },
+    {
+      "code": "PT",
+      "name": "Portugal"
+    },
+    {
+      "code": "QA",
+      "name": "Qatar"
+    },
+    {
+      "code": "RO",
+      "name": "Romania"
+    },
+    {
+      "code": "RU",
+      "name": "Russia"
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda"
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia"
+    },
+    {
+      "code": "SN",
+      "name": "Senegal"
+    },
+    {
+      "code": "RS",
+      "name": "Serbia"
+    },
+    {
+      "code": "SG",
+      "name": "Singapore"
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia"
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia"
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa"
+    },
+    {
+      "code": "KR",
+      "name": "South Korea"
+    },
+    {
+      "code": "ES",
+      "name": "Spain"
+    },
+    {
+      "code": "LK",
+      "name": "Sri Lanka"
+    },
+    {
+      "code": "SE",
+      "name": "Sweden"
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland"
+    },
+    {
+      "code": "SY",
+      "name": "Syria"
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan"
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania"
+    },
+    {
+      "code": "TH",
+      "name": "Thailand"
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago"
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia"
+    },
+    {
+      "code": "TR",
+      "name": "Turkey"
+    },
+    {
+      "code": "UG",
+      "name": "Uganda"
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine"
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates"
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom"
+    },
+    {
+      "code": "US",
+      "name": "United States"
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay"
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan"
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela"
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam"
+    },
+    {
+      "code": "YE",
+      "name": "Yemen"
+    },
+    {
+      "code": "ZM",
+      "name": "Zambia"
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe"
+    }
+  ],
+  "phonePrefixes": {
+    "DZ": "+213",
+    "AO": "+244",
+    "CM": "+237",
+    "EG": "+20",
+    "ET": "+251",
+    "GH": "+233",
+    "CI": "+225",
+    "KE": "+254",
+    "MA": "+212",
+    "MZ": "+258",
+    "NG": "+234",
+    "RW": "+250",
+    "SN": "+221",
+    "ZA": "+27",
+    "TZ": "+255",
+    "TN": "+216",
+    "UG": "+256",
+    "ZM": "+260",
+    "ZW": "+263",
+    "AF": "+93",
+    "BD": "+880",
+    "KH": "+855",
+    "CN": "+86",
+    "HK": "+852",
+    "IN": "+91",
+    "ID": "+62",
+    "IR": "+98",
+    "IQ": "+964",
+    "IL": "+972",
+    "JP": "+81",
+    "JO": "+962",
+    "KZ": "+7",
+    "KR": "+82",
+    "KW": "+965",
+    "LA": "+856",
+    "LB": "+961",
+    "MY": "+60",
+    "MM": "+95",
+    "NP": "+977",
+    "OM": "+968",
+    "PK": "+92",
+    "PH": "+63",
+    "QA": "+974",
+    "SA": "+966",
+    "SG": "+65",
+    "LK": "+94",
+    "SY": "+963",
+    "TW": "+886",
+    "TH": "+66",
+    "TR": "+90",
+    "AE": "+971",
+    "UZ": "+998",
+    "VN": "+84",
+    "YE": "+967",
+    "AT": "+43",
+    "BE": "+32",
+    "BG": "+359",
+    "HR": "+385",
+    "CZ": "+420",
+    "DK": "+45",
+    "EE": "+372",
+    "FI": "+358",
+    "FR": "+33",
+    "DE": "+49",
+    "GR": "+30",
+    "HU": "+36",
+    "IS": "+354",
+    "IE": "+353",
+    "IT": "+39",
+    "LV": "+371",
+    "LT": "+370",
+    "LU": "+352",
+    "NL": "+31",
+    "NO": "+47",
+    "PL": "+48",
+    "PT": "+351",
+    "RO": "+40",
+    "RU": "+7",
+    "RS": "+381",
+    "SK": "+421",
+    "SI": "+386",
+    "ES": "+34",
+    "SE": "+46",
+    "CH": "+41",
+    "UA": "+380",
+    "GB": "+44",
+    "CA": "+1",
+    "CR": "+506",
+    "CU": "+53",
+    "DO": "+1-809",
+    "SV": "+503",
+    "GT": "+502",
+    "HN": "+504",
+    "JM": "+1-876",
+    "MX": "+52",
+    "NI": "+505",
+    "PA": "+507",
+    "TT": "+1-868",
+    "US": "+1",
+    "AU": "+61",
+    "FJ": "+679",
+    "NZ": "+64",
+    "PG": "+675",
+    "AR": "+54",
+    "BO": "+591",
+    "BR": "+55",
+    "CL": "+56",
+    "CO": "+57",
+    "EC": "+593",
+    "PY": "+595",
+    "PE": "+51",
+    "UY": "+598",
+    "VE": "+58"
+  },
+  "countryTimezones": {
+    "US": [
+      ["America/New_York", "Eastern Time (ET)"],
+      ["America/Chicago", "Central Time (CT)"],
+      ["America/Denver", "Mountain Time (MT)"],
+      ["America/Los_Angeles", "Pacific Time (PT)"],
+      ["America/Anchorage", "Alaska Time (AKT)"],
+      ["Pacific/Honolulu", "Hawaii Time (HT)"]
+    ],
+    "CA": [
+      ["America/Toronto", "Eastern Time"],
+      ["America/Winnipeg", "Central Time"],
+      ["America/Edmonton", "Mountain Time"],
+      ["America/Vancouver", "Pacific Time"],
+      ["America/Halifax", "Atlantic Time"],
+      ["America/St_Johns", "Newfoundland Time"]
+    ],
+    "MX": [
+      ["America/Mexico_City", "Central Time"],
+      ["America/Cancun", "Eastern Time"],
+      ["America/Tijuana", "Pacific Time"]
+    ],
+    "GB": [["Europe/London", "British Time (GMT/BST)"]],
+    "IE": [["Europe/Dublin", "Irish Time (GMT/IST)"]],
+    "PT": [["Europe/Lisbon", "Western European Time (WET/WEST)"]],
+    "FR": [["Europe/Paris", "Central European Time (CET/CEST)"]],
+    "DE": [["Europe/Berlin", "Central European Time (CET/CEST)"]],
+    "IT": [["Europe/Rome", "Central European Time (CET/CEST)"]],
+    "ES": [["Europe/Madrid", "Central European Time (CET/CEST)"]],
+    "NL": [["Europe/Amsterdam", "Central European Time (CET/CEST)"]],
+    "BE": [["Europe/Brussels", "Central European Time (CET/CEST)"]],
+    "CH": [["Europe/Zurich", "Central European Time (CET/CEST)"]],
+    "AT": [["Europe/Vienna", "Central European Time (CET/CEST)"]],
+    "SE": [["Europe/Stockholm", "Central European Time (CET/CEST)"]],
+    "NO": [["Europe/Oslo", "Central European Time (CET/CEST)"]],
+    "DK": [["Europe/Copenhagen", "Central European Time (CET/CEST)"]],
+    "PL": [["Europe/Warsaw", "Central European Time (CET/CEST)"]],
+    "CZ": [["Europe/Prague", "Central European Time (CET/CEST)"]],
+    "HU": [["Europe/Budapest", "Central European Time (CET/CEST)"]],
+    "RO": [["Europe/Bucharest", "Eastern European Time (EET/EEST)"]],
+    "FI": [["Europe/Helsinki", "Eastern European Time (EET/EEST)"]],
+    "GR": [["Europe/Athens", "Eastern European Time (EET/EEST)"]],
+    "UA": [["Europe/Kiev", "Eastern European Time (EET/EEST)"]],
+    "RU": [
+      ["Europe/Moscow", "Moscow Time (MSK)"],
+      ["Asia/Yekaterinburg", "Yekaterinburg Time"],
+      ["Asia/Novosibirsk", "Novosibirsk Time"],
+      ["Asia/Vladivostok", "Vladivostok Time"]
+    ],
+    "IN": [["Asia/Kolkata", "India Standard Time (IST)"]],
+    "PK": [["Asia/Karachi", "Pakistan Standard Time (PKT)"]],
+    "BD": [["Asia/Dhaka", "Bangladesh Standard Time (BST)"]],
+    "LK": [["Asia/Colombo", "Sri Lanka Time (SLST)"]],
+    "NP": [["Asia/Kathmandu", "Nepal Time (NPT)"]],
+    "CN": [["Asia/Shanghai", "China Standard Time (CST)"]],
+    "JP": [["Asia/Tokyo", "Japan Standard Time (JST)"]],
+    "KR": [["Asia/Seoul", "Korea Standard Time (KST)"]],
+    "HK": [["Asia/Hong_Kong", "Hong Kong Time (HKT)"]],
+    "TW": [["Asia/Taipei", "Taiwan Time (CST)"]],
+    "SG": [["Asia/Singapore", "Singapore Time (SGT)"]],
+    "MY": [["Asia/Kuala_Lumpur", "Malaysia Time (MYT)"]],
+    "TH": [["Asia/Bangkok", "Indochina Time (ICT)"]],
+    "VN": [["Asia/Ho_Chi_Minh", "Indochina Time (ICT)"]],
+    "ID": [
+      ["Asia/Jakarta", "Western Indonesia Time (WIB)"],
+      ["Asia/Makassar", "Central Indonesia Time (WITA)"],
+      ["Asia/Jayapura", "Eastern Indonesia Time (WIT)"]
+    ],
+    "PH": [["Asia/Manila", "Philippine Time (PHT)"]],
+    "MM": [["Asia/Yangon", "Myanmar Time (MMT)"]],
+    "KH": [["Asia/Phnom_Penh", "Indochina Time (ICT)"]],
+    "LA": [["Asia/Vientiane", "Indochina Time (ICT)"]],
+    "KZ": [["Asia/Almaty", "East Kazakhstan Time"]],
+    "UZ": [["Asia/Tashkent", "Uzbekistan Time"]],
+    "AE": [["Asia/Dubai", "Gulf Standard Time (GST)"]],
+    "SA": [["Asia/Riyadh", "Arabia Standard Time (AST)"]],
+    "IL": [["Asia/Jerusalem", "Israel Standard Time (IST)"]],
+    "TR": [["Europe/Istanbul", "Turkey Time (TRT)"]],
+    "IQ": [["Asia/Baghdad", "Arabia Standard Time (AST)"]],
+    "IR": [["Asia/Tehran", "Iran Standard Time (IRST)"]],
+    "JO": [["Asia/Amman", "Eastern European Time (EET)"]],
+    "LB": [["Asia/Beirut", "Eastern European Time (EET)"]],
+    "SY": [["Asia/Damascus", "Eastern European Time (EET)"]],
+    "YE": [["Asia/Aden", "Arabia Standard Time (AST)"]],
+    "OM": [["Asia/Muscat", "Gulf Standard Time (GST)"]],
+    "KW": [["Asia/Kuwait", "Arabia Standard Time (AST)"]],
+    "QA": [["Asia/Qatar", "Arabia Standard Time (AST)"]],
+    "BH": [["Asia/Bahrain", "Arabia Standard Time (AST)"]],
+    "AU": [
+      ["Australia/Sydney", "Australian Eastern Time (AEDT/AEST)"],
+      ["Australia/Melbourne", "Australian Eastern Time (AEDT/AEST)"],
+      ["Australia/Brisbane", "Australian Eastern Time (AEST)"],
+      ["Australia/Adelaide", "Australian Central Time (ACDT/ACST)"],
+      ["Australia/Perth", "Australian Western Time (AWST)"],
+      ["Australia/Darwin", "Australian Central Time (ACST)"]
+    ],
+    "NZ": [
+      ["Pacific/Auckland", "New Zealand Time (NZDT/NZST)"],
+      ["Pacific/Chatham", "Chatham Island Time"]
+    ],
+    "FJ": [["Pacific/Fiji", "Fiji Time (FJT)"]],
+    "PG": [["Pacific/Port_Moresby", "Papua New Guinea Time"]],
+    "BR": [
+      ["America/Sao_Paulo", "Brasilia Time (BRT)"],
+      ["America/Manaus", "Amazon Time (AMT)"],
+      ["America/Fortaleza", "Brasilia Time (BRT)"]
+    ],
+    "AR": [["America/Argentina/Buenos_Aires", "Argentina Time (ART)"]],
+    "CL": [["America/Santiago", "Chile Time (CLT/CLST)"]],
+    "CO": [["America/Bogota", "Colombia Time (COT)"]],
+    "PE": [["America/Lima", "Peru Time (PET)"]],
+    "VE": [["America/Caracas", "Venezuela Time (VET)"]],
+    "EC": [["America/Guayaquil", "Ecuador Time (ECT)"]],
+    "BO": [["America/La_Paz", "Bolivia Time (BOT)"]],
+    "PY": [["America/Asuncion", "Paraguay Time (PYT)"]],
+    "UY": [["America/Montevideo", "Uruguay Time (UYT)"]],
+    "CR": [["America/Costa_Rica", "Central Standard Time"]],
+    "PA": [["America/Panama", "Eastern Standard Time"]],
+    "GT": [["America/Guatemala", "Central Standard Time"]],
+    "HN": [["America/Tegucigalpa", "Central Standard Time"]],
+    "SV": [["America/El_Salvador", "Central Standard Time"]],
+    "NI": [["America/Managua", "Central Standard Time"]],
+    "CU": [["America/Havana", "Cuba Time (CST/CDT)"]],
+    "DO": [["America/Santo_Domingo", "Atlantic Standard Time"]],
+    "JM": [["America/Jamaica", "Eastern Standard Time"]],
+    "TT": [["America/Port_of_Spain", "Atlantic Standard Time"]],
+    "ZA": [["Africa/Johannesburg", "South Africa Time (SAST)"]],
+    "EG": [["Africa/Cairo", "Eastern European Time (EET/EEST)"]],
+    "NG": [["Africa/Lagos", "West Africa Time (WAT)"]],
+    "KE": [["Africa/Nairobi", "East Africa Time (EAT)"]],
+    "MA": [["Africa/Casablanca", "Western European Time (WET)"]],
+    "ET": [["Africa/Addis_Ababa", "East Africa Time (EAT)"]],
+    "GH": [["Africa/Accra", "Greenwich Mean Time (GMT)"]],
+    "TZ": [["Africa/Dar_es_Salaam", "East Africa Time (EAT)"]],
+    "UG": [["Africa/Kampala", "East Africa Time (EAT)"]],
+    "DZ": [["Africa/Algiers", "Central European Time (CET)"]],
+    "TN": [["Africa/Tunis", "Central European Time (CET)"]],
+    "SN": [["Africa/Dakar", "Greenwich Mean Time (GMT)"]],
+    "CI": [["Africa/Abidjan", "Greenwich Mean Time (GMT)"]],
+    "CM": [["Africa/Douala", "West Africa Time (WAT)"]],
+    "ZW": [["Africa/Harare", "Central Africa Time (CAT)"]],
+    "ZM": [["Africa/Lusaka", "Central Africa Time (CAT)"]],
+    "MZ": [["Africa/Maputo", "Central Africa Time (CAT)"]],
+    "AO": [["Africa/Luanda", "West Africa Time (WAT)"]],
+    "RW": [["Africa/Kigali", "Central Africa Time (CAT)"]]
+  },
+  "mobilePlaceholders": {
+    "US": "(555) 123-4567",
+    "CA": "(555) 123-4567",
+    "MX": "55 1234 5678",
+    "GB": "7700 900000",
+    "IE": "85 123 4567",
+    "FR": "6 12 34 56 78",
+    "DE": "151 12345678",
+    "IT": "312 345 6789",
+    "ES": "612 34 56 78",
+    "NL": "6 12345678",
+    "BE": "470 12 34 56",
+    "CH": "78 123 45 67",
+    "AT": "664 123456",
+    "SE": "70-123 45 67",
+    "NO": "406 12 345",
+    "DK": "20 12 34 56",
+    "FI": "40 1234567",
+    "PL": "512 345 678",
+    "PT": "912 345 678",
+    "GR": "691 234 5678",
+    "AU": "412 345 678",
+    "NZ": "21 123 4567",
+    "JP": "90-1234-5678",
+    "IN": "98765 43210",
+    "CN": "139 1234 5678",
+    "KR": "10-1234-5678",
+    "SG": "8123 4567",
+    "MY": "12-345 6789",
+    "TH": "81 234 5678",
+    "VN": "90 123 45 67",
+    "ID": "812-3456-7890",
+    "PH": "917 123 4567",
+    "PK": "300 1234567",
+    "BD": "1712-345678",
+    "AE": "50 123 4567",
+    "SA": "50 123 4567",
+    "IL": "50-123-4567",
+    "TR": "532 123 45 67",
+    "HK": "5123 4567",
+    "TW": "912 345 678",
+    "BR": "11 91234-5678",
+    "AR": "11 2345-6789",
+    "CL": "9 1234 5678",
+    "CO": "321 1234567",
+    "PE": "987 654 321",
+    "VE": "412-1234567",
+    "ZA": "71 123 4567",
+    "EG": "100 123 4567",
+    "NG": "802 123 4567",
+    "KE": "712 345678",
+    "MA": "6 12 34 56 78"
+  }
+}

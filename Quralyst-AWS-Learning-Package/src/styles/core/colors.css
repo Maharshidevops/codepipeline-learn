@@ -1,0 +1,233 @@
+/* ============================================
+   COLOR PALETTE & THEME TOKEN CONTRACT
+   Centralized color definitions + theming engine (Phase 25)
+   ============================================
+
+   THEME CONTRACT — every theme re-provides these token names; components only ever read them, so a new
+   theme never needs per-component CSS. To add a theme: add a `:root[data-theme="<id>"] { … }` block below
+   (+ one entry in src/styles/themes.ts). Contract tokens a theme must set:
+
+     color-scheme · --theme-color-meta                                  (native UI + mobile chrome bar)
+     --surface-base / -raised / -overlay / -popover / -modal            (elevation ladder, deepest→top)
+     --surface-stripe / --surface-hover / --surface-accent              (table stripe · row/cell hover · tinted card)
+     --color-text-primary / -secondary / -light                         (foreground)
+     --border-subtle / --border-strong · --color-border-focus           (separators + focus ring)
+     --color-primary / --color-primary-hover                            (brand; dark lightens it for text — see note)
+     --color-link / --color-link-hover                                  (links)
+     --color-glass-border                                               (glass card border)
+     --color-success/danger/info/warning + their *-bg                   (status)
+     --shadow-light / -medium / -dark / -overlay                        (shadows)
+
+   Elevation model (dark): the page canvas is the DARKEST layer; every surface stacked above it is
+   slightly LIGHTER (lightness encodes depth, so the UI reads as layers, not flat black, and is easy on
+   the eyes). Light theme keeps near-white surfaces and conveys depth via shadow (the correct inversion).
+   ============================================ */
+
+/* ---- Light = the contract (default; also matches :root[data-theme="light"]) ---- */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+  --theme-color-meta: #ffffff; /* <meta name="theme-color"> — mobile browser chrome */
+
+  /* Primary Colors */
+  --color-primary: #282561;
+  --color-primary-hover: #1d1a4a;
+  --color-secondary: #7db3e2;
+  --color-secondary-active: #5790c8; /* active nav item — a notch darker than hover (#6aa3d2) */
+
+  /* Fixed brand navy (Phase 28) — does NOT flip in dark (white text sits on it). --color-primary
+       cannot be used for navy fills like the deep card: dark remaps it to #8d8ad9. */
+  --brand-navy: #282561;
+  --color-secondary-hover: #6aa3d2; /* secondary interaction state (collapses #6AA3D2/#6aa0d1 drift) */
+  --color-secondary-deep: #5ba5d9; /* gradient end stop (table headers, view-result) */
+  --color-control-muted: #848b98; /* unchecked switch track / disabled control chrome */
+
+  /* Aliases (Phase 20): the research-wizard stylesheets reference --primary-deep / --primary-hover. */
+  --primary-deep: var(--color-primary);
+  --primary-hover: var(--color-primary-hover);
+
+  /* Text Colors */
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-light: #999999;
+  --color-text-white: #ffffff; /* fixed white (text on the navy sidebar etc.) — not themed */
+  --color-text-black: #000000;
+  --color-white: #ffffff; /* fixed white for text/borders on colored fills — NOT a surface (see ladder) */
+
+  /* Elevation ladder (light = near-white; depth via shadow). */
+  --surface-base: #f8f9fa; /* app canvas / page background */
+  --surface-raised: #ffffff; /* cards, panels, tables, inputs */
+  --surface-overlay: #f8f9fa; /* nested cards, table headers, raised sections */
+  --surface-popover: #ffffff; /* dropdowns, sidebar flyout, tooltips */
+  --surface-modal: #ffffff; /* modals / dialogs (top layer) */
+  --surface-stripe: #f8fbff; /* alternating (even) table rows — faint brand tint in light */
+  --surface-hover: #f0f8ff; /* row/cell hover — brand-blue tint in light */
+  --surface-accent: #e8f4fc; /* tinted accent card (criteria-card--light header) */
+
+  /* Background Colors — re-pointed onto the ladder so existing CSS flips with the theme. */
+  --color-bg-white: var(--surface-raised);
+  --color-bg-light: var(--surface-overlay);
+  --color-bg-gray: var(--surface-base);
+
+  /* Borders */
+  --border-subtle: #e5e7eb;
+  --border-strong: #e0e7ee;
+  --color-border-light: var(--border-subtle);
+  --color-border-gray: var(--border-strong);
+  --color-border-focus: #282561;
+
+  /* Previously-undefined aliases referenced (with fallbacks) across page CSS — now real contract
+       tokens so one dark override reaches them. */
+  --color-background: var(--surface-raised);
+  --color-border: var(--border-subtle);
+  --color-text: var(--color-text-primary);
+
+  --color-glass-border: rgba(255, 255, 255, 0.35);
+
+  /* Status Colors */
+  --color-success: #16a34a;
+  --color-success-bg: #f0fdf4;
+  --color-success-border: #bbf7d0;
+
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+  --color-danger-hover: #c82333;
+
+  --color-info: #2563eb;
+  --color-info-bg: #eff6ff;
+  --color-info-border: #bfdbfe;
+
+  --color-warning: #f59e0b;
+  --color-warning-bg: #fffbeb;
+  --color-warning-border: #fde68a;
+
+  /* Logout/Danger specific */
+  --color-logout: #ff6b6b;
+
+  /* Link Colors */
+  --color-link: #282561;
+  --color-link-hover: #7db3e2;
+
+  /* Shadow Colors */
+  --shadow-light: rgba(40, 37, 97, 0.08);
+  --shadow-medium: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.15);
+  --shadow-overlay: rgba(0, 0, 0, 0.4);
+
+  /* Card lift — the single shadow every container uses. Visible enough that the rounded border reads
+       on the light canvas (a 5% shadow was effectively invisible). */
+  --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.12);
+
+  /* Composite shadows (Phase 28) — the six shadow "families" the codebase repeated as literals.
+       Theme-invariant for now (matches today's rendering exactly); dark-deepening is a possible
+       follow-up. */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-raised: 0 4px 12px rgba(40, 37, 97, 0.1);
+  --shadow-popover: 0 8px 32px rgba(40, 37, 97, 0.15);
+  --shadow-modal: 0 10px 40px rgba(0, 0, 0, 0.15);
+  --shadow-hover-lift: 0 12px 30px rgba(40, 37, 97, 0.2);
+  --focus-ring: 0 0 0 3px rgba(125, 179, 226, 0.15);
+}
+
+/* ---- Dark = override the SAME contract token names ---- */
+/* ── 1. Soft Warm Slate Theme (data-theme='dark') ────────────────────────── */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --theme-color-meta: #1e222d;
+
+  --brand-navy: #818cf8;
+  --brand-navy-dark: #6366f1;
+  --color-primary: #6366f1;
+  --color-primary-hover: #818cf8;
+  --color-secondary: #7eb8e5;
+  --color-secondary-active: #4f46e5;
+
+  --surface-base: #1b1e28;
+  --surface-raised: #242836;
+  --surface-overlay: #2e3344;
+  --surface-popover: #373d52;
+  --surface-modal: #3f465e;
+  --surface-stripe: #202431;
+  --surface-hover: #32384a;
+  --surface-accent: #292e40;
+
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #cbd5e1;
+  --color-text-light: #94a3b8;
+
+  --border-subtle: #33394b;
+  --border-strong: #444c62;
+  --color-border-focus: #818cf8;
+  --color-glass-border: rgba(129, 140, 248, 0.2);
+
+  --color-link: #818cf8;
+  --color-link-hover: #a5b4fc;
+
+  --color-success: #34d399;
+  --color-success-bg: rgba(52, 211, 153, 0.16);
+  --color-danger: #f87171;
+  --color-danger-bg: rgba(248, 113, 113, 0.16);
+  --color-info: #60a5fa;
+  --color-info-bg: rgba(96, 165, 250, 0.16);
+  --color-warning: #fbbf24;
+  --color-warning-bg: rgba(251, 191, 36, 0.16);
+
+  --shadow-light: rgba(0, 0, 0, 0.2);
+  --shadow-medium: rgba(0, 0, 0, 0.3);
+  --shadow-dark: rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-hover-lift: 0 8px 24px rgba(99, 102, 241, 0.2);
+  --focus-ring: 0 0 0 3px rgba(129, 140, 248, 0.35);
+}
+
+:root[data-theme='dark'] h1,
+:root[data-theme='dark'] h2,
+:root[data-theme='dark'] h3,
+:root[data-theme='dark'] .rh-title,
+:root[data-theme='dark'] .rh-eyebrow,
+:root[data-theme='dark'] .page-title,
+:root[data-theme='dark'] .aa-title {
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   THEME TRANSITION (Phase 25 tokens; applied to surfaces in Phase 26)
+   Gated by `html.theme-anim-ready` (added by AppLayout after first paint) so the initial load /
+   no-FOUC apply is instant and only user-initiated switches animate.
+   ============================================ */
+:root {
+  --theme-transition: 200ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --theme-transition: 0ms;
+  }
+}
+
+/* Animate themed surfaces only AFTER first paint (the `theme-anim-ready` class is added by AppLayout),
+   so the initial load / no-FOUC apply is instant and only user-initiated theme switches fade. Scoped to
+   a deliberate surface set — never `*` (which would jank scrolling/hover). */
+html.theme-anim-ready body,
+html.theme-anim-ready .main-content,
+html.theme-anim-ready .card,
+html.theme-anim-ready .criteria-card,
+html.theme-anim-ready .table,
+html.theme-anim-ready .table td,
+html.theme-anim-ready .form-control,
+html.theme-anim-ready .form-select,
+html.theme-anim-ready .custom-dropdown-btn,
+html.theme-anim-ready .sidebar,
+html.theme-anim-ready .progress-modal-content {
+  transition:
+    background-color var(--theme-transition),
+    border-color var(--theme-transition),
+    color var(--theme-transition);
+}
+
+/* Decorative PNG bg-objects are light-rendered art; dim them on dark so they don't glare on the canvas. */
+:root[data-theme='dark'] .bg-object {
+  opacity: 0.25;
+  filter: brightness(0.6);
+}

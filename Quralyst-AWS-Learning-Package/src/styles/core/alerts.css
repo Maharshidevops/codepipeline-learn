@@ -1,0 +1,363 @@
+/* ============================================
+   ALERTS & POPUPS
+   Notification, Alert, and Popup Styles
+   ============================================ */
+
+/* ===== ALERT BANNERS ===== */
+.alert {
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  font-size: var(--font-size-base, 16px);
+  border: 1px solid;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Success Alert */
+.alert-success {
+  background-color: var(--color-success-bg, #f0fdf4);
+  color: var(--color-success, #16a34a);
+  border-color: var(--color-success-border, #bbf7d0);
+}
+
+.alert-success::before {
+  content: '✓';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: var(--color-success, #16a34a);
+  color: var(--color-text-white, #ffffff);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* Danger Alert */
+.alert-danger {
+  background-color: var(--color-danger-bg, #fef2f2);
+  color: var(--color-danger, #dc2626);
+  border-color: var(--color-danger-border, #fecaca);
+}
+
+.alert-danger::before {
+  content: '✕';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: var(--color-danger, #dc2626);
+  color: var(--color-text-white, #ffffff);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* Info Alert */
+.alert-info {
+  background-color: var(--color-info-bg, #eff6ff);
+  color: var(--color-info, #2563eb);
+  border-color: var(--color-info-border, #bfdbfe);
+}
+
+.alert-info::before {
+  content: 'i';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: var(--color-info, #2563eb);
+  color: var(--color-text-white, #ffffff);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* Warning Alert */
+.alert-warning {
+  background-color: var(--color-warning-bg, #fffbe6);
+  color: var(--color-warning, #d97706);
+  border-color: var(--color-warning-border, #fef08a);
+}
+
+.alert-warning::before {
+  content: '!';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: var(--color-warning, #d97706);
+  color: var(--color-text-white, #ffffff);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* Dark Mode Alert Overrides — Soft Alpha Fills, Non-Harsh Contrast */
+:root[data-theme='dark'] .alert-success {
+  background-color: rgba(16, 185, 129, 0.14) !important;
+  color: #6ee7b7 !important;
+  border-color: rgba(52, 211, 153, 0.3) !important;
+}
+
+:root[data-theme='dark'] .alert-danger {
+  background-color: rgba(239, 68, 68, 0.14) !important;
+  color: #fca5a5 !important;
+  border-color: rgba(248, 113, 113, 0.3) !important;
+}
+
+:root[data-theme='dark'] .alert-warning {
+  background-color: rgba(245, 158, 11, 0.14) !important;
+  color: #fcd34d !important;
+  border-color: rgba(251, 191, 36, 0.3) !important;
+}
+
+:root[data-theme='dark'] .alert-info {
+  background-color: rgba(99, 102, 241, 0.14) !important;
+  color: #818cf8 !important;
+  border-color: rgba(129, 140, 248, 0.3) !important;
+}
+
+/* ===== POPUP MODALS ===== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--shadow-overlay, rgba(0, 0, 0, 0.4));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.popup-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-box {
+  background: var(--color-bg-white, #ffffff);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px var(--shadow-dark, rgba(0, 0, 0, 0.15));
+  padding: 24px;
+  min-width: 400px;
+  max-width: 500px;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.popup-overlay.show .popup-box {
+  transform: scale(1);
+}
+
+/* Popup Close Button */
+.popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--color-text-light, #999999);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.popup-close:hover {
+  color: var(--color-text-primary, #333333);
+}
+
+/* Popup Title */
+.popup-title {
+  font-size: var(--font-size-lg, 20px);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--color-text-primary, #333333);
+  margin: 0 0 12px 0;
+  padding-right: 40px;
+  line-height: 1.3;
+}
+
+/* Popup Message */
+.popup-message {
+  font-size: var(--font-size-base, 16px);
+  color: var(--color-text-secondary, #666666);
+  margin: 0 0 18px 0;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+/* Popup Buttons Container */
+.popup-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* ===== POPUP TITLE STYLING (Remove Icons) ===== */
+.popup-title,
+.popup-success .popup-title,
+.popup-error .popup-title,
+.popup-info .popup-title,
+.popup-logout .popup-title,
+.popup-confirm .popup-title {
+  color: var(--color-text-primary, #333333) !important;
+  position: relative;
+}
+
+/* Remove ALL pseudo-elements that could create icons */
+.popup-title::before,
+.popup-title::after,
+.popup-success .popup-title::before,
+.popup-success .popup-title::after,
+.popup-error .popup-title::before,
+.popup-error .popup-title::after,
+.popup-info .popup-title::before,
+.popup-info .popup-title::after,
+.popup-logout .popup-title::before,
+.popup-logout .popup-title::after,
+.popup-confirm .popup-title::before,
+.popup-confirm .popup-title::after {
+  display: none !important;
+  content: none !important;
+  visibility: hidden !important;
+}
+
+/* Prevent any Bootstrap or Font Awesome icons */
+.popup-title i,
+.popup-title .fa,
+.popup-title .fas,
+.popup-title .far,
+.popup-title .fal,
+.popup-title .fab,
+.popup-title .bi,
+.popup-title .icon {
+  display: none !important;
+}
+
+/* Ensure no floating elements */
+.popup-box * {
+  float: none !important;
+}
+
+.popup-box *::before,
+.popup-box *::after {
+  position: static !important;
+}
+
+/* Ensure popup boxes don't inherit alert styling */
+.popup-box::before,
+.popup-box::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Override any external CSS that might add icons */
+.popup-overlay * {
+  box-shadow: none !important;
+}
+
+.popup-overlay *:not(.popup-close):not(.popup-btn) {
+  background-image: none !important;
+}
+
+/* Clean text display */
+.popup-title {
+  text-shadow: none !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* ===== SPECIFIC POPUP STYLES ===== */
+
+/* Logout Popup */
+.popup-logout .popup-title {
+  color: var(--color-text-primary, #333333);
+}
+
+/* Delete/Confirm Popup */
+.popup-confirm .popup-title {
+  color: var(--color-danger, #dc3545) !important;
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.popup-confirm .popup-btn-primary {
+  background: var(--color-danger, #dc3545) !important;
+  border-color: var(--color-danger, #dc3545) !important;
+}
+
+.popup-confirm .popup-btn-primary:hover {
+  background: var(--color-danger-hover, #c82333) !important;
+  border-color: var(--color-danger-hover) !important;
+}
+
+/* Auto-hide Animation */
+.popup-auto-hide {
+  animation: autoHidePopup 3s ease-in-out forwards;
+}
+
+@keyframes autoHidePopup {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  70% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ===== RESPONSIVE POPUP STYLES ===== */
+@media (max-width: 640px) {
+  .popup-box {
+    min-width: 300px;
+    max-width: 90%;
+    padding: 24px;
+  }
+
+  .popup-title {
+    font-size: var(--font-size-md, 18px);
+    padding-right: 30px;
+  }
+
+  .popup-message {
+    font-size: var(--font-size-sm, 14px);
+  }
+
+  .popup-buttons {
+    flex-direction: column;
+  }
+
+  .popup-btn {
+    width: 100%;
+  }
+}

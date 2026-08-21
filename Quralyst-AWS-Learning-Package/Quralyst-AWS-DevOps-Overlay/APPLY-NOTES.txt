@@ -1,0 +1,6 @@
+Apply this overlay only to an authorized copy of the frontend.
+
+- Replace/use buildspec.yml for the personal S3 learning pipeline.
+- Copy devops-learning/ into the project.
+- Use README.md and TECHNICAL_ANALYSIS.md as the lab guide.
+- Do not upload Quralyst proprietary source or company operational metadata to a personal/public repository unless explicitly authorized.

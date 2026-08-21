@@ -1,0 +1,16 @@
+/* ============================================
+   RESET & UNIVERSAL STYLES
+   Core CSS Reset and Box-Sizing Rules
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow */
+html,
+body {
+  overflow-x: clip;
+}

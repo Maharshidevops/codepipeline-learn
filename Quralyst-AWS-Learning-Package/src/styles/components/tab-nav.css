@@ -1,0 +1,14 @@
+/* ============================================
+   TAB-NAV (Phase 23)
+   Shared horizontal tab row used by both the result workspace (ResultLayout) and the Organization
+   sub-nav (OrgSubnav), so the two render identically. Neutral class name (not result-layout.css) to
+   keep the Phase 11 CSS load-order rules — pills use `.btn.btn-standard` /
+   `.btn.btn-outline-standard` (brand-matched primary / outline pair).
+   ============================================ */
+
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}

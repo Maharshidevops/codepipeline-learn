@@ -1,0 +1,1318 @@
+/*
+ * PE Holdings — port of Replit QURALYST-20 Holdings.tsx.
+ * Overrides global tables.css blue headers / fixed 220px columns under `.peh-scope`.
+ * Compact pill filters avoid the global .custom-dropdown 58px chrome.
+ */
+
+:root {
+  --peh-skel-bg: #e2e8f0;
+  --peh-card-radius: 1rem;
+  --peh-title-color: #1e1b4b;
+  /* Q20 slate-50 / muted-foreground — keep headers soft vs global blue gradient */
+  --peh-th-bg: #f8fafc;
+  --peh-th-color: #64748b;
+  --peh-th-active: #334155;
+  --peh-td-color: #0f172a;
+  --peh-row-border: #e2e8f0;
+  --peh-row-hover: #f8fafc;
+  --peh-stat-emerald: #059669;
+  --peh-stat-orange: #ea580c;
+  --peh-stat-sky: #0284c7;
+  --peh-ai-bg: #ede9fe;
+  --peh-ai-color: #6d28d9;
+  --peh-kw-bg: #f1f5f9;
+  --peh-kw-color: #475569;
+  --peh-kw-border: transparent;
+  --peh-conf-high-bg: #d1fae5;
+  --peh-conf-high-color: #065f46;
+  --peh-conf-mid-bg: #fef3c7;
+  --peh-conf-mid-color: #92400e;
+  --peh-conf-low-bg: #ffedd5;
+  --peh-conf-low-color: #c2410c;
+  --peh-fresh-bg: #ecfdf5;
+  --peh-fresh-color: #047857;
+  --peh-fresh-border: #a7f3d0;
+  --peh-fresh-dot: #22c55e;
+  --peh-aging-bg: #fffbeb;
+  --peh-aging-color: #b45309;
+  --peh-aging-border: #fde68a;
+  --peh-aging-dot: #fbbf24;
+  --peh-stale-bg: #fef2f2;
+  --peh-stale-color: #b91c1c;
+  --peh-stale-border: #fecaca;
+  --peh-stale-dot: #ef4444;
+  --peh-menu-shadow: 0 4px 16px rgba(15, 23, 42, 0.1);
+  --peh-src-web: #2563eb;
+  --peh-src-scrape: #16a34a;
+  --peh-src-unverified: #d97706;
+}
+
+:root[data-theme='dark'] {
+  --peh-skel-bg: #24324a;
+  --peh-title-color: var(--color-text-primary, #f8fafc);
+  --peh-th-bg: var(--surface-overlay, #29344a);
+  --peh-th-color: var(--color-text-secondary, #cbd5e1);
+  --peh-th-active: #ffffff;
+  --peh-td-color: var(--color-text-primary, #f8fafc);
+  --peh-row-border: var(--border-subtle, #334158);
+  --peh-row-hover: var(--surface-hover, #33415a);
+  --peh-ai-bg: #312852;
+  --peh-ai-color: #f8fafc;
+  --peh-kw-bg: #2a354c;
+  --peh-kw-color: #f8fafc;
+  --peh-kw-border: #3d4c6a;
+  --peh-conf-high-bg: rgba(16, 185, 129, 0.2);
+  --peh-conf-high-color: #6ee7b7;
+  --peh-conf-mid-bg: rgba(245, 158, 11, 0.2);
+  --peh-conf-mid-color: #fcd34d;
+  --peh-conf-low-bg: rgba(239, 68, 68, 0.2);
+  --peh-conf-low-color: #fca5a5;
+  --peh-fresh-bg: rgba(16, 185, 129, 0.2);
+  --peh-fresh-color: #6ee7b7;
+  --peh-fresh-border: rgba(16, 185, 129, 0.4);
+  --peh-fresh-dot: #10b981;
+  --peh-aging-bg: rgba(245, 158, 11, 0.2);
+  --peh-aging-color: #fcd34d;
+  --peh-aging-border: rgba(245, 158, 11, 0.4);
+  --peh-aging-dot: #f59e0b;
+  --peh-stale-bg: rgba(239, 68, 68, 0.2);
+  --peh-stale-color: #fca5a5;
+  --peh-stale-border: rgba(239, 68, 68, 0.4);
+  --peh-stale-dot: #ef4444;
+  --peh-src-web: #818cf8;
+  --peh-src-scrape: #34d399;
+  --peh-src-unverified: #fbbf24;
+}
+
+.peh-page,
+.peh-scope {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0;
+}
+
+/* Avoid double gap when page wraps an inner peh-scope */
+.peh-page > .peh-scope {
+  gap: 1.5rem;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+.peh-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.peh-toolbar__left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.peh-toolbar__right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.peh-search {
+  position: relative;
+  flex: 1 1 14rem;
+  max-width: 22rem;
+  min-width: 0;
+}
+
+.peh-search__icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+  pointer-events: none;
+}
+
+.peh-input {
+  width: 100%;
+  height: 2.25rem;
+  font-size: 0.875rem;
+  padding: 0 0.875rem 0 2.25rem;
+  border: 1px solid var(--border-subtle, #cbd5e1);
+  border-radius: var(--radius-full, 999px);
+  background: var(--surface-raised, #ffffff);
+  color: var(--color-text-primary, #333);
+  box-shadow: var(--shadow-subtle, 0 1px 2px rgba(0, 0, 0, 0.04));
+}
+
+.peh-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus, #282561);
+  box-shadow: var(--focus-ring, 0 0 0 3px rgba(125, 179, 226, 0.15));
+  background: var(--surface-raised, #fff);
+}
+
+/* ── Compact pill select (Firm / Status / Data quality) ───────────────────── */
+.peh-pill {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.peh-pill--firm {
+  width: 13.75rem;
+}
+.peh-pill--status {
+  width: 10.625rem;
+}
+.peh-pill--quality {
+  width: 12.5rem;
+}
+
+.peh-pill__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 0.75rem 0 0.875rem;
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  background: var(--surface-overlay, #fff);
+  color: var(--color-text-primary, #333);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.peh-pill__trigger:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong, #cbd5e1);
+  transform: translateY(-1px);
+}
+
+.peh-pill.is-open .peh-pill__trigger,
+.peh-pill__trigger:focus-visible {
+  outline: none;
+  background: var(--surface-raised, #fff);
+  border-color: var(--border-subtle, #e5e7eb);
+  box-shadow: var(--focus-ring, 0 0 0 3px rgba(125, 179, 226, 0.15));
+}
+
+.peh-pill__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.peh-pill__chevron {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #64748b);
+  opacity: 0.7;
+  transition: transform 0.15s;
+}
+
+.peh-pill.is-open .peh-pill__chevron {
+  transform: rotate(180deg);
+}
+
+.peh-pill__menu {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 40;
+  min-width: 100%;
+  max-height: 16rem;
+  overflow: auto;
+  margin: 0;
+  padding: 0.25rem;
+  list-style: none;
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-sm, 8px);
+  box-shadow: var(--peh-menu-shadow);
+}
+
+.peh-pill__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.625rem;
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+  background: transparent;
+  color: var(--color-text-primary, #333);
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.peh-pill__option:hover {
+  background: var(--surface-overlay, #f8f9fa);
+}
+
+.peh-pill__option.is-selected {
+  font-weight: 500;
+  background: color-mix(in srgb, var(--surface-overlay, #f8f9fa) 80%, transparent);
+}
+
+.peh-pill__option .bi-check2 {
+  color: var(--color-link, #282561);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+.peh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    opacity 0.15s;
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  line-height: 1.4;
+  white-space: nowrap;
+  background: var(--surface-raised, #fff);
+  color: var(--color-text-primary, #333);
+}
+
+.peh-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.peh-btn:hover:not(:disabled) {
+  background: var(--surface-overlay, #f8f9fa);
+}
+
+.peh-btn--pill {
+  border-radius: var(--radius-full, 999px);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.peh-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.peh-crumb {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.peh-crumb__current {
+  color: var(--color-text-primary, #333);
+  font-weight: 500;
+}
+
+.peh-header__title {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--peh-title-color);
+}
+
+.peh-header__sub {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+}
+
+/* ── Stats ───────────────────────────────────────────────────────────────── */
+.peh-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+@media (min-width: 576px) {
+  .peh-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .peh-stats {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.peh-stat {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 0.875rem 1rem;
+}
+
+.peh-stat__label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+  margin: 0 0 0.25rem;
+}
+
+.peh-stat__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary, #333);
+  margin: 0;
+}
+
+.peh-stat__value--emerald {
+  color: var(--peh-stat-emerald);
+}
+.peh-stat__value--orange {
+  color: var(--peh-stat-orange);
+}
+.peh-stat__value--sky {
+  color: var(--peh-stat-sky);
+}
+
+/* ── Filters row ─────────────────────────────────────────────────────────── */
+.peh-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/*
+ * Table card — kill global tables.css (blue gradient + 220px columns).
+ * Q20: slate-50 header band, muted-foreground labels, no heavy active fill.
+ */
+.peh-table-wrap {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--peh-card-radius);
+  overflow: hidden;
+  box-shadow: none;
+  max-height: none;
+}
+
+.peh-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.peh-table-wrap.is-fetching {
+  opacity: 0.6;
+}
+
+.peh-page table.peh-table,
+.peh-scope table.peh-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  table-layout: auto !important;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+.peh-page table.peh-table thead tr,
+.peh-scope table.peh-table thead tr {
+  background: var(--peh-th-bg) !important;
+  border-bottom: 1px solid var(--peh-row-border);
+}
+
+.peh-page table.peh-table thead th,
+.peh-page table.peh-table th,
+.peh-scope table.peh-table thead th,
+.peh-scope table.peh-table th {
+  /* Explicitly clear global linear-gradient + white text */
+  background: var(--peh-th-bg) !important;
+  background-image: none !important;
+  background-color: var(--peh-th-bg) !important;
+  color: var(--peh-th-color) !important;
+  position: static !important;
+  top: auto !important;
+  z-index: auto !important;
+  border: none !important;
+  border-bottom: 1px solid var(--peh-row-border) !important;
+  font-weight: 500 !important;
+  font-size: 0.8125rem !important;
+  padding: 0.5rem 0.75rem !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  letter-spacing: normal !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  vertical-align: middle !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  text-transform: none !important;
+}
+
+.peh-page table.peh-table th.peh-th--sortable,
+.peh-scope table.peh-table th.peh-th--sortable {
+  cursor: pointer;
+  user-select: none;
+  padding: 0 !important;
+}
+
+.peh-page table.peh-table th.peh-th--sortable button,
+.peh-scope table.peh-table th.peh-th--sortable button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: transparent !important;
+  color: inherit !important;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: none !important;
+}
+
+/* Q20: inactive = muted, active/hover = slightly darker text only — no fill */
+.peh-page table.peh-table th.peh-th--sortable:hover,
+.peh-page table.peh-table th.peh-th--sortable.is-active,
+.peh-scope table.peh-table th.peh-th--sortable:hover,
+.peh-scope table.peh-table th.peh-th--sortable.is-active {
+  background: var(--peh-th-bg) !important;
+  background-image: none !important;
+  color: var(--peh-th-active) !important;
+}
+
+.peh-page table.peh-table th.peh-th--num,
+.peh-page table.peh-table td.peh-td--num,
+.peh-scope table.peh-table th.peh-th--num,
+.peh-scope table.peh-table td.peh-td--num {
+  text-align: right !important;
+}
+
+.peh-page table.peh-table th.peh-th--actions,
+.peh-page table.peh-table td.peh-td--actions,
+.peh-scope table.peh-table th.peh-th--actions,
+.peh-scope table.peh-table td.peh-td--actions {
+  text-align: right !important;
+  width: 1% !important;
+  white-space: nowrap !important;
+}
+
+.peh-page table.peh-table td,
+.peh-scope table.peh-table td {
+  padding: 0.625rem 0.75rem !important;
+  vertical-align: top !important;
+  border: none !important;
+  border-bottom: 1px solid var(--peh-row-border) !important;
+  color: var(--peh-td-color) !important;
+  font-size: 0.8125rem !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  cursor: default !important;
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  transition: none !important;
+}
+
+.peh-page table.peh-table td:hover,
+.peh-scope table.peh-table td:hover {
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: default !important;
+}
+
+.peh-page table.peh-table tbody tr:nth-child(even),
+.peh-page table.peh-table tbody tr:nth-child(odd),
+.peh-scope table.peh-table tbody tr:nth-child(even),
+.peh-scope table.peh-table tbody tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+.peh-page table.peh-table tbody tr:last-child td,
+.peh-scope table.peh-table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* ── Sticky first column for Holdings (Company Name) on small/medium screens ── */
+@media (max-width: 1199.98px) {
+  .peh-scope table.peh-table th:first-child,
+  .peh-scope table.peh-table td:first-child {
+    position: sticky !important;
+    left: 0 !important;
+    z-index: 5 !important;
+    background: var(--surface-raised, #ffffff) !important;
+    background-color: var(--surface-raised, #ffffff) !important;
+    border-right: 1px solid var(--border-subtle, #e2e8f0) !important;
+    box-shadow: var(--shadow-subtle, 2px 0 4px rgba(0, 0, 0, 0.05)) !important;
+    min-width: 180px !important;
+  }
+
+  .peh-scope table.peh-table thead th:first-child {
+    z-index: 15 !important;
+    background: var(--peh-th-bg, #f8fafc) !important;
+    background-color: var(--peh-th-bg, #f8fafc) !important;
+  }
+
+  .peh-scope table.peh-table tbody tr:hover td:first-child {
+    background: var(--peh-th-bg, #f8fafc) !important;
+    background-color: var(--peh-th-bg, #f8fafc) !important;
+  }
+}
+
+.peh-page table.peh-table tbody tr:hover,
+.peh-scope table.peh-table tbody tr:hover {
+  background: var(--peh-row-hover) !important;
+}
+
+.peh-page table.peh-table tbody tr:hover td,
+.peh-scope table.peh-table tbody tr:hover td {
+  background: transparent !important;
+}
+
+.peh-page table.peh-table td.peh-empty,
+.peh-scope table.peh-table td.peh-empty {
+  text-align: center !important;
+  padding: 3rem 1rem !important;
+  color: var(--peh-th-color) !important;
+}
+
+.peh-sort-icon {
+  font-size: 0.7rem;
+  opacity: 0.35;
+  color: inherit !important;
+}
+
+.peh-sort-icon--active {
+  opacity: 0.7;
+  color: inherit !important;
+}
+
+/* ── Cell helpers ─────────────────────────────────────────────────────────── */
+.peh-company {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 8rem;
+  max-width: 14rem;
+}
+
+.peh-company__name {
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.peh-company__founded {
+  font-size: 0.7rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.peh-firm-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-link, #282561);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.peh-firm-link:hover {
+  text-decoration: underline;
+}
+
+.peh-sector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 7rem;
+  max-width: 11rem;
+}
+
+.peh-geo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.peh-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.peh-src {
+  font-size: 0.75rem;
+}
+.peh-src--web {
+  color: var(--peh-src-web);
+}
+.peh-src--scrape {
+  color: var(--peh-src-scrape);
+}
+.peh-src--unverified {
+  color: var(--peh-src-unverified);
+}
+
+.peh-est {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.peh-conf {
+  font-size: 0.625rem;
+  font-weight: 600;
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-sm, 4px);
+}
+
+.peh-conf--high {
+  background: var(--peh-conf-high-bg);
+  color: var(--peh-conf-high-color);
+}
+.peh-conf--mid {
+  background: var(--peh-conf-mid-bg);
+  color: var(--peh-conf-mid-color);
+}
+.peh-conf--low {
+  background: var(--peh-conf-low-bg);
+  color: var(--peh-conf-low-color);
+}
+
+.peh-web {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 9rem;
+  color: var(--color-link, #282561);
+  text-decoration: none;
+  font-size: 0.8125rem;
+}
+
+.peh-web:hover {
+  text-decoration: underline;
+}
+
+.peh-web__host {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.peh-desc {
+  max-width: 12rem;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+  line-height: 1.4;
+}
+
+.peh-ai {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.625rem;
+  font-weight: 600;
+  padding: 0.05rem 0.35rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--peh-ai-bg);
+  color: var(--peh-ai-color);
+  margin-left: 0.25rem;
+}
+
+.peh-products {
+  margin: 0;
+  padding-left: 1rem;
+  font-size: 0.7rem;
+  color: var(--color-text-secondary, #666);
+  max-width: 10rem;
+}
+
+.peh-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  max-width: 9rem;
+}
+
+.peh-kw {
+  font-size: 0.625rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--peh-kw-bg);
+  color: var(--peh-kw-color);
+  border: 1px solid var(--peh-kw-border, transparent);
+  white-space: nowrap;
+}
+
+.peh-stale {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.625rem;
+  font-weight: 500;
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--radius-full, 999px);
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.peh-stale__dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+}
+
+.peh-stale--fresh {
+  background: var(--peh-fresh-bg);
+  color: var(--peh-fresh-color);
+  border-color: var(--peh-fresh-border);
+}
+.peh-stale--fresh .peh-stale__dot {
+  background: var(--peh-fresh-dot);
+}
+
+.peh-stale--aging {
+  background: var(--peh-aging-bg);
+  color: var(--peh-aging-color);
+  border-color: var(--peh-aging-border);
+}
+.peh-stale--aging .peh-stale__dot {
+  background: var(--peh-aging-dot);
+}
+
+.peh-stale--stale {
+  background: var(--peh-stale-bg);
+  color: var(--peh-stale-color);
+  border-color: var(--peh-stale-border);
+}
+.peh-stale--stale .peh-stale__dot {
+  background: var(--peh-stale-dot);
+}
+
+.peh-muted {
+  color: var(--color-text-secondary, #666);
+  font-size: 0.75rem;
+}
+
+.peh-banner {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.8125rem;
+  background: color-mix(in srgb, var(--peh-stat-emerald) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--peh-stat-emerald) 30%, transparent);
+  color: var(--color-text-primary, #333);
+}
+
+.peh-banner--error {
+  background: color-mix(in srgb, var(--peh-stale-color) 10%, transparent);
+  border-color: color-mix(in srgb, var(--peh-stale-color) 25%, transparent);
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.peh-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border-subtle, #e5e7eb);
+  background: color-mix(in srgb, var(--surface-overlay, #f8f9fa) 40%, transparent);
+}
+
+.peh-footer__count {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.peh-footer__count strong {
+  color: var(--color-text-primary, #333);
+  font-weight: 500;
+}
+
+.peh-pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.peh-skel {
+  display: inline-block;
+  height: 0.875rem;
+  border-radius: var(--radius-sm, 8px);
+  background: linear-gradient(
+    90deg,
+    var(--peh-skel-bg) 25%,
+    color-mix(in srgb, var(--peh-skel-bg) 60%, #fff) 50%,
+    var(--peh-skel-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: peh-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes peh-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Deal team (F66 Unit 4) ───────────────────────────────────────────────────
+   The expander column, the row-level "has linked people" indicator, and the panel
+   that opens beneath a holding row. Colour tokens follow the file's existing
+   --peh-* convention; direct/fallback reuse the emerald/amber semantics the
+   reference panel uses so "verified link" vs "stand-in" reads at a glance. */
+:root {
+  --peh-team-bg: #f8fafc;
+  --peh-team-border: #e2e8f0;
+  --peh-team-muted: #64748b;
+  /* Base card surface. Needs its own token rather than --color-white: a sector-matched card
+     carries no --direct/--fallback tint, and sector is the common tier, so a literal white
+     here is what the whole panel looks like in dark mode. */
+  --peh-team-card-bg: #ffffff;
+  --peh-team-direct-bg: #ecfdf5;
+  --peh-team-direct-border: #6ee7b7;
+  --peh-team-direct-color: #047857;
+  --peh-team-fallback-bg: #fffbeb;
+  --peh-team-fallback-border: #fcd34d;
+  --peh-team-fallback-color: #b45309;
+  --peh-team-role-bg: #eef2ff;
+  --peh-team-role-color: #4338ca;
+  --peh-team-chip-direct: #10b981;
+  --peh-team-chip-fallback: #f59e0b;
+}
+
+/* Dark theme. Mirrors the token overrides at the top of this file: accent surfaces become
+   low-alpha tints of the same hue and their text lifts to the 200/300 ramp. The two chip
+   colours are deliberately absent — they are solid fills carrying white text, so they read
+   in both themes (same reason --peh-fresh-dot is not overridden above). */
+:root[data-theme='dark'] {
+  --peh-team-bg: var(--surface-overlay, #29344a);
+  --peh-team-border: var(--border-subtle, #334158);
+  --peh-team-muted: var(--color-text-secondary, #cbd5e1);
+  /* Cards sit on top of --peh-team-bg, so they lift rather than match. */
+  --peh-team-card-bg: var(--surface-hover, #33415a);
+  --peh-team-direct-bg: rgba(16, 185, 129, 0.2);
+  --peh-team-direct-border: rgba(16, 185, 129, 0.4);
+  --peh-team-direct-color: #6ee7b7;
+  --peh-team-fallback-bg: rgba(245, 158, 11, 0.2);
+  --peh-team-fallback-border: rgba(245, 158, 11, 0.4);
+  --peh-team-fallback-color: #fcd34d;
+  --peh-team-role-bg: rgba(129, 140, 248, 0.2);
+  --peh-team-role-color: #c7d2fe;
+}
+
+.peh-th--expand,
+.peh-td--expand {
+  width: 2rem;
+  padding-right: 0;
+}
+
+.peh-expand {
+  border: 0;
+  background: none;
+  padding: 0.25rem;
+  color: var(--peh-team-muted);
+  cursor: pointer;
+  line-height: 1;
+  border-radius: var(--radius-xs, 4px);
+}
+
+.peh-expand:hover,
+.peh-expand:focus-visible {
+  color: var(--peh-td-color);
+  background: var(--peh-row-hover);
+}
+
+.peh-company__team {
+  color: var(--peh-src-web);
+  font-size: 0.8125rem;
+}
+
+.peh-row--expanded > td {
+  background: var(--peh-row-hover);
+}
+
+/* BaseTable owns the sub-row element (it hard-codes `.bt-row--expanded`), so the panel styling
+   hangs off the cell we render rather than off the row. */
+.peh-td--panel {
+  padding: 0;
+  background: var(--peh-team-bg);
+}
+
+.peh-team {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid var(--peh-team-border);
+}
+
+.peh-team__muted {
+  margin: 0;
+  color: var(--peh-team-muted);
+  font-size: 0.8125rem;
+  font-style: italic;
+}
+
+.peh-team__head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+
+.peh-team__heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--peh-team-muted);
+}
+
+.peh-team__count {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  padding: 0.125rem 0.4375rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--peh-kw-bg);
+  color: var(--peh-kw-color);
+  border: 1px solid var(--peh-team-border);
+}
+
+.peh-team__count--direct {
+  background: var(--peh-team-direct-bg);
+  color: var(--peh-team-direct-color);
+  border-color: var(--peh-team-direct-border);
+  font-weight: 600;
+}
+
+.peh-team__count--fallback {
+  background: var(--peh-team-fallback-bg);
+  color: var(--peh-team-fallback-color);
+  border-color: var(--peh-team-fallback-border);
+  font-weight: 600;
+}
+
+.peh-team__note {
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--peh-team-muted);
+}
+
+.peh-team__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.peh-team__card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 0.5rem 0.625rem;
+  border: 1px solid var(--peh-team-border);
+  border-radius: var(--radius-sm, 8px);
+  background: var(--peh-team-card-bg);
+}
+
+.peh-team__card--direct {
+  border-color: var(--peh-team-direct-border);
+  background: var(--peh-team-direct-bg);
+}
+
+.peh-team__card--fallback {
+  border-color: var(--peh-team-fallback-border);
+  background: var(--peh-team-fallback-bg);
+}
+
+.peh-team__avatar {
+  flex: 0 0 auto;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.peh-team__avatar--initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--peh-kw-bg);
+  color: var(--peh-kw-color);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.peh-team__body {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.peh-team__name {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--peh-td-color);
+}
+
+.peh-team__chip {
+  flex: 0 0 auto;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.0625rem 0.3125rem;
+  border-radius: var(--radius-xs, 4px);
+  color: var(--color-white, #ffffff);
+}
+
+.peh-team__chip--direct {
+  background: var(--peh-team-chip-direct);
+}
+
+.peh-team__chip--fallback {
+  background: var(--peh-team-chip-fallback);
+}
+
+.peh-team__title {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--peh-team-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.peh-team__role {
+  display: inline-block;
+  margin-top: 0.1875rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+  padding: 0.0625rem 0.375rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--peh-team-role-bg);
+  color: var(--peh-team-role-color);
+}
+
+.peh-team__contacts {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.3125rem 0 0;
+}
+
+.peh-team__contacts a {
+  color: var(--peh-team-muted);
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.peh-team__contacts a:hover,
+.peh-team__contacts a:focus-visible {
+  color: var(--peh-src-web);
+}
+
+/* ── Enrichment panel (ledger read) ───────────────────────────────────────────
+   Sits under the deal team inside the same expanded row. Reuses the --peh-team-*
+   surface tokens (both dark-mode variants are defined with them) and adds only the
+   two status colours it needs. */
+:root {
+  --peh-enr-found-bg: #ecfdf5;
+  --peh-enr-found-color: #047857;
+  --peh-enr-missing-bg: #f1f5f9;
+  --peh-enr-missing-color: #64748b;
+}
+
+:root[data-theme='dark'] {
+  --peh-enr-found-bg: rgba(16, 185, 129, 0.2);
+  --peh-enr-found-color: #6ee7b7;
+  --peh-enr-missing-bg: rgba(148, 163, 184, 0.2);
+  --peh-enr-missing-color: #cbd5e1;
+}
+
+.peh-enr {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid var(--peh-team-border);
+}
+
+.peh-enr__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--peh-team-muted);
+}
+
+.peh-enr__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.625rem;
+}
+
+.peh-enr__section {
+  padding: 0.5rem 0.625rem;
+  border: 1px solid var(--peh-team-border);
+  border-radius: var(--radius-sm, 8px);
+  background: var(--peh-team-card-bg);
+}
+
+.peh-enr__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0 0 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.peh-enr__status {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.0625rem 0.3125rem;
+  border-radius: var(--radius-xs, 4px);
+  background: var(--peh-enr-missing-bg);
+  color: var(--peh-enr-missing-color);
+}
+
+.peh-enr__status--found {
+  background: var(--peh-enr-found-bg);
+  color: var(--peh-enr-found-color);
+}
+
+.peh-enr__conf {
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.peh-enr__fields {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.125rem 0.5rem;
+  margin: 0;
+  font-size: 0.6875rem;
+}
+
+.peh-enr__field {
+  display: contents;
+}
+
+.peh-enr__field dt {
+  color: var(--peh-team-muted);
+  white-space: nowrap;
+}
+
+.peh-enr__field dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.peh-enr__error {
+  margin: 0.375rem 0 0;
+  font-size: 0.6875rem;
+  color: var(--peh-stale-color);
+}
+
+/* The classifier's justification, collapsed. Muted and quiet by default so it reads as an
+   affordance rather than as another field; only the open state earns visual weight. */
+.peh-enr__reason {
+  margin: 0.375rem 0 0;
+  font-size: 0.6875rem;
+}
+
+.peh-enr__reason > summary {
+  color: var(--peh-team-muted);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  width: fit-content;
+}
+
+/* Safari renders the default disclosure triangle through a pseudo-element that
+   `list-style: none` alone does not remove. */
+.peh-enr__reason > summary::-webkit-details-marker {
+  display: none;
+}
+
+.peh-enr__reason > summary::before {
+  content: '▸';
+  display: inline-block;
+  margin-right: 0.25rem;
+  transition: transform 120ms ease;
+}
+
+.peh-enr__reason[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.peh-enr__reason > summary:hover,
+.peh-enr__reason > summary:focus-visible {
+  color: var(--peh-th-color);
+}
+
+.peh-enr__reason > p {
+  margin: 0.25rem 0 0;
+  padding-left: 0.875rem; /* aligns the prose under the summary text, not the marker */
+  color: var(--peh-th-color);
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .peh-enr__reason > summary::before {
+    transition: none;
+  }
+}

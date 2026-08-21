@@ -1,0 +1,819 @@
+/*
+ * IB Transactions page — pixel-faithful port of Replit QURALYST-20 reference.
+ * All raw hex values and radius literals are replaced with design-token vars
+ * (scale-unlimited/declaration-strict-value compliance).
+ *
+ * New badge/chart colours that have no global token are defined as local
+ * :root vars below so they can be overridden by a dark-theme block if needed.
+ */
+
+/* ── Local colour tokens (badge palette + chart accent) ─────────────────── */
+:root {
+  /* Bar chart accents */
+  --tx-bar-blue: #60a5fa;
+  --tx-bar-gold: #fbbf24;
+
+  /* League rank accents */
+  --tx-rank-gold: #d97706;
+  --tx-rank-silver: #64748b;
+  --tx-rank-bronze: #ea580c;
+
+  /* Skeleton shimmer */
+  --tx-skel-bg: #e2e8f0;
+
+  /* League first-row highlight */
+  --tx-league-first-bg: rgba(255, 251, 235, 0.7);
+
+  /* Sector tag (league row) */
+  --tx-sector-tag-bg: #f1f5f9;
+  --tx-sector-tag-color: #64748b;
+
+  /* Focus ring tweak for plain inputs */
+  --tx-input-focus-border: #86b7fe;
+  --tx-input-focus-shadow: rgba(13, 110, 253, 0.12);
+
+  /* Deal-type badge colours */
+  --tx-badge-ma-bg: #dbeafe;
+  --tx-badge-ma-color: #1d4ed8;
+  --tx-badge-sky-bg: #e0f2fe;
+  --tx-badge-sky-color: #0369a1;
+  --tx-badge-ipo-bg: #ede9fe;
+  --tx-badge-ipo-color: #6d28d9;
+  --tx-badge-restr-bg: #ffedd5;
+  --tx-badge-restr-color: #c2410c;
+  --tx-badge-debt-bg: #fef3c7;
+  --tx-badge-debt-color: #b45309;
+  --tx-badge-cap-bg: #dcfce7;
+  --tx-badge-cap-color: #15803d;
+  --tx-badge-priv-bg: #ccfbf1;
+  --tx-badge-priv-color: #0f766e;
+  --tx-badge-def-bg: #f1f5f9;
+  --tx-badge-def-color: #475569;
+}
+
+:root[data-theme='dark'] {
+  --tx-bar-blue: #818cf8;
+  --tx-bar-gold: linear-gradient(90deg, #f59e0b, #fbbf24);
+  --tx-rank-gold: #fcd34d;
+  --tx-rank-silver: #cbd5e1;
+  --tx-rank-bronze: #fdba74;
+
+  --tx-skel-bg: rgba(255, 255, 255, 0.08);
+  --tx-league-first-bg: rgba(245, 158, 11, 0.08);
+
+  --tx-sector-tag-bg: rgba(99, 102, 241, 0.14);
+  --tx-sector-tag-color: #a5b4fc;
+
+  --tx-input-focus-border: #818cf8;
+  --tx-input-focus-shadow: rgba(129, 140, 248, 0.18);
+
+  --tx-badge-ma-bg: rgba(99, 102, 241, 0.16);
+  --tx-badge-ma-color: #818cf8;
+  --tx-badge-sky-bg: rgba(56, 189, 248, 0.16);
+  --tx-badge-sky-color: #38bdf8;
+  --tx-badge-ipo-bg: rgba(168, 85, 247, 0.16);
+  --tx-badge-ipo-color: #c084fc;
+  --tx-badge-restr-bg: rgba(245, 158, 11, 0.16);
+  --tx-badge-restr-color: #fcd34d;
+  --tx-badge-debt-bg: rgba(239, 68, 68, 0.16);
+  --tx-badge-debt-color: #fca5a5;
+  --tx-badge-cap-bg: rgba(16, 185, 129, 0.16);
+  --tx-badge-cap-color: #6ee7b7;
+  --tx-badge-priv-bg: rgba(20, 184, 166, 0.16);
+  --tx-badge-priv-color: #2dd4bf;
+  --tx-badge-def-bg: rgba(148, 163, 184, 0.16);
+  --tx-badge-def-color: #cbd5e1;
+}
+
+/* ── Page wrapper (Q20: plain flex stack, no extra outer padding) ─────────── */
+.tx-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.tx-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.tx-header__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.25rem;
+  color: var(--color-text-primary, #333);
+}
+
+.tx-header__sub {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+  margin: 0;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+.tx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    opacity 0.15s;
+  border: 1px solid transparent;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.tx-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tx-btn--outline {
+  border-color: var(--border-subtle, #e5e7eb);
+  background: var(--surface-raised, #fff);
+  color: var(--color-text-primary, #333);
+}
+
+.tx-btn--outline:hover:not(:disabled) {
+  background: var(--surface-overlay, #f8f9fa);
+}
+
+.tx-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-text-secondary, #666);
+}
+
+.tx-btn--ghost:hover {
+  background: var(--surface-overlay, #f8f9fa);
+}
+
+/* ── Stats grid ───────────────────────────────────────────────────────────── */
+.tx-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .tx-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.tx-stat {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 1rem;
+}
+
+.tx-stat__label {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+  margin-bottom: 0.25rem;
+}
+
+.tx-stat__label .bi {
+  font-size: 0.875rem;
+}
+
+.tx-stat__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text-primary, #333);
+}
+
+/* ── Skeleton pulse ───────────────────────────────────────────────────────── */
+@keyframes tx-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.tx-skel {
+  display: inline-block;
+  background: var(--tx-skel-bg);
+  border-radius: var(--radius-xs, 4px);
+  animation: tx-pulse 1.5s ease-in-out infinite;
+}
+
+/* ── League table card ────────────────────────────────────────────────────── */
+.tx-league {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tx-league__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.tx-league__title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tx-league__trophy {
+  font-size: 0.875rem;
+  color: var(--color-warning, #f59e0b);
+}
+
+.tx-league__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #333);
+}
+
+.tx-league__subtitle {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.tx-league__filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+.tx-league__filters select,
+.tx-league__filters .form-select {
+  width: auto !important;
+  flex: 0 0 auto;
+}
+
+.tx-league__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* ── League row ───────────────────────────────────────────────────────────── */
+.tx-lr {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: var(--radius-sm, 8px);
+  padding: 0.375rem 0.5rem;
+  transition: background-color 0.12s;
+}
+
+.tx-lr:hover:not(.tx-lr--first) {
+  background: var(--surface-hover, #f0f8ff);
+}
+
+.tx-lr--first {
+  background: var(--tx-league-first-bg);
+}
+
+.tx-lr__rank {
+  font-size: 0.875rem;
+  width: 1.25rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.tx-lr__rank--gold {
+  color: var(--tx-rank-gold);
+  font-weight: 700;
+}
+.tx-lr__rank--silver {
+  color: var(--tx-rank-silver);
+  font-weight: 600;
+}
+.tx-lr__rank--bronze {
+  color: var(--tx-rank-bronze);
+  font-weight: 600;
+}
+.tx-lr__rank--other {
+  color: var(--color-text-secondary, #666);
+}
+
+.tx-lr__name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  width: 11rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-link, #282561);
+  text-decoration: none;
+}
+
+.tx-lr__name:hover {
+  text-decoration: underline;
+}
+
+.tx-lr__bar-track {
+  flex: 1;
+  height: 0.375rem;
+  background: var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-full, 999px);
+  overflow: hidden;
+}
+
+.tx-lr__bar-fill {
+  height: 100%;
+  background: var(--tx-bar-blue);
+  border-radius: var(--radius-full, 999px);
+  transition: width 0.4s ease;
+}
+
+.tx-lr__bar-fill--gold {
+  background: var(--tx-bar-gold);
+}
+
+.tx-lr__deals {
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary, #666);
+  width: 4.5rem;
+  text-align: right;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Sector tags — hidden below lg */
+.tx-lr__sectors {
+  display: none;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  width: 12rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 992px) {
+  .tx-lr__sectors {
+    display: flex;
+  }
+}
+
+.tx-lr__sector-tag {
+  font-size: 0.625rem;
+  background: var(--tx-sector-tag-bg);
+  color: var(--tx-sector-tag-color);
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-xs, 4px);
+  line-height: 1.4;
+}
+
+/* Most-recent deal — hidden below xl */
+.tx-lr__recent {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+  width: 6rem;
+  text-align: right;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.tx-lr__recent .bi {
+  font-size: 0.7rem;
+}
+
+@media (min-width: 1200px) {
+  .tx-lr__recent {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+/* ── Feed filters ───────────────────────────────────────────────────────── */
+.tx-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .tx-filters {
+    flex-wrap: wrap;
+  }
+}
+
+.tx-filters__search {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 180px;
+}
+
+.tx-filters__search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary, #94a3b8);
+  font-size: 0.875rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tx-filters select,
+.tx-filters .form-select {
+  width: auto !important;
+  flex: 0 0 auto;
+  max-width: 180px;
+}
+
+/* ── Selects & Inputs ─────────────────────────────────────────────────────── */
+.tx-select,
+.tx-select--sm,
+.tx-select--pill {
+  width: auto !important;
+  height: 2.25rem;
+  font-size: 0.875rem;
+  padding: 0 2rem 0 0.75rem;
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px) !important;
+  background-color: var(--surface-raised, #fff);
+  background-image: var(
+    --dropdown-arrow,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")
+  );
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  color: var(--color-text-primary, #333);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.tx-select--sm {
+  height: 2rem;
+  font-size: 0.8125rem;
+  padding: 0 1.85rem 0 0.65rem;
+}
+
+.tx-select:hover:not(:disabled),
+.tx-select--sm:hover:not(:disabled) {
+  border-color: var(--border-strong, #94a3b8);
+  transform: translateY(-1px);
+}
+
+.tx-input {
+  display: block;
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 0.75rem 0 2.25rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  background: var(--surface-raised, #fff);
+  color: var(--color-text-primary, #333);
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.tx-input:focus {
+  border-color: var(--tx-input-focus-border);
+  box-shadow: 0 0 0 3px var(--tx-input-focus-shadow);
+}
+
+/* Dark theme surfaces & inputs */
+:root[data-theme='dark'] .tx-stat,
+:root[data-theme='dark'] .tx-league,
+:root[data-theme='dark'] .tx-page .tx-table-wrap {
+  background: var(--surface-raised, #1e2230) !important;
+  border: 1px solid var(--border-subtle, #2e3446) !important;
+}
+
+:root[data-theme='dark'] .tx-select,
+:root[data-theme='dark'] .tx-input,
+:root[data-theme='dark'] .tx-btn--outline {
+  background-color: var(--surface-overlay, #2a2f3f) !important;
+  border: 1px solid var(--border-subtle, #33394b) !important;
+  color: var(--color-text-primary, #f3f4f6) !important;
+}
+
+:root[data-theme='dark'] .tx-select:hover:not(:disabled),
+:root[data-theme='dark'] .tx-input:hover,
+:root[data-theme='dark'] .tx-btn--outline:hover:not(:disabled) {
+  border-color: var(--border-strong, #475569) !important;
+  background-color: var(--surface-hover, #353b4f) !important;
+}
+
+:root[data-theme='dark'] .tx-select option {
+  background-color: var(--surface-raised, #242836) !important;
+  color: var(--color-text-primary, #f3f4f6) !important;
+  padding: 8px 12px !important;
+}
+
+/* ── Table (QURALYST-20 IBAllTransactions) ─────────────────────────────────
+ * Global `tables.css` paints EVERY `table thead th` / `table td` with a blue
+ * gradient + fixed 220px columns (!important). Same bug as IB Banks — reset
+ * those globals under `.tx-page` so this table matches Q20. */
+.tx-page .tx-table-wrap {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  overflow: hidden;
+  box-shadow: none;
+  max-height: none;
+}
+
+.tx-page table.tx-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  table-layout: auto !important;
+  font-size: 0.875rem;
+  margin-bottom: 0;
+  background: transparent;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+.tx-page table.tx-table thead tr {
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+  background: var(--surface-overlay, #f8f9fa);
+}
+
+.tx-page table.tx-table thead th,
+.tx-page table.tx-table th {
+  background: var(--surface-overlay, #f8f9fa) !important;
+  color: var(--color-text-secondary, #666) !important;
+  position: static !important;
+  top: auto !important;
+  z-index: auto !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb) !important;
+  font-weight: 500 !important;
+  font-size: 0.8125rem !important;
+  padding: 0.625rem 1rem !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+  letter-spacing: normal !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  vertical-align: middle !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.tx-page table.tx-table th.tx-th--icon {
+  width: 2rem !important;
+  min-width: 2rem !important;
+  max-width: 2.5rem !important;
+}
+
+.tx-page table.tx-table td {
+  padding: 0.625rem 1rem !important;
+  vertical-align: middle !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb) !important;
+  color: var(--color-text-primary, #333) !important;
+  font-size: 0.875rem !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  cursor: default !important;
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  transition: none !important;
+}
+
+.tx-page table.tx-table td:hover {
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+  cursor: default !important;
+}
+
+.tx-page table.tx-table tbody tr:nth-child(even),
+.tx-page table.tx-table tbody tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+.tx-page table.tx-table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+.tx-page table.tx-table tbody tr.tx-row:hover {
+  background: color-mix(in srgb, var(--surface-overlay, #f8f9fa) 50%, transparent) !important;
+}
+
+.tx-page table.tx-table tbody tr.tx-row:hover td {
+  background: transparent !important;
+}
+
+/* ── Table cells ──────────────────────────────────────────────────────────── */
+.tx-page table.tx-table td.tx-cell--deal {
+  max-width: 13.75rem !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.tx-deal__name {
+  font-weight: 500;
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tx-deal__sub {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tx-page table.tx-table td.tx-cell--sm {
+  font-size: 0.875rem;
+  white-space: nowrap !important;
+}
+
+.tx-page table.tx-table td.tx-cell--icon {
+  width: 2rem !important;
+  min-width: 2rem !important;
+  max-width: 2.5rem !important;
+  text-align: center !important;
+  overflow: visible !important;
+}
+
+.tx-muted {
+  color: var(--color-text-secondary, #666) !important;
+  font-size: 0.875rem;
+}
+
+.tx-link {
+  color: var(--color-link, #282561);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s ease;
+}
+
+.tx-link:hover {
+  color: var(--color-link-hover, #4338ca);
+  text-decoration: underline;
+}
+
+:root[data-theme='dark'] .tx-link {
+  color: var(--color-link, #818cf8);
+}
+
+:root[data-theme='dark'] .tx-link:hover {
+  color: var(--color-link-hover, #a5b4fc);
+}
+
+.tx-source-link {
+  color: var(--color-text-secondary, #666);
+  font-size: 0.8125rem;
+  transition: color 0.12s;
+}
+
+.tx-source-link:hover {
+  color: var(--color-text-primary, #333);
+}
+
+:root[data-theme='dark'] .tx-source-link {
+  color: var(--color-text-secondary, #94a3b8);
+}
+
+:root[data-theme='dark'] .tx-source-link:hover {
+  color: var(--color-link, #818cf8);
+}
+
+/* ── Deal-type badges ─────────────────────────────────────────────────────── */
+.tx-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full, 999px);
+  white-space: nowrap;
+}
+
+.tx-badge--ma {
+  background: var(--tx-badge-ma-bg);
+  color: var(--tx-badge-ma-color);
+}
+.tx-badge--sellside {
+  background: var(--tx-badge-ma-bg);
+  color: var(--tx-badge-ma-color);
+}
+.tx-badge--buyside {
+  background: var(--tx-badge-sky-bg);
+  color: var(--tx-badge-sky-color);
+}
+.tx-badge--ipo {
+  background: var(--tx-badge-ipo-bg);
+  color: var(--tx-badge-ipo-color);
+}
+.tx-badge--restr {
+  background: var(--tx-badge-restr-bg);
+  color: var(--tx-badge-restr-color);
+}
+.tx-badge--debt {
+  background: var(--tx-badge-debt-bg);
+  color: var(--tx-badge-debt-color);
+}
+.tx-badge--capital {
+  background: var(--tx-badge-cap-bg);
+  color: var(--tx-badge-cap-color);
+}
+.tx-badge--private {
+  background: var(--tx-badge-priv-bg);
+  color: var(--tx-badge-priv-color);
+}
+.tx-badge--fairness {
+  background: var(--tx-badge-def-bg);
+  color: var(--tx-badge-def-color);
+}
+.tx-badge--default {
+  background: var(--tx-badge-def-bg);
+  color: var(--tx-badge-def-color);
+}
+
+/* ── Empty states ─────────────────────────────────────────────────────────── */
+.tx-page table.tx-table td.tx-empty-cell {
+  text-align: center !important;
+  padding: 3rem 1rem !important;
+  color: var(--color-text-secondary, #666) !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.tx-empty-msg {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+  padding: 1rem 0;
+  margin: 0;
+}
+
+/* ── Pagination ───────────────────────────────────────────────────────────── */
+.tx-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.tx-pagination__btns {
+  display: flex;
+  gap: 0.25rem;
+}

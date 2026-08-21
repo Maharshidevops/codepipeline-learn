@@ -1,0 +1,58 @@
+/* FAQ accordion. The full FAQ page styling lands in Phase 3; this is the shared expand/collapse
+   shell. `slideDown` keyframe is verbatim from
+   Backup/static/css/pages/strategic-research/strategic-research.css. */
+.q-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.q-accordion-item {
+  border: 2px solid var(--color-border-light, #e5e7eb);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-white, #ffffff);
+  overflow: hidden;
+}
+.q-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary, #282561);
+  transition: background 0.2s ease;
+}
+.q-accordion-header:hover {
+  background: var(--color-bg-light, #f8f9fa);
+}
+.q-accordion-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.q-accordion-item.open .q-accordion-icon {
+  transform: rotate(180deg);
+}
+.q-accordion-body {
+  padding: 0 20px 18px;
+  color: var(--color-text-secondary, #666666);
+  line-height: 1.6;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

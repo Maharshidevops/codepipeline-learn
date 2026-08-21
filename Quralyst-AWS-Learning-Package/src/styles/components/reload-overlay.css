@@ -1,0 +1,80 @@
+/* ============================================
+   RELOAD OVERLAY STYLES
+   Used by quralyst_research, strategic_research
+   ============================================ */
+
+.reload-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.reload-overlay-content {
+  text-align: center;
+  padding: 40px;
+  background: var(--surface-modal);
+  border-radius: var(--radius-lg);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+}
+
+.reload-spinner {
+  margin-bottom: 20px;
+}
+
+.reload-spinner i {
+  color: var(--color-primary);
+}
+
+.reload-message {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ============================================
+   ANIMATION
+   ============================================ */
+
+@keyframes reloadPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.reload-overlay-content {
+  animation: reloadPulse 2s ease-in-out infinite;
+}
+/* Local spin utility (Phase 30) — replaces Font Awesome's fa-spin/fa-2x on the overlay icon. */
+.reload-spinner i {
+  font-size: 2em;
+}
+
+.icon-spin {
+  display: inline-block;
+  animation: icon-spin 1s linear infinite;
+}
+
+@keyframes icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

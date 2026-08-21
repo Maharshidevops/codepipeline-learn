@@ -1,0 +1,147 @@
+/* Tokenized pill badge. Tones use the core/colors.css *-bg / * token pairs. The legacy app applied
+   Bootstrap .badge variants ad hoc; this unifies them with the Quralyst palette. */
+.q-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  border: 1px solid transparent;
+}
+.q-badge--success {
+  background: var(--color-success-bg, #f0fdf4);
+  color: var(--color-success, #16a34a);
+  border-color: var(--color-success-border, #bbf7d0);
+}
+.q-badge--danger {
+  background: var(--color-danger-bg, #fef2f2);
+  color: var(--color-danger, #dc2626);
+  border-color: var(--color-danger-border, #fecaca);
+}
+.q-badge--warning {
+  background: var(--color-warning-bg, #fffbeb);
+  color: var(--color-warning, #f59e0b);
+  border-color: var(--color-warning-border, #fde68a);
+}
+.q-badge--info {
+  background: var(--color-info-bg, #eff6ff);
+  color: var(--color-info, #2563eb);
+  border-color: var(--color-info-border, #bfdbfe);
+}
+.q-badge--secondary,
+.q-badge--neutral {
+  background: var(--color-secondary, #7db3e2);
+  color: var(--color-text-white, #ffffff);
+}
+.q-badge--primary {
+  background: var(--color-primary-bg, #eef2ff);
+  color: var(--color-primary, #4f46e5);
+  border-color: var(--color-primary-border, #c7d2fe);
+}
+
+:root[data-theme='dark'] .q-badge--primary {
+  background: rgba(99, 102, 241, 0.18);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+:root[data-theme='dark'] .q-badge--success {
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+:root[data-theme='dark'] .q-badge--danger {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+:root[data-theme='dark'] .q-badge--warning {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+:root[data-theme='dark'] .q-badge--info {
+  background: rgba(99, 102, 241, 0.18);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+:root[data-theme='dark'] .q-badge--secondary {
+  background: rgba(148, 163, 184, 0.18);
+  color: #cbd5e1;
+  border-color: rgba(148, 163, 184, 0.35);
+}
+
+/* ── PE Signal Chips ────────────────────────────────────────────────────── */
+.sig-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.725rem;
+  font-weight: 600;
+  line-height: 1.4;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.sig-chip--high,
+.sig-chip--elevated {
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+:root[data-theme='dark'] .sig-chip--high,
+:root[data-theme='dark'] .sig-chip--elevated {
+  background: rgba(16, 185, 129, 0.18);
+  color: #6ee7b7;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.sig-chip--moderate,
+.sig-chip--watch {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+:root[data-theme='dark'] .sig-chip--moderate,
+:root[data-theme='dark'] .sig-chip--watch {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fcd34d;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.sig-chip--low {
+  background: rgba(99, 102, 241, 0.12);
+  color: #4338ca;
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+:root[data-theme='dark'] .sig-chip--low {
+  background: #2a354c;
+  color: #f8fafc;
+  border-color: #3d4c6a;
+}
+
+.sig-chip--dormant,
+.sig-chip--na {
+  background: rgba(148, 163, 184, 0.12);
+  color: #475569;
+  border-color: rgba(148, 163, 184, 0.25);
+}
+
+:root[data-theme='dark'] .sig-chip--dormant,
+:root[data-theme='dark'] .sig-chip--na {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+  border-color: rgba(148, 163, 184, 0.3);
+}

@@ -1,0 +1,156 @@
+/* ============================================
+   FINANCIAL VERTICALS RESULTS PAGE STYLES
+   Page-specific styles for financial_verticals/results.html
+   ============================================ */
+
+/* Header — mirrors view-result.css / result-layout.css. Required because global
+   typography.css sets h1–h6 to white; without these overrides the page title
+   is invisible on the light workspace background. */
+.result-header-section {
+  padding-bottom: 0;
+}
+
+.result-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--color-primary, #282561);
+  margin-bottom: 0.25rem;
+}
+
+.result-creator-info {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-primary, #282561);
+  margin-bottom: 0;
+}
+
+.creator-name {
+  font-weight: 600;
+  color: var(--color-primary, #282561);
+}
+
+.creation-date {
+  font-weight: 500;
+}
+
+.result-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.result-actions .btn-standard {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.result-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--border-subtle, #dee2e6);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-white, #ffffff);
+  color: var(--color-primary, #282561);
+  transition: all 0.2s ease;
+}
+
+.result-icon-btn:hover {
+  background: var(--surface-hover, #f8f9fa);
+  border-color: var(--color-primary, #282561);
+}
+
+.result-icon-btn i {
+  font-size: 1.1rem;
+}
+
+.result-icon-btn--delete:hover {
+  color: var(--color-danger, #dc3545);
+  border-color: var(--color-danger, #dc3545);
+}
+
+@media (max-width: 768px) {
+  .result-header-section {
+    padding: 15px 0;
+  }
+
+  .result-title {
+    font-size: 22px;
+  }
+
+  .result-creator-info {
+    font-size: 13px;
+  }
+
+  .result-actions {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+  }
+}
+
+/* Table header styling - extracted from inline styles */
+.financial-verticals-table thead th,
+#financial-verticals-table thead th {
+  background: var(--color-primary);
+  color: var(--color-text-white, #ffffff);
+  border: 1px solid var(--color-success);
+  font-weight: 600;
+  padding: 12px 8px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* All columns now have equal width - removed specific column widths */
+
+/* Table cell styling */
+.financial-verticals-table tbody td {
+  padding: 10px 8px;
+  vertical-align: middle;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Clickable cells */
+.clickable-cell {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clickable-cell:hover {
+  background-color: var(--surface-hover);
+}
+
+/* Financial range display */
+.financial-range {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+/* Domain links */
+#financial-verticals-table a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+#financial-verticals-table a:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+/* Badge styling for industries */
+#financial-verticals-table .badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px;
+  color: var(--color-primary);
+}

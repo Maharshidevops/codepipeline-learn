@@ -1,0 +1,29 @@
+/* App-level globals layered on top of the verbatim core/components CSS.
+   Core (reset/colors/typography/...) is imported first in main.tsx; this only fills gaps. */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text-primary);
+}
+
+/* View Transitions (Phase 36) — default cross-fade for router tab switches + wizard steps.
+   Wrapped in no-preference so reduced-motion users get instant swaps; unsupported browsers
+   ignore these selectors entirely. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 160ms;
+  }
+}

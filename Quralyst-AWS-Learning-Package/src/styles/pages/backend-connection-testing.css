@@ -1,0 +1,170 @@
+/* ── Layout ─────────────────────────────────────────────────────────────────── */
+
+.bct-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.bct-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.bct-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.bct-subtitle {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────────── */
+
+.bct-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.bct-buttons button {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.bct-buttons button:hover:not(:disabled) {
+  background: var(--surface-base);
+  border-color: var(--color-control-muted);
+}
+
+.bct-buttons button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Alert ──────────────────────────────────────────────────────────────────── */
+
+.bct-alert {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.bct-alert--error {
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-danger-border);
+  color: var(--color-danger);
+}
+
+.bct-alert--ok {
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
+  color: var(--color-success);
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────────── */
+
+.bct-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.bct-card {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  background: var(--surface-raised);
+  opacity: 0.45;
+  transition: opacity 0.25s;
+}
+
+.bct-card--visible {
+  opacity: 1;
+}
+
+.bct-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.bct-card-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ── Badges ─────────────────────────────────────────────────────────────────── */
+
+.bct-badge {
+  display: inline-block;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-transform: capitalize;
+}
+
+.bct-badge--ok {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.bct-badge--fail {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+/* ── Definition list ────────────────────────────────────────────────────────── */
+
+.bct-dl {
+  font-size: 0.875rem;
+}
+
+.bct-dl-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.375rem 0;
+  border-bottom: 1px solid var(--surface-base);
+}
+
+.bct-dl-row:last-child {
+  border-bottom: none;
+}
+
+.bct-dl dt {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  margin: 0;
+}
+
+.bct-dl dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+  max-width: 65%;
+  word-break: break-word;
+}
+
+.bct-card-empty {
+  color: var(--color-text-light);
+  font-size: 0.875rem;
+  margin: 0;
+}

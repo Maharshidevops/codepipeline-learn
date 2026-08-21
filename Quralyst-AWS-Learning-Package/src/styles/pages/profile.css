@@ -1,0 +1,844 @@
+/* ============================================
+   PROFILE PAGE STYLES
+   Profile page layout, sections, and form styling
+   ============================================ */
+
+/* ============================================
+   PAGE CONTAINER
+   ============================================ */
+
+/* Width + outer spacing now come from the shared .main-content workspace box (Phase 24). */
+.profile-page .container-fluid {
+  background: transparent;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================
+   PROFILE HEADER
+   ============================================ */
+
+.profile-header-container {
+  background: var(--surface-raised);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-raised);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+
+.profile-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--border-subtle, #e5e7eb);
+  background: var(--surface-overlay, #f8fafc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.profile-avatar:hover {
+  border-color: var(--color-primary, #6366f1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Profile Image Upload Label */
+.profile-image-upload-label {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--color-primary, #282561);
+  color: var(--color-white, #ffffff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid var(--color-white, #ffffff);
+  font-size: 12px;
+  transition: all 0.3s ease;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- brand-navy shadow variant, deliberate one-off */
+  box-shadow: 0 2px 8px rgba(40, 37, 97, 0.2);
+}
+
+.profile-image-upload-label:hover {
+  background: var(--color-primary);
+  transform: scale(1.1);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- brand-navy shadow variant, deliberate one-off */
+  box-shadow: 0 4px 12px rgba(40, 37, 97, 0.3);
+}
+
+/* Image Upload Progress */
+.image-upload-progress {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--color-primary, #282561);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-white, #ffffff);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- brand-navy shadow variant, deliberate one-off */
+  box-shadow: 0 2px 8px rgba(40, 37, 97, 0.2);
+}
+
+.image-upload-progress .spinner-border-sm {
+  color: var(--color-white, #ffffff);
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.profile-basic-info h2.profile-name {
+  color: var(--color-primary, #282561);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.profile-basic-info .profile-email {
+  color: var(--color-primary, #282561);
+  font-size: 1.1rem;
+  margin: 0.25rem 0 0 0;
+}
+
+/* ============================================
+   PROFILE ACTION BUTTONS
+   ============================================ */
+
+.profile-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.profile-actions .btn {
+  padding: 8px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  width: auto;
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile-actions .btn-edit {
+  background: var(--color-primary, #282561);
+  color: var(--color-white, #ffffff);
+  border-color: var(--color-primary, #282561);
+}
+
+.profile-actions .btn-edit:hover {
+  background: var(--color-secondary, #7db3e2);
+  transform: translateY(-2px);
+  border-color: var(--color-secondary, #7db3e2);
+}
+
+.profile-actions .btn-save {
+  background: var(--color-primary, #282561);
+  color: var(--color-white, #ffffff);
+  border-color: var(--color-primary, #282561);
+}
+
+.profile-actions .btn-save:hover {
+  background: var(--color-secondary, #7db3e2);
+  border-color: var(--color-secondary, #7db3e2);
+  transform: translateY(-2px);
+}
+
+.profile-actions .btn-cancel {
+  background: var(--color-primary, #282561);
+  color: var(--color-white, #ffffff);
+  border-color: var(--color-primary, #282561);
+}
+
+.profile-actions .btn-cancel:hover {
+  background: var(--color-secondary, #7db3e2);
+  border-color: var(--color-secondary, #7db3e2);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   PROFILE SECTIONS
+   ============================================ */
+
+.profile-section {
+  background: var(--surface-raised);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-raised);
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.billing-section {
+  background: var(--surface-raised);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-raised);
+  padding: 2.5rem;
+}
+
+.billing-title {
+  color: var(--color-primary, #282561);
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--color-border, #e5e7eb);
+  padding-bottom: 1rem;
+}
+
+.profile-notice {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+
+/* Ensure security button uses the primary style and aligns with inputs */
+.billing-section .btn-standard {
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.billing-section .change-password-btn {
+  width: 100%;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
+  line-height: 1;
+}
+
+/* ============================================
+   FORM LABELS AND INPUTS
+   ============================================ */
+
+.profile-label {
+  display: block;
+  color: var(--color-primary, #282561);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.25px;
+}
+
+.profile-label i {
+  margin-right: 0.5rem;
+  color: var(--color-primary, #282561);
+  width: 16px;
+  text-align: center;
+}
+
+.profile-input,
+.profile-select {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--color-border, #e5e7eb);
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  color: var(--color-text, #333333);
+  background: var(--surface-overlay);
+  transition: all 0.2s ease;
+  font-family: var(--font-primary), sans-serif;
+}
+
+.profile-input:focus,
+.profile-select:focus {
+  outline: none;
+  border-color: var(--color-secondary, #7db3e2);
+  background: var(--surface-raised);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- secondary-blue focus glow, deliberate one-off */
+  box-shadow: 0 0 0 3px rgba(125, 179, 226, 0.1);
+}
+
+.profile-input.editable,
+.profile-select.editable {
+  background: var(--surface-raised);
+  border-color: var(--color-primary, #282561);
+}
+
+.profile-input.non-editable,
+.profile-input:disabled {
+  background: var(--surface-overlay);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+.profile-input::placeholder {
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+.profile-input:hover:not(.non-editable):not(:disabled):not(.disabled),
+.profile-select:hover:not([disabled]) {
+  border-color: var(--color-secondary, #7db3e2);
+  background: var(--surface-raised);
+}
+
+/* ============================================
+   SELECT DROPDOWN
+   ============================================ */
+
+.profile-select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23666" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+.profile-select[disabled] {
+  background: var(--surface-overlay);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23999" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+}
+
+/* Dark theme: the chevron data-URI can't read CSS vars — re-point it to a light glyph so it stays
+   visible on the dark select surface. Higher specificity than the base + [disabled] rules, so both flip. */
+:root[data-theme='dark'] .profile-select {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23e6e6ec" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+}
+
+/* ============================================
+   PLAN DISPLAY
+   ============================================ */
+
+.current-plan-display {
+  background: var(--surface-overlay);
+  border: 2px solid var(--color-border, #e5e7eb);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+}
+
+.plan-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.plan-name {
+  color: var(--color-primary, #282561);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.plan-status {
+  background: var(--color-success);
+  color: var(--color-white, #ffffff);
+  padding: 4px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   INPUT GROUP (Phone Number)
+   ============================================ */
+
+.input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group .input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary, #282561);
+  background: var(--surface-overlay);
+  border: 2px solid var(--color-border, #e5e7eb);
+  border-right: none;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- off-scale radius, legacy parity (WS2 deferred) */
+  border-radius: 16px 0 0 16px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.input-group .profile-input {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- off-scale radius, legacy parity (WS2 deferred) */
+  border-radius: 0 16px 16px 0 !important;
+  border-left: 2px solid var(--color-border, #e5e7eb);
+  flex: 1;
+  min-width: 0;
+}
+
+.input-group .profile-input:focus {
+  border-left-color: var(--color-secondary, #7db3e2);
+}
+
+.input-group .profile-input.editable {
+  border-left-color: var(--color-primary, #282561);
+}
+
+.input-group:hover .input-group-text {
+  background: var(--surface-overlay);
+  border-color: var(--color-secondary, #7db3e2);
+}
+
+.input-group:has(.profile-input:focus) .input-group-text {
+  background: var(--surface-overlay);
+  border-color: var(--color-secondary, #7db3e2);
+}
+
+.input-group:has(.profile-input.editable) .input-group-text {
+  background: var(--surface-raised);
+  border-color: var(--color-primary, #282561);
+}
+
+.input-group-text.bg-white {
+  background: var(--surface-raised) !important;
+  border-radius: 1rem 0 0 1rem !important;
+}
+
+/* ============================================
+   ANIMATION & FOCUS STYLES
+   ============================================ */
+
+.profile-input,
+.profile-select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.profile-input.editable,
+.profile-select.editable {
+  transform: scale(1.01);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- brand-navy shadow variant, deliberate one-off */
+  box-shadow: 0 2px 8px rgba(40, 37, 97, 0.1);
+}
+
+.profile-input:focus-visible,
+.profile-select:focus-visible,
+.profile-actions .btn:focus-visible {
+  outline: 2px solid var(--color-secondary, #7db3e2);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Dark theme: the select chevron data-URI hardcodes a dark fill — re-declare it light. */
+:root[data-theme='dark'] .profile-select {
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23e6e6ec" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+}
+
+@media (max-width: 768px) {
+  .profile-page .container-fluid {
+    padding: 20px 15px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .profile-avatar-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .profile-actions {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .profile-actions .btn {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+
+  .profile-section,
+  .billing-section {
+    padding: 1.5rem;
+  }
+
+  .profile-basic-info h2.profile-name {
+    font-size: 1.5rem;
+  }
+
+  .profile-basic-info .profile-email {
+    font-size: 1rem;
+  }
+
+  .billing-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-actions {
+    flex-direction: column;
+  }
+
+  .profile-actions .btn {
+    width: 100%;
+  }
+
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .profile-image {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* ============================================
+   INLINE-STYLE MIGRATION (Phase 28 WS5)
+   Semantic classes that replaced static style={{}} props on ProfilePage.
+   ============================================ */
+
+/* Security card sits below the personal-info section. */
+.profile-security-section {
+  margin-top: 30px;
+}
+
+/* Password change/set result banner — success/danger colors stay inline (state-driven). */
+.profile-notice--password {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+/* "Account created with Google" notice. */
+.profile-notice--google {
+  display: block;
+  background: rgba(66, 133, 244, 0.08); /* Google brand tint, not a theme token */
+  color: var(--color-text-secondary);
+  border-left: 3px solid #4285f4; /* Google brand constant, not a theme token */
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+/* Google brand constant, not a theme token */
+.google-brand-icon {
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- Google brand constant, not a theme token */
+  color: #4285f4;
+  margin-right: 6px;
+}
+
+/* Change/Set Password button column — aligns with the password input row. */
+.change-password-col {
+  align-self: flex-start;
+  margin-top: 28px;
+}
+
+/* ============================================
+   APPEARANCE THEME CARDS
+   ============================================ */
+
+/* stylelint-disable scale-unlimited/declaration-strict-value -- theme card preview mockups & dark mode token overrides */
+.theme-card {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: var(--radius-xl, 0.75rem);
+  border: 2px solid var(--border-subtle, #e5e7eb);
+  background: var(--surface-raised, #ffffff);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.theme-card:hover {
+  border-color: var(--color-primary, #6366f1);
+  transform: translateY(-2px);
+}
+
+.theme-card.is-active {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+}
+
+.theme-card__preview {
+  height: 84px;
+  border-radius: 0.5rem;
+  display: flex;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+.theme-card__preview--light {
+  background: #f8fafc;
+}
+
+.theme-card__preview--light .preview-sidebar {
+  width: 25%;
+  background: #0f172a;
+}
+
+.theme-card__preview--light .preview-content {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.theme-card__preview--light .preview-header {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.theme-card__preview--light .preview-line {
+  height: 6px;
+  background: #cbd5e1;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+.theme-card__preview--light .preview-box {
+  height: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+}
+
+.theme-card__preview--dark {
+  background: #0f121d;
+}
+
+.theme-card__preview--dark .preview-sidebar {
+  width: 25%;
+  background: #171a26;
+}
+
+.theme-card__preview--dark .preview-content {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.theme-card__preview--dark .preview-header {
+  height: 8px;
+  background: #334155;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.theme-card__preview--dark .preview-line {
+  height: 6px;
+  background: #1e293b;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+.theme-card__preview--dark .preview-box {
+  height: 24px;
+  background: #1e2230;
+  border: 1px solid #2e3446;
+  border-radius: 4px;
+}
+
+.theme-card__preview--auto {
+  background: linear-gradient(135deg, #f8fafc 50%, #0f121d 50%);
+}
+
+.theme-card__preview--auto .preview-sidebar {
+  width: 25%;
+  background: #1e1b4b;
+}
+
+.theme-card__preview--auto .preview-content {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+.theme-card__preview--auto .preview-header {
+  height: 8px;
+  background: rgba(99, 102, 241, 0.4);
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.theme-card__preview--auto .preview-line {
+  height: 6px;
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+.theme-card__preview--auto .preview-box {
+  height: 24px;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 4px;
+}
+
+.theme-card__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.theme-card__label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #333333);
+}
+
+.theme-card__icon {
+  font-size: 1.1rem;
+  color: var(--color-primary, #6366f1);
+}
+
+.theme-card__check {
+  color: var(--color-primary, #6366f1);
+  font-size: 1.1rem;
+}
+
+/* ============================================
+   DARK MODE OVERRIDES FOR MY PROFILE & APPEARANCE
+   ============================================ */
+:root[data-theme='dark'] .profile-header-container,
+:root[data-theme='dark'] .profile-section,
+:root[data-theme='dark'] .billing-section {
+  background: #1e2230;
+  border: 1px solid #2e3446;
+  box-shadow: none;
+}
+
+:root[data-theme='dark'] .profile-basic-info h2.profile-name {
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .profile-basic-info .profile-email {
+  color: #cbd5e1;
+}
+
+:root[data-theme='dark'] .profile-label,
+:root[data-theme='dark'] .billing-title,
+:root[data-theme='dark'] .plan-name {
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .billing-title {
+  border-bottom-color: #2e3446;
+}
+
+:root[data-theme='dark'] .profile-label i {
+  color: #818cf8;
+}
+
+:root[data-theme='dark'] .profile-input,
+:root[data-theme='dark'] .profile-select {
+  background: #141824;
+  border-color: #2e3446;
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .profile-input:focus,
+:root[data-theme='dark'] .profile-select:focus {
+  border-color: #818cf8;
+  background: #1e2230;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
+}
+
+:root[data-theme='dark'] .profile-input.editable,
+:root[data-theme='dark'] .profile-select.editable {
+  background: #1e2230;
+  border-color: #818cf8;
+}
+
+:root[data-theme='dark'] .profile-input.non-editable,
+:root[data-theme='dark'] .profile-input:disabled {
+  background: #0f121d;
+  color: #64748b;
+  border-color: #262b3a;
+}
+
+:root[data-theme='dark'] .current-plan-display {
+  background: #141824;
+  border-color: #2e3446;
+}
+
+:root[data-theme='dark'] .input-group .input-group-text {
+  background: #141824;
+  border-color: #2e3446;
+  color: #cbd5e1;
+}
+
+:root[data-theme='dark'] .theme-card {
+  background: #1e2230;
+  border-color: #2e3446;
+}
+
+:root[data-theme='dark'] .theme-card__label {
+  color: #f3f4f6;
+}
+
+:root[data-theme='dark'] .theme-card__icon,
+:root[data-theme='dark'] .theme-card__check {
+  color: #818cf8;
+}
+:root[data-theme='dark'] .profile-preview-img-wrap {
+  border-color: #334155;
+  background: #141824;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme='dark'] .profile-avatar {
+  border-color: #334155;
+  background: #141824;
+}
+
+:root[data-theme='dark'] .profile-avatar:hover {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+}
+
+:root[data-theme='dark'] .profile-image-upload-label {
+  border-color: #1e293b;
+  background: #6366f1;
+}
+
+/* stylelint-enable scale-unlimited/declaration-strict-value */

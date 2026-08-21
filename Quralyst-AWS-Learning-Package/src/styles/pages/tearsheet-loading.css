@@ -1,0 +1,262 @@
+/* Tearsheet generation progress — visible pipeline while research/synthesis runs. */
+
+.tearsheet-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 4.5rem);
+  padding: 1.5rem 1rem;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- layered wash + surface; no matching background token */
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% -10%,
+      color-mix(in srgb, var(--color-primary, #0d6efd) 12%, transparent),
+      transparent
+    ),
+    var(--surface-base, #f8fafc);
+}
+
+.tearsheet-loading-card {
+  width: min(100%, 40rem);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised, #fff);
+  box-shadow: var(--shadow-subtle);
+  overflow: hidden;
+}
+
+.tearsheet-loading-head {
+  padding: 1.35rem 1.5rem 1.1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-overlay);
+}
+
+.tearsheet-loading-head h1 {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 650;
+  color: var(--color-text-primary);
+}
+
+.tearsheet-loading-company {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.tearsheet-loading-phase {
+  margin: 0.85rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.tearsheet-loading-phase-detail {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.tearsheet-loading-progress {
+  height: 0.35rem;
+  margin: 1rem 1.5rem 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface-overlay);
+  overflow: hidden;
+}
+
+.tearsheet-loading-progress-bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary, #0d6efd);
+  transition: width 0.35s ease;
+}
+
+.tearsheet-loading-body {
+  padding: 1rem 1.25rem 1.25rem;
+}
+
+.tearsheet-loading-stages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.tearsheet-loading-stage {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--surface-base);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.tearsheet-loading-stage--running {
+  border-color: color-mix(in srgb, var(--color-primary, #0d6efd) 45%, var(--border-subtle));
+  background: color-mix(in srgb, var(--color-primary, #0d6efd) 6%, var(--surface-base));
+}
+
+.tearsheet-loading-stage--complete {
+  border-color: color-mix(in srgb, var(--color-success, #198754) 35%, var(--border-subtle));
+}
+
+.tearsheet-loading-stage--failed,
+.tearsheet-loading-stage--skipped {
+  border-color: color-mix(in srgb, var(--color-danger, #dc3545) 45%, var(--border-subtle));
+  background: color-mix(in srgb, var(--color-danger, #dc3545) 6%, var(--surface-base));
+}
+
+.tearsheet-loading-stage-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface-overlay);
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.tearsheet-loading-stage--running .tearsheet-loading-stage-icon {
+  color: var(--color-primary, #0d6efd);
+}
+
+.tearsheet-loading-stage--complete .tearsheet-loading-stage-icon {
+  color: var(--color-success, #198754);
+}
+
+.tearsheet-loading-stage--failed .tearsheet-loading-stage-icon,
+.tearsheet-loading-stage--skipped .tearsheet-loading-stage-icon {
+  color: var(--color-danger, #dc3545);
+}
+
+.tearsheet-loading-stage-copy {
+  min-width: 0;
+}
+
+.tearsheet-loading-stage-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.tearsheet-loading-stage-detail {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.tearsheet-loading-stage-message {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.tearsheet-loading-stage-badge {
+  font-size: 0.7rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-secondary);
+  padding-top: 0.2rem;
+  white-space: nowrap;
+}
+
+.tearsheet-loading-stage--running .tearsheet-loading-stage-badge {
+  color: var(--color-primary, #0d6efd);
+}
+
+.tearsheet-loading-stage--complete .tearsheet-loading-stage-badge {
+  color: var(--color-success, #198754);
+}
+
+.tearsheet-loading-stage--failed .tearsheet-loading-stage-badge,
+.tearsheet-loading-stage--skipped .tearsheet-loading-stage-badge {
+  color: var(--color-danger, #dc3545);
+}
+
+.tearsheet-loading-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.tearsheet-loading-foot {
+  margin: 0.85rem 0 0;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+}
+
+.tearsheet-loading-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* The shared button hovers were authored for dark surfaces: primary swaps brand navy for a brighter
+   indigo plus a glow, and secondary forces white text, which vanishes against the light theme's
+   near-white --surface-hover. Every button on this card holds its resting look instead. */
+.tearsheet-ready-card .q-btn--primary:hover:not(:disabled) {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tearsheet-ready-card .q-btn--secondary:hover:not(:disabled) {
+  background: var(--surface-overlay);
+  border-color: var(--border-subtle);
+  color: var(--color-text-primary);
+}
+
+:root[data-theme='dark'] .tearsheet-loading {
+  background: var(--surface-base, #1a1d24) !important;
+}
+
+:root[data-theme='dark'] .tearsheet-loading-card,
+:root[data-theme='dark'] .tearsheet-ready-card {
+  background: var(--surface-raised, #242836) !important;
+  border-color: var(--border-subtle, #33394b) !important;
+  color: var(--color-text-primary, #f3f4f6) !important;
+}
+
+:root[data-theme='dark'] .tearsheet-loading-head {
+  background: var(--surface-overlay, #2e3344) !important;
+  border-bottom-color: var(--border-subtle, #33394b) !important;
+}
+
+:root[data-theme='dark'] .tearsheet-loading-head h1,
+:root[data-theme='dark'] .tearsheet-loading-phase,
+:root[data-theme='dark'] .tearsheet-loading-stage-label {
+  color: var(--color-text-primary, #f3f4f6) !important;
+}
+
+:root[data-theme='dark'] .tearsheet-loading-stage {
+  background: var(--surface-base, #1a1d24) !important;
+  border-color: var(--border-subtle, #33394b) !important;
+}

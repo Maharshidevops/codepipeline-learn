@@ -1,0 +1,400 @@
+/*
+ * IB Bank detail — port of Replit QURALYST-20 IBDetail.tsx.
+ * Token-compliant (scale-unlimited/declaration-strict-value).
+ */
+
+:root {
+  --ibd-skel-bg: #e2e8f0;
+  --ibd-ai-badge-bg: rgba(139, 92, 246, 0.12);
+  --ibd-ai-badge-color: #7c3aed;
+
+  --ibd-badge-ma-bg: #dbeafe;
+  --ibd-badge-ma-color: #1d4ed8;
+  --ibd-badge-ipo-bg: #ede9fe;
+  --ibd-badge-ipo-color: #6d28d9;
+  --ibd-badge-restr-bg: #ffedd5;
+  --ibd-badge-restr-color: #c2410c;
+  --ibd-badge-debt-bg: #fef3c7;
+  --ibd-badge-debt-color: #b45309;
+  --ibd-badge-cap-bg: #dcfce7;
+  --ibd-badge-cap-color: #15803d;
+  --ibd-badge-def-bg: #f1f5f9;
+  --ibd-badge-def-color: #475569;
+}
+
+.ibd-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 1.25rem 1rem;
+}
+
+.ibd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+  text-decoration: none;
+  margin-bottom: 1.25rem;
+  width: fit-content;
+}
+
+.ibd-back:hover {
+  color: var(--color-text-primary, #333);
+}
+
+.ibd-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.ibd-header__left {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.ibd-header__icon {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 0.75rem;
+}
+
+.ibd-header__icon .bi-bank {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.ibd-header__title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--color-text-primary, #333);
+}
+
+.ibd-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.ibd-header__meta a {
+  color: var(--color-text-secondary, #666);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ibd-header__meta a:hover {
+  color: var(--color-link, #282561);
+}
+
+.ibd-ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--ibd-ai-badge-bg);
+  color: var(--ibd-ai-badge-color);
+  border: 1px solid color-mix(in srgb, var(--ibd-ai-badge-color) 20%, transparent);
+}
+
+.ibd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: var(--color-primary, #282561);
+  color: var(--color-on-primary, #fff);
+}
+
+.ibd-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ibd-btn--outline {
+  background: var(--surface-raised, #fff);
+  border-color: var(--border-subtle, #e5e7eb);
+  color: var(--color-text-primary, #333);
+}
+
+/* Tabs */
+.ibd-tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+  margin-bottom: 1.25rem;
+}
+
+.ibd-tab {
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  background: none;
+  color: var(--color-text-secondary, #666);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ibd-tab:hover {
+  color: var(--color-text-primary, #333);
+}
+
+.ibd-tab--active {
+  border-bottom-color: var(--color-primary, #282561);
+  color: var(--color-primary, #282561);
+}
+
+.ibd-tab__count {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--surface-overlay, #f8f9fa);
+  color: var(--color-text-secondary, #666);
+}
+
+/* Overview */
+.ibd-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ibd-stat {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 1.25rem;
+}
+
+.ibd-stat__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.ibd-stat__label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+  margin-top: 0.25rem;
+}
+
+.ibd-card {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.ibd-card__title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary, #666);
+  margin: 0 0 1rem;
+}
+
+.ibd-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .ibd-profile-grid,
+  .ibd-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ibd-profile-item__label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+}
+
+.ibd-profile-item__value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.125rem;
+}
+
+.ibd-chip {
+  display: inline-flex;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full, 999px);
+  background: var(--surface-overlay, #f8f9fa);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  margin: 0.125rem;
+}
+
+.ibd-empty-dash {
+  border: 1px dashed var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--color-text-secondary, #666);
+}
+
+.ibd-enrich-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* Table */
+.ibd-table-wrap {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  overflow: hidden;
+}
+
+.ibd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.ibd-table thead tr {
+  background: var(--surface-overlay, #f8f9fa);
+}
+
+.ibd-table th,
+.ibd-table td {
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+  text-align: left;
+}
+
+.ibd-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.ibd-badge {
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full, 999px);
+}
+
+.ibd-badge--ma {
+  background: var(--ibd-badge-ma-bg);
+  color: var(--ibd-badge-ma-color);
+}
+.ibd-badge--ipo {
+  background: var(--ibd-badge-ipo-bg);
+  color: var(--ibd-badge-ipo-color);
+}
+.ibd-badge--restr {
+  background: var(--ibd-badge-restr-bg);
+  color: var(--ibd-badge-restr-color);
+}
+.ibd-badge--default {
+  background: var(--ibd-badge-def-bg);
+  color: var(--ibd-badge-def-color);
+}
+
+/* People cards */
+.ibd-people {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ibd-person {
+  background: var(--surface-raised, #fff);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-md, 12px);
+  padding: 1.25rem;
+}
+
+.ibd-person__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ibd-person__name {
+  font-weight: 600;
+}
+
+.ibd-person__title {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, #666);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: var(--radius-sm, 8px);
+  padding: 0.125rem 0.5rem;
+  margin: 0;
+}
+
+.ibd-person__bio {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #666);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.ibd-person__links {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.ibd-inferred {
+  font-size: 0.6875rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-full, 999px);
+  background: color-mix(in srgb, var(--color-warning, #f59e0b) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-warning, #f59e0b) 30%, transparent);
+}
+
+.ibd-msg {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary, #666);
+  margin-bottom: 1rem;
+}
+
+.ibd-edit-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.ibd-overview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}

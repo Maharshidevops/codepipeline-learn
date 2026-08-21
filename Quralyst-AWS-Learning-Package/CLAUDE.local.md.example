@@ -1,0 +1,25 @@
+# CLAUDE.local.md (personal — NOT committed)
+
+Copy this file to `CLAUDE.local.md` and make it yours. It is git-ignored, so put machine-specific or
+personal preferences here that should NOT be shared with the team. Keep it under ~200 lines. Claude
+loads it automatically alongside `CLAUDE.md`; your personal rules win on conflict, so use sparingly.
+
+## Examples of what goes here
+
+- Which backend you point at locally (e.g. a teammate's tunnel) and the port you run Vite on.
+- Personal workflow preferences ("show me the diff before committing", "run only the changed test").
+- Scratch notes for your current task.
+
+## Template (delete what you don't need)
+
+```
+## My environment
+- Backend I run against: http://localhost:8000  (start it before `npm run dev`)
+- Node version: 22 (matches CI)
+
+## My preferences
+- <e.g. always run `npm run lint && npm run typecheck` before proposing a commit>
+- <e.g. prefer Testing Library queries by role/label>
+```
+
+Do NOT put secrets here. Public config goes in the documented `VITE_*` env vars (see `.env.example`).

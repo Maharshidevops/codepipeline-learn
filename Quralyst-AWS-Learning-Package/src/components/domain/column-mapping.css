@@ -1,0 +1,26 @@
+/* ColumnMappingDialog (F9) — modal shell (portaled to <body>). */
+.modal-backdrop-inline {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--shadow-overlay);
+}
+
+.column-mapping-modal {
+  width: min(680px, 94vw);
+  max-height: 88vh;
+  overflow: auto;
+  background: var(--bs-body-bg, #fff);
+  color: var(--bs-body-color, inherit);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-modal);
+}
+
+.column-mapping-body {
+  max-height: 60vh;
+  overflow: auto;
+}

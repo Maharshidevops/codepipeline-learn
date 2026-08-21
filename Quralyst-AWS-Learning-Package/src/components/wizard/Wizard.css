@@ -1,0 +1,378 @@
+/* 3-step wizard chrome — net-new in the React migration (legacy had a 2-step wizard with minimal
+   styling). Matches the UI snapshots (UI/{target-list,strategic-list,financial-verticals}/list-page-*):
+   numbered stepper (active circle = filled secondary #7DB3E2, inactive = outlined), a sticky bottom
+   nav bar (navy "Step X of N" pill + label / Save Draft + forward button, back arrow on steps 2–3),
+   and Step-3 review summary cards with per-section Edit links. */
+
+/* Wizard page width cap — the shared .main-content box is 85% of the viewport, which on wide monitors
+   stretches the header + stepper + step cards uncomfortably wide (long line lengths, a sparse stepper,
+   and the col-md-8/col-md-4 split leaving a big empty gutter). Cap the 3 wizard pages to a centered,
+   readable column. Scoped to .wizard-page (added on those page containers) so other pages keep 85%. */
+.wizard-page {
+  max-width: 1180px;
+  margin-inline: auto;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Authoritative card chrome for the wizard's white form sections. Declared HERE (Wizard.css is imported
+   directly by the Wizard component, so it always loads/HMRs reliably) rather than relying solely on
+   .criteria-card--white in the @imported criteria-cards.css. The `.wizard-page` prefix raises specificity
+   above the .criteria-card variants so this always wins. Matches the standard .card (cards.css). */
+.wizard-page .criteria-card--white {
+  background: var(--surface-raised);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+/* ===== STEPPER ===== */
+/* Container around the stepper — uses the SAME chrome as the standard .card (layout.css) so the wizard
+   reads as a normal container: surface-raised fill, subtle 2px border, matching radius/shadow/padding. */
+.wizard-stepper-card {
+  background: var(--surface-raised);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  margin-bottom: 1.25rem;
+}
+.wizard-stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.wizard-step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+.wizard-step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-light, #e5e7eb);
+  background: var(--color-bg-white, #ffffff);
+  color: var(--color-text-light, #999999);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.wizard-step-node.active .wizard-step-circle,
+.wizard-step-node.done .wizard-step-circle {
+  background: var(--color-secondary, #7db3e2);
+  border-color: var(--color-secondary, #7db3e2);
+  color: var(--color-text-white, #ffffff);
+}
+.wizard-step-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-primary, #333333);
+}
+.wizard-step-label {
+  font-size: 11px;
+  color: var(--color-text-light, #999999);
+  max-width: 110px;
+  line-height: 1.3;
+}
+.wizard-step-node.active .wizard-step-label {
+  color: var(--color-text-secondary, #666666);
+}
+.wizard-step-connector {
+  flex: 1 1 auto;
+  height: 2px;
+  background: var(--color-border-light, #e5e7eb);
+  margin: 15px 4px 0;
+  min-width: 40px;
+}
+.wizard-step-connector.done {
+  background: var(--color-secondary, #7db3e2);
+}
+
+/* ===== AI-ASSIST PANEL (AiAssistPanel.tsx) ===== */
+.ai-assist-card {
+  padding: 1.25rem;
+}
+
+/* Embedded inside an existing deep card — no extra padding/chrome. */
+.ai-assist-card--embedded {
+  padding: 0;
+  width: 100%;
+}
+
+/* Full-width banner variant (Step 1 autofill) — horizontal row above the step card so the card below
+   spans the constant full wizard width. Wraps to stacked on narrow screens. */
+.ai-assist-card--banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.ai-assist-card--banner .ai-assist-title {
+  margin-bottom: 2px;
+}
+.ai-assist-card--banner .ai-assist-desc {
+  margin-bottom: 0;
+}
+.ai-assist-banner-text {
+  min-width: 0;
+}
+.ai-assist-banner-btn {
+  flex-shrink: 0;
+}
+.ai-assist-title {
+  margin-bottom: 6px;
+  /* a11y (Phase 35): the title became an h3 for heading order; keep the h4 visual size. */
+  font-size: var(--font-size-xl);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  line-height: 1.3;
+}
+.ai-assist-desc {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.ai-assist-prompt-input {
+  margin-bottom: 12px;
+}
+
+/* ===== STEP BODY ===== */
+.wizard-body {
+  /* No extra bottom padding — the last step card already carries its own mb-4 (24px), which matches
+     every other page's bottom gutter (--chrome-pad-bottom). The old 88px/24px padding stacked on top
+     of that margin and left a visible dead gap above the sticky nav bar. */
+  padding-bottom: 0;
+}
+
+/* ===== STICKY BOTTOM NAV BAR ===== */
+.wizard-navbar {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--color-bg-white, #ffffff);
+  border-top: 1px solid var(--color-border-light, #e5e7eb);
+  border-radius: var(--radius-xl);
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- one-off shadow; no matching --shadow-* token (Phase 28) */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 50;
+}
+.wizard-navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.wizard-step-pill {
+  background: var(--color-primary, #282561);
+  color: var(--color-text-white, #ffffff);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+}
+.wizard-step-pill-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary, #333333);
+}
+.wizard-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.wizard-save-draft {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary, #666666);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.wizard-save-draft:hover {
+  color: var(--color-primary, #282561);
+}
+.wizard-back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-light, #e5e7eb);
+  background: var(--color-bg-white, #ffffff);
+  color: var(--color-primary, #282561);
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.wizard-back-btn:hover {
+  border-color: var(--color-secondary, #7db3e2);
+  color: var(--color-secondary, #7db3e2);
+}
+
+/* ===== STEP-3 REVIEW SUMMARY ===== */
+.review-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  /* Bottom gutter to match steps 1/2 (whose last card carries mb-4) — the review list has no trailing
+     margin, so without this the step-3 content sat flush against the sticky nav bar. */
+  margin-bottom: 1.5rem;
+}
+/* Review cards use the SAME chrome as the standard .card (layout.css): surface-raised fill, 2px subtle
+   border, 20px radius, and the soft shadow (the shadow is what makes the card read as raised — on a
+   dark canvas a same-tone border alone barely separates the rounded edge). */
+.review-section {
+  background: var(--surface-raised);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-card);
+}
+.review-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.review-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-primary, #282561);
+  margin: 0;
+}
+.review-edit-link {
+  background: none;
+  border: none;
+  color: var(--color-link, #282561);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.review-edit-link:hover {
+  color: var(--color-link-hover, #7db3e2);
+}
+.review-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-bg-light, #f8f9fa);
+  font-size: 14px;
+}
+.review-row:last-child {
+  border-bottom: none;
+}
+.review-row-label {
+  color: var(--color-text-secondary, #666666);
+}
+.review-row-value {
+  color: var(--color-text-primary, #333333);
+  font-weight: 500;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .wizard-stepper-card {
+    padding: 14px 12px;
+  }
+
+  .wizard-step-label {
+    display: none;
+  }
+
+  .wizard-navbar {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .wizard-step-pill-label {
+    display: none;
+  }
+
+  .wizard-navbar-left {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .wizard-navbar-right {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .wizard-step-pill {
+    font-size: 12px;
+    padding: 5px 12px;
+    white-space: nowrap;
+  }
+
+  .wizard-save-draft {
+    font-size: 13px;
+  }
+
+  .ai-assist-card--banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ai-assist-banner-btn {
+    width: 100%;
+  }
+
+  .ai-assist-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .review-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .review-row-value {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .wizard-navbar {
+    padding: 10px 12px;
+  }
+
+  .wizard-navbar-right .btn-standard {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .wizard-back-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
